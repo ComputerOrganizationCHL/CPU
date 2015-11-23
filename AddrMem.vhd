@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    23:31:07 11/22/2015 
+-- Create Date:    12:58:29 11/23/2015 
 -- Design Name: 
--- Module Name:    FwdUnit - Behavioral 
+-- Module Name:    AddrMem - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -29,18 +29,13 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity FwdUnit is
-    Port ( FwdUnit_Rs : in  STD_LOGIC_VECTOR (3 downto 0);
-           FwdUnit_Rt : in  STD_LOGIC_VECTOR (3 downto 0);
-           FwdUnit_RegDistSel : in  STD_LOGIC;
-           FwdUnit_ExToMem_RegWr : in  STD_LOGIC;
-           FwdUnit_ExToMem_RegNum : in  STD_LOGIC_VECTOR (3 downto 0);
-           FwdUnit_MemToWr_RegWr : in  STD_LOGIC;
-           FwdUnit_MemToWr_RegNum : in  STD_LOGIC_VECTOR (3 downto 0);
-           FwdUnit_FwdSel : out  STD_LOGIC_VECTOR (1 downto 0));
-end FwdUnit;
+entity AddrMem is
+    Port ( AddrMem_RESET : in  STD_LOGIC;
+           AddrMem_PC : in  STD_LOGIC_VECTOR (15 downto 0);
+           AddrMem_Ins : out  STD_LOGIC_VECTOR (15 downto 0));
+end AddrMem;
 
-architecture Behavioral of FwdUnit is
+architecture Behavioral of AddrMem is
 
 begin
 

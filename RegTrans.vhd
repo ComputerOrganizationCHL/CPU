@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    23:31:07 11/22/2015 
+-- Create Date:    13:39:22 11/23/2015 
 -- Design Name: 
--- Module Name:    FwdUnit - Behavioral 
+-- Module Name:    RegTrans - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -29,18 +29,17 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity FwdUnit is
-    Port ( FwdUnit_Rs : in  STD_LOGIC_VECTOR (3 downto 0);
-           FwdUnit_Rt : in  STD_LOGIC_VECTOR (3 downto 0);
-           FwdUnit_RegDistSel : in  STD_LOGIC;
-           FwdUnit_ExToMem_RegWr : in  STD_LOGIC;
-           FwdUnit_ExToMem_RegNum : in  STD_LOGIC_VECTOR (3 downto 0);
-           FwdUnit_MemToWr_RegWr : in  STD_LOGIC;
-           FwdUnit_MemToWr_RegNum : in  STD_LOGIC_VECTOR (3 downto 0);
-           FwdUnit_FwdSel : out  STD_LOGIC_VECTOR (1 downto 0));
-end FwdUnit;
+entity RegTrans is
+    Port ( RegTrans_Op : in  STD_LOGIC_VECTOR (4 downto 0);
+           RegTrans_Rs_IN : in  STD_LOGIC_VECTOR (2 downto 0);
+           RegTrans_Rt_IN : in  STD_LOGIC_VECTOR (2 downto 0);
+           RegTrans_Rd_IN : in  STD_LOGIC_VECTOR (2 downto 0);
+           RegTrans_Rs_OUT : out  STD_LOGIC_VECTOR (3 downto 0);
+           RegTrans_Rt_OUT : out  STD_LOGIC_VECTOR (3 downto 0);
+           RegTrans_Rd_OUT : out  STD_LOGIC_VECTOR (3 downto 0));
+end RegTrans;
 
-architecture Behavioral of FwdUnit is
+architecture Behavioral of RegTrans is
 
 begin
 

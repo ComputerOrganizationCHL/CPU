@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2015-11-23T12:43:51</DateModified>
+  <DateModified>2015-11-23T12:47:07</DateModified>
   <ModuleName>MemToWr</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
-  <SavedFilePath>C:/Users/wenxiao/cpu/iseconfig/MemToWr.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>C:/Users/wenxiao/cpu\</ImplementationReportsDirectory>
+  <SavedFilePath>C:/Users/wenxiao/Documents/GitHub/CPU/iseconfig/MemToWr.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>C:/Users/wenxiao/Documents/GitHub/CPU\</ImplementationReportsDirectory>
   <DateInitialized>2015-11-22T22:41:09</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>

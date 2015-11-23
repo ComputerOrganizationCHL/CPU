@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    23:31:07 11/22/2015 
+-- Create Date:    12:53:47 11/23/2015 
 -- Design Name: 
--- Module Name:    FwdUnit - Behavioral 
+-- Module Name:    PCSel - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -29,18 +29,14 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity FwdUnit is
-    Port ( FwdUnit_Rs : in  STD_LOGIC_VECTOR (3 downto 0);
-           FwdUnit_Rt : in  STD_LOGIC_VECTOR (3 downto 0);
-           FwdUnit_RegDistSel : in  STD_LOGIC;
-           FwdUnit_ExToMem_RegWr : in  STD_LOGIC;
-           FwdUnit_ExToMem_RegNum : in  STD_LOGIC_VECTOR (3 downto 0);
-           FwdUnit_MemToWr_RegWr : in  STD_LOGIC;
-           FwdUnit_MemToWr_RegNum : in  STD_LOGIC_VECTOR (3 downto 0);
-           FwdUnit_FwdSel : out  STD_LOGIC_VECTOR (1 downto 0));
-end FwdUnit;
+entity PCSel is
+    Port ( PC_EN : in  STD_LOGIC;
+           PC_RESET : in  STD_LOGIC;
+           PC_NextPC_IN : in  STD_LOGIC_VECTOR (15 downto 0);
+           PC_NextPC_OUT : out  STD_LOGIC_VECTOR (15 downto 0));
+end PCSel;
 
-architecture Behavioral of FwdUnit is
+architecture Behavioral of PCSel is
 
 begin
 

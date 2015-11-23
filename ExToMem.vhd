@@ -39,7 +39,7 @@ entity ExToMem is
            ExToMem_MemVal_IN : in  STD_LOGIC_VECTOR(15 downto 0);
 			  ExToMem_MemAddr_IN : in  STD_LOGIC_VECTOR(15 downto 0);
            ExToMem_RegOverflow_IN : in  STD_LOGIC;
-           ExToMem_RegNum_IN : in  STD_LOGIC_VECTOR(2 downto 0);
+           ExToMem_RegNum_IN : in  STD_LOGIC_VECTOR(3 downto 0);
            ExToMem_PC_OUT : out  STD_LOGIC_VECTOR(15 downto 0);
            ExToMem_MemToWr_RegMemSel_OUT : out  STD_LOGIC;
            ExToMem_MemToWr_RegWr_OUT : out  STD_LOGIC;
@@ -47,7 +47,7 @@ entity ExToMem is
            ExToMem_MemVal_OUT : out  STD_LOGIC_VECTOR(15 downto 0);
 			  ExToMem_MemAddr_OUT : out  STD_LOGIC_VECTOR(15 downto 0);
 			  ExToMem_RegOverflow_OUT : out  STD_LOGIC;
-			  ExToMem_RegNum_OUT : out  STD_LOGIC_VECTOR(2 downto 0)
+			  ExToMem_RegNum_OUT : out  STD_LOGIC_VECTOR(3 downto 0)
 			  );
 end ExToMem;
 

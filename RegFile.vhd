@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    23:31:07 11/22/2015 
+-- Create Date:    13:36:30 11/23/2015 
 -- Design Name: 
--- Module Name:    FwdUnit - Behavioral 
+-- Module Name:    RegFile - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -29,18 +29,17 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity FwdUnit is
-    Port ( FwdUnit_Rs : in  STD_LOGIC_VECTOR (3 downto 0);
-           FwdUnit_Rt : in  STD_LOGIC_VECTOR (3 downto 0);
-           FwdUnit_RegDistSel : in  STD_LOGIC;
-           FwdUnit_ExToMem_RegWr : in  STD_LOGIC;
-           FwdUnit_ExToMem_RegNum : in  STD_LOGIC_VECTOR (3 downto 0);
-           FwdUnit_MemToWr_RegWr : in  STD_LOGIC;
-           FwdUnit_MemToWr_RegNum : in  STD_LOGIC_VECTOR (3 downto 0);
-           FwdUnit_FwdSel : out  STD_LOGIC_VECTOR (1 downto 0));
-end FwdUnit;
+entity RegFile is
+    Port ( RegFile_WE : in  STD_LOGIC;
+           RegFile_Ra : in  STD_LOGIC_VECTOR (3 downto 0);
+           RegFile_Rb : in  STD_LOGIC_VECTOR (3 downto 0);
+           RegFile_RegNum : in  STD_LOGIC_VECTOR (3 downto 0);
+           RegFile_RegVal : in  STD_LOGIC_VECTOR (15 downto 0);
+           RegFile_Da : out  STD_LOGIC_VECTOR (15 downto 0);
+           RegFile_Db : out  STD_LOGIC_VECTOR (15 downto 0));
+end RegFile;
 
-architecture Behavioral of FwdUnit is
+architecture Behavioral of RegFile is
 
 begin
 
