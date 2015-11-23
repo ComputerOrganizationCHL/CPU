@@ -33,21 +33,23 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity ExToMem is
     Port ( ExToMem_En : in  STD_LOGIC;
            ExToMem_PC_IN : in  STD_LOGIC_VECTOR(15 downto 0);
-           ExToMem_MemToWr_RegMemSel_IN : in  STD_LOGIC;
-           ExToMem_MemToWr_RegWr_IN : in  STD_LOGIC;
-           ExToMem_MemEn_IN : in  STD_LOGIC;
+           ExToMem_Wr_RegMemSel_IN : in  STD_LOGIC;
+           ExToMem_Wr_RegWr_IN : in  STD_LOGIC;
+           ExToMem_MemRE_IN : in  STD_LOGIC;
+			  ExToMem_MemWE_IN : in  STD_LOGIC;
            ExToMem_MemVal_IN : in  STD_LOGIC_VECTOR(15 downto 0);
-			  ExToMem_MemAddr_IN : in  STD_LOGIC_VECTOR(15 downto 0);
+           ExToMem_MemAddr_IN : in  STD_LOGIC_VECTOR(15 downto 0);
            ExToMem_RegOverflow_IN : in  STD_LOGIC;
            ExToMem_RegNum_IN : in  STD_LOGIC_VECTOR(3 downto 0);
            ExToMem_PC_OUT : out  STD_LOGIC_VECTOR(15 downto 0);
-           ExToMem_MemToWr_RegMemSel_OUT : out  STD_LOGIC;
-           ExToMem_MemToWr_RegWr_OUT : out  STD_LOGIC;
-           ExToMem_MemEn_OUT : out  STD_LOGIC;
+           ExToMem_Wr_RegMemSel_OUT : out  STD_LOGIC;
+           ExToMem_Wr_RegWr_OUT : out  STD_LOGIC;
+           ExToMem_MemRE_OUT : out  STD_LOGIC;
+			  ExToMem_MemWE_OUT : out  STD_LOGIC;
            ExToMem_MemVal_OUT : out  STD_LOGIC_VECTOR(15 downto 0);
-			  ExToMem_MemAddr_OUT : out  STD_LOGIC_VECTOR(15 downto 0);
-			  ExToMem_RegOverflow_OUT : out  STD_LOGIC;
-			  ExToMem_RegNum_OUT : out  STD_LOGIC_VECTOR(3 downto 0)
+           ExToMem_MemAddr_OUT : out  STD_LOGIC_VECTOR(15 downto 0);
+           ExToMem_RegOverflow_OUT : out  STD_LOGIC;
+           ExToMem_RegNum_OUT : out  STD_LOGIC_VECTOR(3 downto 0)
 			  );
 end ExToMem;
 

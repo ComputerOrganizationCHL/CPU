@@ -9,13 +9,13 @@
          <ClosedNodesVersion>2</ClosedNodesVersion>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>RegTrans - Behavioral (C:/Users/wenxiao/Documents/GitHub/CPU/RegTrans.vhd)</SelectedItem>
+         <SelectedItem>xc3s1200e-4fg320</SelectedItem>
       </SelectedItems>
-      <ScrollbarPosition orientation="vertical" >1</ScrollbarPosition>
+      <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000020200000001000000010000006400000138000000020000000000000000000000000200000064ffffffff000000810000000300000002000001380000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>RegTrans - Behavioral (C:/Users/wenxiao/Documents/GitHub/CPU/RegTrans.vhd)</CurrentItem>
+      <CurrentItem>xc3s1200e-4fg320</CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="" guiview="Process" >
       <ClosedNodes>
@@ -86,6 +86,6 @@
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem/>
    </ItemView>
-   <SourceProcessView>000000ff00000000000000020000012d0000011b01000000050100000002</SourceProcessView>
+   <SourceProcessView>000000ff00000000000000020000015e0000005b01000000050100000002</SourceProcessView>
    <CurrentView>Implementation</CurrentView>
 </Project>

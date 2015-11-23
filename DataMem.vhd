@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    12:56:33 11/23/2015 
+-- Create Date:    16:41:02 11/23/2015 
 -- Design Name: 
--- Module Name:    IfToId - Behavioral 
+-- Module Name:    DataMem - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -29,15 +29,15 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity IfToId is
-    Port ( IfToId_EN : in  STD_LOGIC;
-           IfToId_PC_IN : in  STD_LOGIC_VECTOR(15 downto 0);
-           IfToId_Ins_IN : in  STD_LOGIC_VECTOR(15 downto 0);
-           IfToId_PC_OUT : out  STD_LOGIC_VECTOR(15 downto 0);
-           IfToId_Ins_OUT : out  STD_LOGIC_VECTOR(15 downto 0));
-end IfToId;
+entity DataMem is
+    Port ( DataMem_Addr : in  STD_LOGIC_VECTOR (15 downto 0);
+           DataMem_Val_IN : in  STD_LOGIC_VECTOR (15 downto 0);
+           DataMem_RE : in  STD_LOGIC;
+           DataMem_WE : in  STD_LOGIC;
+           DataMem_Val_OUT : out  STD_LOGIC_VECTOR (15 downto 0));
+end DataMem;
 
-architecture Behavioral of IfToId is
+architecture Behavioral of DataMem is
 
 begin
 

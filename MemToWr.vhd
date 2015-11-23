@@ -30,7 +30,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity MemToWr is
-    Port ( MemToWr_En_IN : in  STD_LOGIC;
+    Port ( MemToWr_En : in  STD_LOGIC;
            MemToWr_RegMemSel_IN : in  STD_LOGIC;
            MemToWr_RegWr_IN : in  STD_LOGIC;
            MemToWr_MemVal_IN : in  STD_LOGIC_VECTOR(15 downto 0);

@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    12:56:33 11/23/2015 
+-- Create Date:    16:33:00 11/23/2015 
 -- Design Name: 
--- Module Name:    IfToId - Behavioral 
+-- Module Name:    LoadUse - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -29,15 +29,19 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity IfToId is
-    Port ( IfToId_EN : in  STD_LOGIC;
-           IfToId_PC_IN : in  STD_LOGIC_VECTOR(15 downto 0);
-           IfToId_Ins_IN : in  STD_LOGIC_VECTOR(15 downto 0);
-           IfToId_PC_OUT : out  STD_LOGIC_VECTOR(15 downto 0);
-           IfToId_Ins_OUT : out  STD_LOGIC_VECTOR(15 downto 0));
-end IfToId;
+entity LoadUse is
+    Port ( LoadUse_Id_Rs : in  STD_LOGIC_VECTOR (3 downto 0);
+           LoadUse_Id_Rt : in  STD_LOGIC_VECTOR (3 downto 0);
+           LoadUse_Id_Brh : in  STD_LOGIC;
+           LoadUse_Id_Jmp : in  STD_LOGIC;
+           LoadUse_Ex_RegNum : in  STD_LOGIC_VECTOR (3 downto 0);
+           LoadUse_Ex_MemWE : in  STD_LOGIC;
+           LoadUse_Mem_RegNum : in  STD_LOGIC_VECTOR (3 downto 0);
+           LoadUse_Mem_MemWE : in  STD_LOGIC;
+           LoadUse_En : out  STD_LOGIC);
+end LoadUse;
 
-architecture Behavioral of IfToId is
+architecture Behavioral of LoadUse is
 
 begin
 
