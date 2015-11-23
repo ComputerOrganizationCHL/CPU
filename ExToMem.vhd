@@ -31,12 +31,13 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 
 entity ExToMem is
-    Port ( ExToMem_En : in  STD_LOGIC;
+    Port ( CLK : in STD_LOGIC;
+           ExToMem_En : in  STD_LOGIC;
            ExToMem_PC_IN : in  STD_LOGIC_VECTOR(15 downto 0);
            ExToMem_Wr_RegMemSel_IN : in  STD_LOGIC;
            ExToMem_Wr_RegWr_IN : in  STD_LOGIC;
-           ExToMem_MemRE_IN : in  STD_LOGIC;
-			  ExToMem_MemWE_IN : in  STD_LOGIC;
+           ExToMem_Mem_MemRE_IN : in  STD_LOGIC;
+           ExToMem_Mem_MemWE_IN : in  STD_LOGIC;
            ExToMem_MemVal_IN : in  STD_LOGIC_VECTOR(15 downto 0);
            ExToMem_MemAddr_IN : in  STD_LOGIC_VECTOR(15 downto 0);
            ExToMem_RegOverflow_IN : in  STD_LOGIC;
@@ -44,8 +45,8 @@ entity ExToMem is
            ExToMem_PC_OUT : out  STD_LOGIC_VECTOR(15 downto 0);
            ExToMem_Wr_RegMemSel_OUT : out  STD_LOGIC;
            ExToMem_Wr_RegWr_OUT : out  STD_LOGIC;
-           ExToMem_MemRE_OUT : out  STD_LOGIC;
-			  ExToMem_MemWE_OUT : out  STD_LOGIC;
+           ExToMem_Mem_MemRE_OUT : out  STD_LOGIC;
+           ExToMem_Mem_MemWE_OUT : out  STD_LOGIC;
            ExToMem_MemVal_OUT : out  STD_LOGIC_VECTOR(15 downto 0);
            ExToMem_MemAddr_OUT : out  STD_LOGIC_VECTOR(15 downto 0);
            ExToMem_RegOverflow_OUT : out  STD_LOGIC;
@@ -54,8 +55,34 @@ entity ExToMem is
 end ExToMem;
 
 architecture Behavioral of ExToMem is
-
 begin
+
+process(CLK)
+begin
+	if (rising_edge(CLK)) then
+        if (ExToMem_En) then
+            ExToMem_PC_OUT <= ExToMem_PC_IN;
+            ExToMem_Wr_RegMemSel_OUT <= ExToMem_Wr_RegMemSel_IN;
+            ExToMem_Wr_RegWr_OUT <= ExToMem_Wr_RegWr_IN;
+            ExToMem_Mem_MemRE_OUT <= ExToMem_Mem_MemRE_IN;
+            ExToMem_Mem_MemWE_OUT <= ExToMem_Mem_MemWE_IN;
+            ExToMem_MemVal_OUT <= ExToMem_MemVal_IN;
+            ExToMem_MemAddr_OUT <= ExToMem_MemAddr_IN;
+            ExToMem_RegOverflow_OUT <= ExToMem_RegOverflow_IN;
+            ExToMem_RegNum_OUT <= ExToMem_RegNum_IN;
+        else 
+            ExToMem_PC_OUT <= "0000000000000000";
+            ExToMem_Wr_RegMemSel_OUT <= 0;
+            ExToMem_Wr_RegWr_OUT <= 0;
+            ExToMem_Mem_MemRE_OUT <= 0;
+            ExToMem_Mem_MemWE_OUT <= 0;
+            ExToMem_MemVal_OUT <= 0;
+            ExToMem_MemAddr_OUT <= "0000000000000000";
+            ExToMem_RegOverflow_OUT <= "0000000000000000";
+            ExToMem_RegNum_OUT <= "0000";
+        end if;
+    end if;
+end process;
 
 
 end Behavioral;
