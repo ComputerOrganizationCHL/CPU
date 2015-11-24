@@ -30,9 +30,9 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity ImmTrans is
-    Port ( ImmTrans_Inm_IN : in  STD_LOGIC_VECTOR (15 downto 0);
+    Port ( ImmTrans_Imm_IN : in  STD_LOGIC_VECTOR (15 downto 0);
            ImmTrans_SignExt : in STD_LOGIC;
-           ImmTrans_Imm _OUT: out  STD_LOGIC_VECTOR (15 downto 0));
+           ImmTrans_Imm_OUT : out  STD_LOGIC_VECTOR (15 downto 0));
 end ImmTrans;
 
 architecture Behavioral of ImmTrans is

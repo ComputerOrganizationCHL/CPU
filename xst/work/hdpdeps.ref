@@ -1,6 +1,0 @@
-V3 3
-FL C:/Users/wenxiao/Documents/GitHub/CPU/MemToWr.vhd 2015/11/23.17:58:20 P.20131013
-EN work/MemToWr 1448275567 FL C:/Users/wenxiao/Documents/GitHub/CPU/MemToWr.vhd \
-      PB ieee/std_logic_1164 1381692176
-AR work/MemToWr/Behavioral 1448275568 \
-      FL C:/Users/wenxiao/Documents/GitHub/CPU/MemToWr.vhd EN work/MemToWr 1448275567

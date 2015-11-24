@@ -81,19 +81,10 @@
       <status xil_pn:value="FailedRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
       <status xil_pn:value="InputAdded"/>
       <status xil_pn:value="InputChanged"/>
-      <outfile xil_pn:name="MemToWr.lso"/>
-      <outfile xil_pn:name="MemToWr.ngc"/>
-      <outfile xil_pn:name="MemToWr.ngr"/>
-      <outfile xil_pn:name="MemToWr.prj"/>
-      <outfile xil_pn:name="MemToWr.syr"/>
-      <outfile xil_pn:name="MemToWr.xst"/>
-      <outfile xil_pn:name="MemToWr_vhdl.prj"/>
-      <outfile xil_pn:name="MemToWr_xst.xrpt"/>
-      <outfile xil_pn:name="_xmsgs/xst.xmsgs"/>
-      <outfile xil_pn:name="webtalk_pn.xml"/>
-      <outfile xil_pn:name="xst"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1448275573" xil_pn:name="TRAN_compileBCD2" xil_pn:prop_ck="-956860591582053501" xil_pn:start_ts="1448275573">
       <status xil_pn:value="SuccessfullyRun"/>
@@ -102,21 +93,21 @@
     <transform xil_pn:end_ts="1448275583" xil_pn:in_ck="122776167173253297" xil_pn:name="TRANEXT_ngdbuild_FPGA" xil_pn:prop_ck="-7407643032729030287" xil_pn:start_ts="1448275573">
       <status xil_pn:value="AbortedRun"/>
       <status xil_pn:value="WarningsGenerated"/>
-      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="NotReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
-      <outfile xil_pn:name="MemToWr.bld"/>
-      <outfile xil_pn:name="MemToWr.ngd"/>
-      <outfile xil_pn:name="MemToWr_ngdbuild.xrpt"/>
-      <outfile xil_pn:name="_ngo"/>
-      <outfile xil_pn:name="_xmsgs/ngdbuild.xmsgs"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputRemoved"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1448275589" xil_pn:in_ck="122776167173253298" xil_pn:name="TRANEXT_map_spartan3" xil_pn:prop_ck="3188416950630775481" xil_pn:start_ts="1448275583">
       <status xil_pn:value="FailedRun"/>
-      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="NotReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
-      <outfile xil_pn:name="MemToWr_map.map"/>
-      <outfile xil_pn:name="MemToWr_map.mrp"/>
-      <outfile xil_pn:name="_xmsgs/map.xmsgs"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputRemoved"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
   </transforms>
 
