@@ -84,6 +84,7 @@
       <status xil_pn:value="OutOfDateForOutputs"/>
       <status xil_pn:value="InputAdded"/>
       <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="InputRemoved"/>
       <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1448275573" xil_pn:name="TRAN_compileBCD2" xil_pn:prop_ck="-956860591582053501" xil_pn:start_ts="1448275573">

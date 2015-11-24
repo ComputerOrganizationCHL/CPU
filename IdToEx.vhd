@@ -84,8 +84,8 @@ begin
 process(CLK)
 begin
     if (rising_edge(CLK)) then
-        if (IdToEx_Reset = 1) then
-            if (IdToEx_En = 1) then
+        if (IdToEx_Reset = '1') then
+            if (IdToEx_En = '1') then
                 IdToEx_PC <= IdToEx_PC_IN;
                 IdToEx_Wr_RegMemSel <= IdToEx_Wr_RegMemSel_IN;
                 IdToEx_Wr_RegWr <= IdToEx_Wr_RegWr_IN;

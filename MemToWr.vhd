@@ -60,8 +60,8 @@ begin
 process(CLK)
 begin
     if (rising_edge(CLK)) then
-        if (MemToWr_Reset = 1) then
-            if (MemToWr_En = 1) then
+        if (MemToWr_Reset = '1') then
+            if (MemToWr_En = '1') then
                 MemToWr_RegMemSel <= MemToWr_RegMemSel_IN;
                 MemToWr_RegWr <= MemToWr_RegWr_IN;
                 MemToWr_MemVal <= MemToWr_MemVal_IN;

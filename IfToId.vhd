@@ -48,8 +48,8 @@ begin
 process(CLK)
 begin
     if (rising_edge(CLK)) then
-        if (IfToId_Reset = 1) then
-            if (IfToId_En = 1) then
+        if (IfToId_Reset = '1') then
+            if (IfToId_En = '1') then
                 IfToId_PC <= IfToId_PC_IN;
                 IfToId_Ins <= IfToId_Ins_IN;
                 

@@ -48,8 +48,8 @@ begin
 process(CLK)
 begin
     if (rising_edge(CLK)) then
-        if (PC_RESET = 1) then
-            if (PC_En = 1) then
+        if (PC_RESET = '1') then
+            if (PC_En = '1') then
                 if (PC_Sel) then
                     PC <= PC_JmpPC_IN;
                     

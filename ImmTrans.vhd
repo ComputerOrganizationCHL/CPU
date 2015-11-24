@@ -41,12 +41,9 @@ begin
 
 process(ImmTrans_Ins)
 begin
-    case ImmTrans_Ins(4 downto 0) is
-        --TODO
-            
-        when others =>
-            ImmTrans_Imm <= "0000000000000000";
-    end case;
+    if (ImmTrans_Imm_SignExt = '1') then
+        
+    end if;
 end process;
 
 

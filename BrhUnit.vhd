@@ -31,11 +31,12 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity BrhUnit is
     Port ( BrhUnit_Brh : in  STD_LOGIC_VECTOR (1 downto 0);
-           BrhUnit_RsVal : in  STD_LOGIC_VECTOR (16 downto 0);
-           BrhUnit_RtVal : in  STD_LOGIC_VECTOR (16 downto 0);
-           BrhUnit_Imm : in  STD_LOGIC_VECTOR (16 downto 0);
-           BrhUnit_PC : in  STD_LOGIC_VECTOR (16 downto 0);
-           BrhUnit_JmpPC : out  STD_LOGIC_VECTOR (16 downto 0);
+           BrhUnit_Jmp : in  STD_LOGIC;
+           BrhUnit_RsVal : in  STD_LOGIC_VECTOR (15 downto 0);
+           BrhUnit_RtVal : in  STD_LOGIC_VECTOR (15 downto 0);
+           BrhUnit_Imm : in  STD_LOGIC_VECTOR (15 downto 0);
+           BrhUnit_PC : in  STD_LOGIC_VECTOR (15 downto 0);
+           BrhUnit_JmpPC : out  STD_LOGIC_VECTOR (15 downto 0);
            BrhUnit_PCSel : out  STD_LOGIC);
 end BrhUnit;
 
@@ -48,23 +49,23 @@ begin
     case BrhUnit_Brh is
         when "00" =>
             BrhUnit_JmpPC <= BrhUnit_PC + BrhUnit_Imm;
-            BrhUnit_PCSel <= '1';
+            BrhUnit_PCSel <= BrhUnit_Jmp;
             
         when "01" =>
             BrhUnit_JmpPC <= BrhUnit_PC + BrhUnit_RsVal;
-            BrhUnit_PCSel <= '1';
+            BrhUnit_PCSel <= BrhUnit_Jmp;
             
         when "10" =>
             BrhUnit_JmpPC <= BrhUnit_PC + BrhUnit_Imm;
             if (BrhUnit_RsVal = BrhUnit_RtVal) then
-                BrhUnit_PCSel <= '1';
+                BrhUnit_PCSel <= BrhUnit_Jmp;
             else
                 BrhUnit_PCSel <= '0';
             end if;
         when "11" =>
             BrhUnit_JmpPC <= BrhUnit_PC + BrhUnit_Imm;
             if (BrhUnit_RsVal /= BrhUnit_RtVal) then
-                BrhUnit_PCSel <= '1';
+                BrhUnit_PCSel <= BrhUnit_Jmp;
             else
                 BrhUnit_PCSel <= '0';
             end if;

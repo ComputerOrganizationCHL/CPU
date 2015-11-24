@@ -73,8 +73,8 @@ begin
 process(CLK)
 begin
 	if (rising_edge(CLK)) then
-        if (ExToMem_RESET = 1) then
-            if (ExToMem_En = 1) then
+        if (ExToMem_RESET = '1') then
+            if (ExToMem_En = '1') then
                 ExToMem_PC <= ExToMem_PC_IN;
                 ExToMem_Wr_RegMemSel <= ExToMem_Wr_RegMemSel_IN;
                 ExToMem_Wr_RegWr <= ExToMem_Wr_RegWr_IN;
