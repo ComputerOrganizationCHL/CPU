@@ -32,6 +32,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity ImmTrans is
     Port ( ImmTrans_Imm_IN : in  STD_LOGIC_VECTOR (15 downto 0);
            ImmTrans_SignExt : in STD_LOGIC;
+           ImmTrans_Width : in STD_LOGIC_VECTOR(3 downto 0);
            ImmTrans_Imm_OUT : out  STD_LOGIC_VECTOR (15 downto 0));
 end ImmTrans;
 
@@ -42,7 +43,35 @@ begin
 process(ImmTrans_Ins)
 begin
     if (ImmTrans_Imm_SignExt = '1') then
+        case ImmTrans_Width is
+            when "00" =>
+                ImmTrans_Imm_OUT <= ImmTrans_Imm_IN;
+            when "01" =>
+                if (ImmTrans_Imm_IN(4) = '1') then
+                    ImmTrans_Imm_OUT(15 downto 4) <= "111111111111";
+                else
+                    ImmTrans_Imm_OUT(15 downto 4) <= "000000000000";
+                end if;
+                ImmTrans_Imm_OUT(3 downto 0) <= ImmTrans_Imm_IN(3 downto 0);
+            when "10" =>
+                if (ImmTrans_Imm_IN(7) = '1') then
+                    ImmTrans_Imm_OUT(15 downto 7) <= "111111111";
+                else
+                    ImmTrans_Imm_OUT(15 downto 7) <= "000000000";
+                end if;
+                ImmTrans_Imm_OUT(6 downto 0) <= ImmTrans_Imm_IN(6 downto 0);
+            when "11" =>
+                if (ImmTrans_Imm_IN(10) = '1') then
+                    ImmTrans_Imm_OUT(15 downto 10) <= "111111";
+                else
+                    ImmTrans_Imm_OUT(15 downto 10) <= "000000";
+                end if;
+                ImmTrans_Imm_OUT(9 downto 0) <= ImmTrans_Imm_IN(9 downto 0);
         
+            when others =>
+                ImmTrans_Imm_OUT <= ImmTrans_Imm_IN;
+        
+        end case;
     end if;
 end process;
 
