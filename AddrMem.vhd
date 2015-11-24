@@ -30,7 +30,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity AddrMem is
-    Port ( AddrMem_RESET : in  STD_LOGIC;
+    Port ( AddrMem_Reset : in  STD_LOGIC;
            AddrMem_PC : in  STD_LOGIC_VECTOR (15 downto 0);
            AddrMem_Ins : out  STD_LOGIC_VECTOR (15 downto 0));
 end AddrMem;

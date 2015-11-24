@@ -32,6 +32,7 @@
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_STX" xil_pn:name="MemToWr.stx"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_REPORT" xil_pn:name="MemToWr.syr"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST" xil_pn:name="MemToWr.xst"/>
+    <file xil_pn:fileType="FILE_HTML" xil_pn:name="MemToWr_envsettings.html"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_MAP_REPORT" xil_pn:name="MemToWr_map.map" xil_pn:subbranch="Map"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_MAP_REPORT" xil_pn:name="MemToWr_map.mrp" xil_pn:subbranch="Map"/>
     <file xil_pn:fileType="FILE_XRPT" xil_pn:name="MemToWr_ngdbuild.xrpt"/>
@@ -76,15 +77,15 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1448275573" xil_pn:in_ck="1178621171642573511" xil_pn:name="TRANEXT_xstsynthesize_spartan3e" xil_pn:prop_ck="-3113488638541842303" xil_pn:start_ts="1448275557">
-      <status xil_pn:value="SuccessfullyRun"/>
-      <status xil_pn:value="WarningsGenerated"/>
+    <transform xil_pn:end_ts="1448338178" xil_pn:in_ck="1178621171642573511" xil_pn:name="TRANEXT_xstsynthesize_spartan3e" xil_pn:prop_ck="-3113488638541842303" xil_pn:start_ts="1448338175">
+      <status xil_pn:value="FailedRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="InputChanged"/>
       <outfile xil_pn:name="MemToWr.lso"/>
       <outfile xil_pn:name="MemToWr.ngc"/>
       <outfile xil_pn:name="MemToWr.ngr"/>
       <outfile xil_pn:name="MemToWr.prj"/>
-      <outfile xil_pn:name="MemToWr.stx"/>
       <outfile xil_pn:name="MemToWr.syr"/>
       <outfile xil_pn:name="MemToWr.xst"/>
       <outfile xil_pn:name="MemToWr_vhdl.prj"/>
@@ -98,9 +99,10 @@
       <status xil_pn:value="ReadyToRun"/>
     </transform>
     <transform xil_pn:end_ts="1448275583" xil_pn:in_ck="122776167173253297" xil_pn:name="TRANEXT_ngdbuild_FPGA" xil_pn:prop_ck="-7407643032729030287" xil_pn:start_ts="1448275573">
-      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="AbortedRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
       <outfile xil_pn:name="MemToWr.bld"/>
       <outfile xil_pn:name="MemToWr.ngd"/>
       <outfile xil_pn:name="MemToWr_ngdbuild.xrpt"/>
@@ -110,6 +112,7 @@
     <transform xil_pn:end_ts="1448275589" xil_pn:in_ck="122776167173253298" xil_pn:name="TRANEXT_map_spartan3" xil_pn:prop_ck="3188416950630775481" xil_pn:start_ts="1448275583">
       <status xil_pn:value="FailedRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
       <outfile xil_pn:name="MemToWr_map.map"/>
       <outfile xil_pn:name="MemToWr_map.mrp"/>
       <outfile xil_pn:name="_xmsgs/map.xmsgs"/>

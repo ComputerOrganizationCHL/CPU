@@ -30,7 +30,9 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity IfToId is
-    Port ( IfToId_EN : in  STD_LOGIC;
+    Port ( CLK : in STD_LOGIC;
+           IfToId_En : in  STD_LOGIC;--En = 1是正常工作，0表示不可写并保持上次的输出
+           IfToId_Reset : in STD_LOGIC;--Reset = 1是正常工作，0表示置0
            IfToId_PC_IN : in  STD_LOGIC_VECTOR(15 downto 0);
            IfToId_Ins_IN : in  STD_LOGIC_VECTOR(15 downto 0);
            IfToId_PC_OUT : out  STD_LOGIC_VECTOR(15 downto 0);
@@ -38,9 +40,36 @@ entity IfToId is
 end IfToId;
 
 architecture Behavioral of IfToId is
+    signal PC : STD_LOGIC_VECTOR(15 downto 0);
+    signal Ins : STD_LOGIC_VECTOR(15 downto 0);
 
 begin
 
+process(CLK)
+begin
+    if (rising_edge(CLK)) then
+        if (IfToId_Reset = 1) then
+            if (IfToId_En = 1) then
+                IfToId_PC <= IfToId_PC_IN;
+                IfToId_Ins <= IfToId_Ins_IN;
+                
+                IfToId_PC_OUT <= IfToId_PC_IN;
+                IfToId_Ins_OUT <= IfToId_Ins_IN;
+            else
+                IfToId_PC_OUT <= IfToId_PC;
+                IfToId_Ins_OUT <= IfToId_Ins;
+            end if;
+        else 
+            IfToId_PC <= "0000000000000000";
+            IfToId_Ins <= "0000000000000000";
+            
+            IfToId_PC_OUT <= "0000000000000000";
+            IfToId_Ins_OUT <= "0000000000000000";
+        end if;
+    
+    end if;
+
+end process;
 
 end Behavioral;
 

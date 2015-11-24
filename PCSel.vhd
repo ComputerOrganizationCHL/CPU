@@ -30,18 +30,38 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity PCSel is
-    Port ( PC_EN : in  STD_LOGIC;
-           PC_RESET : in  STD_LOGIC;
+    Port ( CLK : in STD_LOGIC;
+           PC_En : in  STD_LOGIC;--En = 1是正常工作，0表示不可写并保持上次的输出
+           PC_Reset : in  STD_LOGIC;--Reset = 1是正常工作，0表示置0
            PC_NextPC_IN : in  STD_LOGIC_VECTOR (15 downto 0);
            PC_NextPC_OUT : out  STD_LOGIC_VECTOR (15 downto 0));
 end PCSel;
 
 architecture Behavioral of PCSel is
 
-
+signal PC: STD_LOGIC_VECTOR(15 downto 0);
 
 begin
 
+process(CLK)
+begin
+    if (rising_edge(CLK)) then
+        if (PC_RESET = 1) then
+            if (PC_En = 1) then
+                PC <= PC_NextPC_IN;
+                
+                PC_NextPC_OUT <= PC_NextPC_IN;
+            else
+                PC_NextPC_OUT <= PC;
+            end if;
+        else 
+            PC <= "0000000000000000";
+            
+            PC_NextPC_OUT <= "0000000000000000";
+        end if;
+    end if;
+
+end process;
 
 end Behavioral;
 
