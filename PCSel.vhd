@@ -33,6 +33,8 @@ entity PCSel is
     Port ( CLK : in STD_LOGIC;
            PC_En : in  STD_LOGIC;--En = 1是正常工作，0表示不可写并保持上次的输出
            PC_Reset : in  STD_LOGIC;--Reset = 1是正常工作，0表示置0
+           PC_Sel : in STD_LOGIC;--与Jmp连接
+           PC_JmpPC_IN : in STD_LOGIC(15 downto 0);
            PC_NextPC_IN : in  STD_LOGIC_VECTOR (15 downto 0);
            PC_NextPC_OUT : out  STD_LOGIC_VECTOR (15 downto 0));
 end PCSel;
@@ -48,9 +50,15 @@ begin
     if (rising_edge(CLK)) then
         if (PC_RESET = 1) then
             if (PC_En = 1) then
-                PC <= PC_NextPC_IN;
+                if (PC_Sel) then
+                    PC <= PC_JmpPC_IN;
+                    
+                    PC_NextPC_OUT <= PC_JmpPC_IN;
+                else
+                    PC <= PC_NextPC_IN;
                 
-                PC_NextPC_OUT <= PC_NextPC_IN;
+                    PC_NextPC_OUT <= PC_NextPC_IN;
+                end if;
             else
                 PC_NextPC_OUT <= PC;
             end if;

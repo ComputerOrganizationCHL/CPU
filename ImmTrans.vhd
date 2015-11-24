@@ -38,6 +38,16 @@ architecture Behavioral of ImmTrans is
 
 begin
 
+process(ImmTrans_Ins)
+begin
+    case ImmTrans_Ins(4 downto 0) is
+        --TODO
+            
+        when others =>
+            ImmTrans_Imm <= "0000000000000000";
+    end case;
+end process;
+
 
 end Behavioral;
 
