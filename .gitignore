@@ -234,7 +234,5 @@ xst/
 *.map
 *.mrp
 *.xrpt
-*.xise
-*.gise
 *.xml
 *.bld
