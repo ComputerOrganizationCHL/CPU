@@ -31,20 +31,20 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity DataMem is
     Port ( DataMem_CLK_low : in STD_LOGIC;
-			  DataMem_CLK_high : in STD_LOGIC;
-			  DataMem_Reset : in  STD_LOGIC;
-			  DataMem_Addr : in  STD_LOGIC_VECTOR (15 downto 0);
+           DataMem_CLK_high : in STD_LOGIC;
+           DataMem_Reset : in  STD_LOGIC;
+           DataMem_Addr : in  STD_LOGIC_VECTOR (15 downto 0);
            DataMem_RE : in  STD_LOGIC;
            DataMem_WE : in  STD_LOGIC;
-			  DataMem_EN : in  STD_LOGIC;
-			  DataMem_Val_IN : in  STD_LOGIC_VECTOR (15 downto 0);
+           DataMem_EN : in  STD_LOGIC;
+           DataMem_Val_IN : in  STD_LOGIC_VECTOR (15 downto 0);
            DataMem_Val_OUT : out  STD_LOGIC_VECTOR (15 downto 0);
-			  
-			  DataMem_Ram1_Addr : out STD_LOGIC_VECTOR (15 downto 0);
-			  DataMem_Ram1_Data : inout STD_LOGIC_VECTOR (15 downto 0);
-			  DataMem_Ram1_OE : out STD_LOGIC;
-			  DataMem_Ram1_WE : out STD_LOGIC;
-			  DataMem_Ram1_EN : out STD_LOGIC);
+           
+           DataMem_Ram1_Addr : out STD_LOGIC_VECTOR (15 downto 0);
+           DataMem_Ram1_Data : inout STD_LOGIC_VECTOR (15 downto 0);
+           DataMem_Ram1_OE : out STD_LOGIC;
+           DataMem_Ram1_WE : out STD_LOGIC;
+           DataMem_Ram1_EN : out STD_LOGIC);
 end DataMem;
 
 architecture Behavioral of DataMem is

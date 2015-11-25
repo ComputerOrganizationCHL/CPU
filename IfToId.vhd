@@ -38,7 +38,9 @@ entity IfToId is
 end IfToId;
 
 architecture Behavioral of IfToId is
-
+    signal PC : STD_LOGIC_VECTOR(15 downto 0);
+    signal Ins : STD_LOGIC_VECTOR(15 downto 0);
+    
 begin
 
 process(CLK)

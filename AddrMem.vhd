@@ -31,20 +31,19 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity AddrMem is
     Port ( AddrMem_CLK_low : in STD_LOGIC;
-			  AddrMem_CLK_high : in STD_LOGIC;
-		     AddrMem_Reset : in  STD_LOGIC;
+           AddrMem_CLK_high : in STD_LOGIC;
+           AddrMem_Reset : in  STD_LOGIC;
            AddrMem_PC : in  STD_LOGIC_VECTOR (15 downto 0);
-			  AddrMem_RE : in STD_LOGIC;
-			  AddrMem_WE : in STD_LOGIC;
-			  AddrMem_EN : in STD_LOGIC;
-			  AddrMem_Ins_IN : in STD_LOGIC_VECTOR (15 downto 0);
+           AddrMem_RE : in STD_LOGIC;
+           AddrMem_WE : in STD_LOGIC;
+           AddrMem_EN : in STD_LOGIC;
+           AddrMem_Ins_IN : in STD_LOGIC_VECTOR (15 downto 0);
            AddrMem_Ins_OUT : out  STD_LOGIC_VECTOR (15 downto 0);
-			  
-			  AddrMem_Ram1_Addr : out STD_LOGIC_VECTOR (15 downto 0);
-			  AddrMem_Ram1_Data : inout STD_LOGIC_VECTOR (15 downto 0);
-			  AddrMem_Ram1_OE : out STD_LOGIC;
-			  AddrMem_Ram1_WE : out STD_LOGIC;
-			  AddrMem_Ram1_EN : out STD_LOGIC );
+           AddrMem_Ram1_Addr : out STD_LOGIC_VECTOR (15 downto 0);
+           AddrMem_Ram1_Data : inout STD_LOGIC_VECTOR (15 downto 0);
+           AddrMem_Ram1_OE : out STD_LOGIC;
+           AddrMem_Ram1_WE : out STD_LOGIC;
+           AddrMem_Ram1_EN : out STD_LOGIC );
 end AddrMem;
 
 architecture Behavioral of AddrMem is

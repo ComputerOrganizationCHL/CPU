@@ -62,7 +62,20 @@ entity IdToEx is
 end IdToEx;
 
 architecture Behavioral of IdToEx is
-
+    signal IdToEx_PC : STD_LOGIC_VECTOR(15 downto 0);
+    signal IdToEx_Wr_RegMemSel : STD_LOGIC;
+    signal IdToEx_Wr_RegWr : STD_LOGIC;
+    signal IdToEx_Mem_MemRE : STD_LOGIC;
+    signal IdToEx_Mem_MemRE : STD_LOGIC;
+    signal IdToEx_ALUOp : STD_LOGIC_VECTOR(3 downto 0);
+    signal IdToEx_Imm : STD_LOGIC_VECTOR(15 downto 0);
+    signal IdToEx_RtRegImmSel : STD_LOGIC;
+    signal IdToEx_RtRdSel : STD_LOGIC;
+    signal IdToEx_RsVal : STD_LOGIC_VECTOR(15 downto 0);
+    signal IdToEx_RtVal : STD_LOGIC_VECTOR(15 downto 0);
+    signal IdToEx_Rs : STD_LOGIC_VECTOR(3 downto 0);
+    signal IdToEx_Rt : STD_LOGIC_VECTOR(3 downto 0);
+    signal IdToEx_Rd : STD_LOGIC_VECTOR(3 downto 0);
 begin
 
 process(CLK)
