@@ -30,7 +30,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity RegFile is
-    Port ( RegFile_WE : in  STD_LOGIC;
+    Port ( RegFile_CLK : in STD_LOGIC;
+           RegFile_WE : in  STD_LOGIC;
            RegFile_Rs : in  STD_LOGIC_VECTOR (2 downto 0);
            RegFile_Rt : in  STD_LOGIC_VECTOR (2 downto 0);
            RegFile_RegNum : in  STD_LOGIC_VECTOR (3 downto 0);--For write --000~111 gr, 1000~1011 SP IH RA T
@@ -62,9 +63,13 @@ architecture Behavioral of RegFile is
 
 begin
 
-process(RegFile_WE, RegFile_Rs, RegFile_Rt, RegFile_RegNum, RegFile_RegVal)       -- main process
+SP_OUT <= SP;
+IH_OUT <= IH;
+RA_OUT <= RA;
+T_OUT  <= T;
+
+process(RegFile_Rs,R0,R1,R2,R3,R4,R5,R6,R7,SP,IH,RA,T)                     --read Rt process
 begin
-    if RegFile_WE = '0' then
         case RegFile_Rs is
             when "000" =>
                 RegFile_RsVal <= R0;
@@ -84,7 +89,11 @@ begin
                 RegFile_RsVal <= R7;
             when others =>
         end case;
-        
+end process;
+
+
+process(RegFile_Rt,R0,R1,R2,R3,R4,R5,R6,R7,SP,IH,RA,T)                         --read Rt process
+begin
         case RegFile_Rt is
             when "000" =>
                 RegFile_RtVal <= R0;
@@ -104,12 +113,12 @@ begin
                 RegFile_RtVal <= R7;
             when others =>
         end case;
-        
-        SP_OUT <= SP;
-        IH_OUT <= IH;
-        RA_OUT <= RA;
-        T_OUT  <= T;
-    else
+   
+end process;
+
+process(RegFile_CLK)         --write process
+begin
+    if RegFile_WE = '1' and rising_edge(RegFile_CLK) then
         case RegFile_RegNum is
             when "0000" =>
                 R0 <= RegFile_RegVal;
@@ -138,7 +147,6 @@ begin
                 T  <= RegFile_RegVal;
             when others =>
         end case;
-    
     end if;
 
 end process;
