@@ -236,3 +236,5 @@ xst/
 *.xrpt
 *.xml
 *.bld
+cpu.xise
+cpu.gise
