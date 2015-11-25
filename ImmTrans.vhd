@@ -70,10 +70,18 @@ begin
         
             when others =>
                 ImmTrans_Imm_OUT <= ImmTrans_Imm_IN;
-        
+        l
         end case;
     else
-        ImmTrans_Imm_OUT <= ImmTrans_Imm_IN;
+        if (ImmTrans_Width = "01") then
+            if (ImmTrans_Imm_IN = "0000000000000000") then
+                ImmTrans_Imm_OUT <= "0000000000000100";
+            else
+                ImmTrans_Imm_OUT <= ImmTrans_Imm_IN;    
+            end if;
+        else
+            ImmTrans_Imm_OUT <= ImmTrans_Imm_IN;    
+        end if;
     end if;
 end process;
 

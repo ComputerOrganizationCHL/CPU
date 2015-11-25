@@ -33,10 +33,12 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity ALU is
     Port ( ALU_ALUOp : in  STD_LOGIC_VECTOR (2 downto 0);
+           ALU_ALUOr : in  STD_LOGIC;
            ALU_RsVal : in  STD_LOGIC_VECTOR (15 downto 0);
            ALU_RtVal : in  STD_LOGIC_VECTOR (15 downto 0);
            ALU_OUT : out  STD_LOGIC_VECTOR (15 downto 0));
 end ALU;
+
 
 architecture Behavioral of ALU is
 
@@ -62,13 +64,16 @@ begin
             --取反, OUT = ~Rs
             ALU_OUT <= NOT ALU_RsVal;
         when "100" =>
-            --或操作, OUT <= Rs | Rt
-            ALU_OUT <= ALU_RsVal OR ALU_RtVal;
+            --与或操作, OUT <= Rs | Rt
+            if (ALU_ALUOr = '1') then
+                ALU_OUT <= ALU_RsVal OR ALU_RtVal;
+            else
+                ALU_OUT <= ALU_RsVal AND ALU_RtVal;
         when "101" =>
             --左移操作, OUT <= Rs << Rt
             ALU_OUT <= to_stdlogicvector(to_bitvector(ALU_RsVal) SLL conv_integer(ALU_RtVal));
         when "110" =>
-            --右移操作, OUT <= Rs << Rt
+            --右移操作, OUT <= Rs >> Rt
             ALU_OUT <= to_stdlogicvector(to_bitvector(ALU_RsVal) SRA conv_integer(ALU_RtVal));
         when "111" =>
             --小于等于操作, ALU_OUT <= (ALU_RsVal < ALU_RtVal)
