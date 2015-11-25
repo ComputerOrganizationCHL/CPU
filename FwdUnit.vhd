@@ -30,19 +30,14 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity FwdUnit is
-    Port ( FwdUnit_Id_Rs : in  STD_LOGIC_VECTOR (3 downto 0);
-           FwdUnit_Id_Rt : in  STD_LOGIC_VECTOR (3 downto 0);
-           FwdUnit_Ex_Rs : in  STD_LOGIC_VECTOR (3 downto 0);
-           FwdUnit_Ex_Rt : in  STD_LOGIC_VECTOR (3 downto 0);
+    Port ( FwdUnit_Rs : in  STD_LOGIC_VECTOR (3 downto 0);
+           FwdUnit_Rt : in  STD_LOGIC_VECTOR (3 downto 0);
+           FwdUnit_RegDistSel : in  STD_LOGIC;
            FwdUnit_ExToMem_RegWr : in  STD_LOGIC;
            FwdUnit_ExToMem_RegNum : in  STD_LOGIC_VECTOR (3 downto 0);
            FwdUnit_MemToWr_RegWr : in  STD_LOGIC;
            FwdUnit_MemToWr_RegNum : in  STD_LOGIC_VECTOR (3 downto 0);
-           FwdUnit_MemToWr_RegMemSel : in STD_LOGIC;
-           FwdUnit_Id_Rs_FwdSel : out  STD_LOGIC_VECTOR (1 downto 0);
-           FwdUnit_Id_Rt_FwdSel : out  STD_LOGIC_VECTOR (1 downto 0);
-           FwdUnit_Ex_Rs_FwdSel : out  STD_LOGIC_VECTOR (1 downto 0);
-           FwdUnit_Ex_Rt_FwdSel : out  STD_LOGIC_VECTOR (1 downto 0));
+           FwdUnit_FwdSel : out  STD_LOGIC_VECTOR (1 downto 0));
 end FwdUnit;
 
 architecture Behavioral of FwdUnit is

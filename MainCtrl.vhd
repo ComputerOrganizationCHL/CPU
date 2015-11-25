@@ -34,11 +34,12 @@ entity MainCtrl is
            MainCtrl_Wr_RegMemSel : out  STD_LOGIC;
            MainCtrl_Wr_RegWr : out  STD_LOGIC;
            MainCtrl_Mem_MemRE : out  STD_LOGIC;
-           MainCtrl_Mem_MemWE : out  STD_LOGIC;
+			  MainCtrl_Mem_MemWE : out  STD_LOGIC;
            MainCtrl_Ex_ALUOp : out  STD_LOGIC_VECTOR (3 downto 0);
            MainCtrl_Ex_RtRegImmSel : out  STD_LOGIC;
            MainCtrl_Ex_RtRdSel : out  STD_LOGIC;
-           MainCtrl_Brh : out  STD_LOGIC_VECTOR(1 downto 0));
+           MainCtrl_BrhSel : out  STD_LOGIC;
+           MainCtrl_JmpSel : out  STD_LOGIC);
 end MainCtrl;
 
 architecture Behavioral of MainCtrl is

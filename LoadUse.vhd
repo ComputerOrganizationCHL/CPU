@@ -32,28 +32,19 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity LoadUse is
     Port ( LoadUse_Id_Rs : in  STD_LOGIC_VECTOR (3 downto 0);
            LoadUse_Id_Rt : in  STD_LOGIC_VECTOR (3 downto 0);
-           LoadUse_Id_Brh : in  STD_LOGIC_VECTOR(1 downto 0);
-           LoadUse_IdToEx_Rt : in  STD_LOGIC_VECTOR (3 downto 0);
-           LoadUse_IdToEx_Rd : in  STD_LOGIC_VECTOR (3 downto 0);
-           LoadUse_IdToEx_RtRdSel : in  STD_LOGIC;
-           LoadUse_IdToEx_MemRE : in  STD_LOGIC;
-           LoadUse_ExToMem_RegNum : in  STD_LOGIC_VECTOR (3 downto 0);
-           LoadUse_ExToMem_MemRE : in  STD_LOGIC;
-           LoadUse_MemToWr_RegNum : in  STD_LOGIC_VECTOR (3 downto 0);
-           LoadUse_MemToWr_MemRE : in  STD_LOGIC;
-           LoadUse_PCSel_En : out  STD_LOGIC;
-           LoadUse_IfToId_En : out  STD_LOGIC;
-           LoadUse_IfToId_Reset : out  STD_LOGIC;
-           LoadUse_IdToEx_En : out  STD_LOGIC;
-           LoadUse_IdToEx_Reset : out  STD_LOGIC;
-           LoadUse_ExToMem_En : out  STD_LOGIC;
-           LoadUse_ExToMem_Reset : out  STD_LOGIC
-           );
+           LoadUse_Id_Brh : in  STD_LOGIC;
+           LoadUse_Id_Jmp : in  STD_LOGIC;
+           LoadUse_Ex_RegNum : in  STD_LOGIC_VECTOR (3 downto 0);
+           LoadUse_Ex_MemWE : in  STD_LOGIC;
+           LoadUse_Mem_RegNum : in  STD_LOGIC_VECTOR (3 downto 0);
+           LoadUse_Mem_MemWE : in  STD_LOGIC;
+           LoadUse_En : out  STD_LOGIC);
 end LoadUse;
 
 architecture Behavioral of LoadUse is
 
 begin
+
 
 end Behavioral;
 
