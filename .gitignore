@@ -238,3 +238,13 @@ xst/
 *.bld
 cpu.xise
 cpu.gise
+isim/
+*.cmd
+*.wdb
+*.exe
+AddrMem_tb.vhd
+*.ini
+*.xbcd
+RegFile_tb.vhd
+*.xmsgs
+*.gise
