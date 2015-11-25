@@ -56,9 +56,9 @@ begin
 
 process( AddrMem_CLK_high,AddrMem_Reset,AddrMem_EN)
 begin
-	if AddrMem_Reset = '0' or AddrMem_EN = '1' then
+	if AddrMem_Reset = '0' or AddrMem_EN = '0' then
 		current_status <= Asleep;
-	elsif rising_edge( AddrMem_CLK_high) and AddrMem_EN = '0' then
+	elsif rising_edge( AddrMem_CLK_high) and AddrMem_EN = '1' then
 		current_status <= next_status;
 	end if;
 end process;
@@ -67,9 +67,9 @@ process(current_status,AddrMem_EN)
 begin	
 	case current_status is
 		when Asleep =>
-			if AddrMem_RE = '0' and AddrMem_WE = '1' and AddrMem_EN = '0' then
+			if AddrMem_RE = '1' and AddrMem_WE = '0' and AddrMem_EN = '1' then
 				next_status <= readPre;
-			elsif AddrMem_RE = '1' and AddrMem_WE = '0' and AddrMem_EN = '0' then
+			elsif AddrMem_RE = '0' and AddrMem_WE = '1' and AddrMem_EN = '1' then
 				next_status <= writePre;
 				else
 					next_status <= Asleep;

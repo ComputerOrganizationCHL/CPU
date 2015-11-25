@@ -57,9 +57,9 @@ begin
 
 process( DataMem_CLK_high,DataMem_Reset,DataMem_EN)
 begin
-	if DataMem_Reset = '0' or DataMem_EN = '1' then
+	if DataMem_Reset = '0' or DataMem_EN = '0' then
 		current_status <= Asleep;
-	elsif rising_edge( DataMem_CLK_high) and DataMem_EN = '0' then
+	elsif rising_edge( DataMem_CLK_high) and DataMem_EN = '1' then
 		current_status <= next_status;
 	end if;
 end process;
@@ -68,9 +68,9 @@ process(current_status,DataMem_EN)
 begin	
 	case current_status is
 		when Asleep =>
-			if DataMem_RE = '1' and DataMem_WE = '0' and DataMem_EN = '0' then
+			if DataMem_RE = '0' and DataMem_WE = '1' and DataMem_EN = '1' then
 				next_status <= readPre;
-			elsif DataMem_RE = '0' and DataMem_WE = '1' and DataMem_EN = '0' then
+			elsif DataMem_RE = '1' and DataMem_WE = '0' and DataMem_EN = '1' then
 				next_status <= writePre;
 				else
 					next_status <= Asleep;
