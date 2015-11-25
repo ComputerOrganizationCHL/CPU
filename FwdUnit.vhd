@@ -30,9 +30,9 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity FwdUnit is
-    Port ( FwdUnit_Rs : in  STD_LOGIC_VECTOR (3 downto 0);
-           FwdUnit_Rt : in  STD_LOGIC_VECTOR (3 downto 0);
-           FwdUnit_RegDistSel : in  STD_LOGIC;
+    Port (
+           FwdUnit_Ex_Rs : in  STD_LOGIC_VECTOR (3 downto 0);
+           FwdUnit_Ex_Rt : in  STD_LOGIC_VECTOR (3 downto 0);
            FwdUnit_ExToMem_RegWr : in  STD_LOGIC;
            FwdUnit_ExToMem_RegNum : in  STD_LOGIC_VECTOR (3 downto 0);
            FwdUnit_MemToWr_RegWr : in  STD_LOGIC;

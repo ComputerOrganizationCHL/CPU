@@ -41,6 +41,31 @@ architecture Behavioral of IfToId is
 
 begin
 
+process(CLK)
+begin
+    if (rising_edge(CLK)) then
+        if (IfToId_Reset = '1') then
+            if (IfToId_En = '1') then
+                IfToId_PC <= IfToId_PC_IN;
+                IfToId_Ins <= IfToId_Ins_IN;
+                
+                IfToId_PC_OUT <= IfToId_PC_IN;
+                IfToId_Ins_OUT <= IfToId_Ins_IN;
+            else
+                IfToId_PC_OUT <= IfToId_PC;
+                IfToId_Ins_OUT <= IfToId_Ins;
+            end if;
+        else 
+            IfToId_PC <= "0000000000000000";
+            IfToId_Ins <= "0000000000000000";
+            
+            IfToId_PC_OUT <= "0000000000000000";
+            IfToId_Ins_OUT <= "0000000000000000";
+        end if;
+    
+    end if;
+
+end process;
 
 end Behavioral;
 
