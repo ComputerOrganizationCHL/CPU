@@ -35,15 +35,56 @@ entity FwdUnit is
            FwdUnit_Ex_Rt : in  STD_LOGIC_VECTOR (3 downto 0);
            FwdUnit_ExToMem_RegWr : in  STD_LOGIC;
            FwdUnit_ExToMem_RegNum : in  STD_LOGIC_VECTOR (3 downto 0);
+           FwdUnit_MemToWr_RegMemSel : in STD_LOGIC;
            FwdUnit_MemToWr_RegWr : in  STD_LOGIC;
            FwdUnit_MemToWr_RegNum : in  STD_LOGIC_VECTOR (3 downto 0);
-           FwdUnit_FwdSel : out  STD_LOGIC_VECTOR (1 downto 0));
+           FwdUnit_FwdRsSel : out  STD_LOGIC_VECTOR (1 downto 0);
+           FwdUnit_FwdRtSel : out  STD_LOGIC_VECTOR (1 downto 0));
+           --"00" : RsVal "01" ExToMem "10" WrReg "11" WrMem
 end FwdUnit;
 
 architecture Behavioral of FwdUnit is
 
 begin
 
+process(FwdUnit_Ex_Rs, FwdUnit_ExToMem_RegWr, FwdUnit_ExToMem_RegNum, FwdUnit_MemToWr_RegMemSel, FwdUnit_MemToWr_RegWr, FwdUnit_MemToWr_RegNum)
+begin
+    if (FwdUnit_ExToMem_RegWr = '1') then
+        if (FwdUnit_Ex_Rs = FwdUnit_ExToMem_RegNum) then
+            FwdUnit_FwdRsSel <= "01";
+        else
+            if (FwdUnit_Ex_Rs = FwdUnit_MemToWr_RegNum) then
+                if (FwdUnit_MemToWr_RegMemSel = '0') then
+                    FwdUnit_FwdRsSel <= "10";
+                else
+                    FwdUnit_FwdRsSel <= "11";
+                end if;
+            else
+                FwdUnit_FwdRsSel <= "00";
+            end if;
+        end if;
+    end if;
+end process;
+
+
+process(FwdUnit_Ex_Rt, FwdUnit_ExToMem_RegWr, FwdUnit_ExToMem_RegNum, FwdUnit_MemToWr_RegMemSel, FwdUnit_MemToWr_RegWr, FwdUnit_MemToWr_RegNum)
+begin
+    if (FwdUnit_ExToMem_RegWr = '1') then
+        if (FwdUnit_Ex_Rt = FwdUnit_ExToMem_RegNum) then
+            FwdUnit_FwdRtSel <= "01";
+        else
+            if (FwdUnit_Ex_Rt = FwdUnit_MemToWr_RegNum) then
+                if (FwdUnit_MemToWr_RegMemSel = '0') then
+                    FwdUnit_FwdRtSel <= "10";
+                else
+                    FwdUnit_FwdRtSel <= "11";
+                end if;
+            else
+                FwdUnit_FwdRtSel <= "00";
+            end if;
+        end if;
+    end if;
+end process;
 
 end Behavioral;
 
