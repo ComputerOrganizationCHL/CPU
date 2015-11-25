@@ -30,7 +30,9 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity IdToEx is
-    Port ( IdToEx_EN : in  STD_LOGIC;
+    Port ( CLK : in STD_LOGIC;
+           IdToEx_En : in  STD_LOGIC;
+           IdToEx_Reset : in  STD_LOGIC;
            IdToEx_PC_IN : in  STD_LOGIC_VECTOR (15 downto 0);
            IdToEx_Wr_RegMemSel_IN : in  STD_LOGIC;
            IdToEx_Wr_RegWr_IN : in  STD_LOGIC;
@@ -49,9 +51,9 @@ entity IdToEx is
            IdToEx_Wr_RegMemSel_OUT : out  STD_LOGIC;
            IdToEx_Wr_RegWr_OUT : out  STD_LOGIC;
            IdToEx_Mem_MemRE_OUT : out  STD_LOGIC;
-			     IdToEx_Mem_MemWE_OUT : out  STD_LOGIC;
+           IdToEx_Mem_MemWE_OUT : out  STD_LOGIC;
            IdToEx_ALUOp_OUT : out  STD_LOGIC_VECTOR (3 downto 0);
-			     IdToEx_Imm_OUT : in  STD_LOGIC_VECTOR (15 downto 0);
+           IdToEx_Imm_OUT : in  STD_LOGIC_VECTOR (15 downto 0);
            IdToEx_RtRegImmSel_OUT : out  STD_LOGIC;
            IdToEx_RtRdSel_OUT : out  STD_LOGIC;
            IdToEx_RsVal_OUT : out  STD_LOGIC_VECTOR (15 downto 0);

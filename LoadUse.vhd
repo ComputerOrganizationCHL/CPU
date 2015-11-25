@@ -32,18 +32,32 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity LoadUse is
     Port ( LoadUse_Id_Rs : in  STD_LOGIC_VECTOR (3 downto 0);
            LoadUse_Id_Rt : in  STD_LOGIC_VECTOR (3 downto 0);
-           LoadUse_Id_Brh : in  STD_LOGIC;
-           LoadUse_Id_Jmp : in  STD_LOGIC;
            LoadUse_Ex_RegNum : in  STD_LOGIC_VECTOR (3 downto 0);
-           LoadUse_Ex_MemWE : in  STD_LOGIC;
-           LoadUse_Mem_RegNum : in  STD_LOGIC_VECTOR (3 downto 0);
-           LoadUse_Mem_MemWE : in  STD_LOGIC;
+           LoadUse_Ex_MemRE : in  STD_LOGIC;
            LoadUse_En : out  STD_LOGIC);
 end LoadUse;
 
 architecture Behavioral of LoadUse is
 
 begin
+
+process(LoadUse_Id_Rs, LoadUse_Id_Rt, LoadUse_Ex_RegNum, LoadUse_Ex_MemRE)
+begin
+    if (LoadUse_Ex_MemRE = '1') then
+        if (LoadUse_Id_Rs = LoadUse_Ex_RegNum) then
+            LoadUse_En <= '0';
+        else
+            if (LoadUse_Id_Rt = LoadUse_Ex_RegNum) then
+                LoadUse_En <= '0';
+            else
+                LoadUse_En <= '1';
+            end if;
+        end if;
+    else
+        LoadUse_En <= '1';
+    end if;
+
+end process;
 
 
 end Behavioral;

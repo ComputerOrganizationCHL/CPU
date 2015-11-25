@@ -30,7 +30,9 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity IfToId is
-    Port ( IfToId_EN : in  STD_LOGIC;
+    Port ( CLK : in STD_LOGIC;
+           IfToId_En : in  STD_LOGIC;
+           IfToId_Reset : in  STD_LOGIC;
            IfToId_PC_IN : in  STD_LOGIC_VECTOR(15 downto 0);
            IfToId_Ins_IN : in  STD_LOGIC_VECTOR(15 downto 0);
            IfToId_PC_OUT : out  STD_LOGIC_VECTOR(15 downto 0);

@@ -32,6 +32,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity ExToMem is
     Port ( ExToMem_En : in  STD_LOGIC;
+           ExToMem_Reset : in  STD_LOGIC;
            ExToMem_PC_IN : in  STD_LOGIC_VECTOR(15 downto 0);
            ExToMem_Wr_RegMemSel_IN : in  STD_LOGIC;
            ExToMem_Wr_RegWr_IN : in  STD_LOGIC;
@@ -49,8 +50,7 @@ entity ExToMem is
            ExToMem_MemVal_OUT : out  STD_LOGIC_VECTOR(15 downto 0);
            ExToMem_MemAddr_OUT : out  STD_LOGIC_VECTOR(15 downto 0);
            ExToMem_RegOverflow_OUT : out  STD_LOGIC;
-           ExToMem_RegNum_OUT : out  STD_LOGIC_VECTOR(3 downto 0)
-			  );
+           ExToMem_RegNum_OUT : out  STD_LOGIC_VECTOR(3 downto 0));
 end ExToMem;
 
 architecture Behavioral of ExToMem is
