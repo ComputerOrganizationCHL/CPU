@@ -68,7 +68,7 @@ IH_OUT <= IH;
 RA_OUT <= RA;
 T_OUT  <= T;
 
-process(RegFile_Rs,R0,R1,R2,R3,R4,R5,R6,R7,SP,IH,RA,T)                     --read Rt process
+process(RegFile_Rs,R0,R1,R2,R3,R4,R5,R6,R7)                     --read Rs process
 begin
         case RegFile_Rs is
             when "000" =>
@@ -92,7 +92,7 @@ begin
 end process;
 
 
-process(RegFile_Rt,R0,R1,R2,R3,R4,R5,R6,R7,SP,IH,RA,T)                         --read Rt process
+process(RegFile_Rt,R0,R1,R2,R3,R4,R5,R6,R7)                         --read Rt process
 begin
         case RegFile_Rt is
             when "000" =>
