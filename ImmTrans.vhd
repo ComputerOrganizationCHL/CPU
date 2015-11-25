@@ -72,6 +72,8 @@ begin
                 ImmTrans_Imm_OUT <= ImmTrans_Imm_IN;
         
         end case;
+    else
+        ImmTrans_Imm_OUT <= ImmTrans_Imm_IN;
     end if;
 end process;
 

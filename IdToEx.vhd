@@ -41,7 +41,7 @@ entity IdToEx is
            IdToEx_ALUOp_IN : in  STD_LOGIC_VECTOR (3 downto 0);
            IdToEx_Imm_IN : in  STD_LOGIC_VECTOR (15 downto 0);
            IdToEx_RtRegImmSel_IN : in  STD_LOGIC;
-           IdToEx_RtRdSel_IN : in  STD_LOGIC;
+           IdToEx_RsRtRdSel_IN : in  STD_LOGIC;
            IdToEx_RsVal_IN : in  STD_LOGIC_VECTOR (15 downto 0);
            IdToEx_RtVal_IN : in  STD_LOGIC_VECTOR (15 downto 0);
            IdToEx_Rs_IN : in  STD_LOGIC_VECTOR (3 downto 0);
