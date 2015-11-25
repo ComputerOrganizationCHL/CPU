@@ -30,7 +30,9 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity RegSelUnit is
-    Port ( RegSelUnit_RsDedEn : in  STD_LOGIC;
+    Port ( RegSelUnit_RsZero : in STD_LOGIC;
+           RegSelUnit_RtZero : in STD_LOGIC;
+           RegSelUnit_RsDedEn : in  STD_LOGIC;
            RegSelUnit_RsDedSel : in  STD_LOGIC_VECTOR (1 downto 0);
            RegSelUnit_RtDedEn : in  STD_LOGIC;
            RegSelUnit_RtDedSel : in  STD_LOGIC_VECTOR (1 downto 0);

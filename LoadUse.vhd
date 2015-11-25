@@ -34,7 +34,7 @@ entity LoadUse is
            LoadUse_Id_Rt : in  STD_LOGIC_VECTOR (3 downto 0);
            LoadUse_Ex_RegNum : in  STD_LOGIC_VECTOR (3 downto 0);
            LoadUse_Ex_MemRE : in  STD_LOGIC;
-           LoadUse_En : out  STD_LOGIC);
+           LoadUse_En : out  STD_LOGIC);--Connnected to PC.En, IfToId.En, IdToEx.Reset
 end LoadUse;
 
 architecture Behavioral of LoadUse is

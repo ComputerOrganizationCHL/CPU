@@ -41,6 +41,8 @@ end PCSel;
 
 architecture Behavioral of PCSel is
 
+    signal PC : STD_LOGIC_VECTOR(15 downto 0);
+
 begin
 
 process(CLK)

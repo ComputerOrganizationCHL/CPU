@@ -37,7 +37,7 @@ entity BrhUnit is
            BrhUnit_Imm : in  STD_LOGIC_VECTOR (15 downto 0);
            BrhUnit_PC : in  STD_LOGIC_VECTOR (15 downto 0);
            BrhUnit_JmpPC : out  STD_LOGIC_VECTOR (15 downto 0);
-           BrhUnit_PCSel : out  STD_LOGIC);
+           BrhUnit_PCSel : out  STD_LOGIC);--PCSel's NOT connneted to IfToId.Reset
 end BrhUnit;
 
 architecture Behavioral of BrhUnit is
