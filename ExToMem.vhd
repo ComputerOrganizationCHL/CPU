@@ -36,7 +36,7 @@ entity ExToMem is
            ExToMem_Wr_RegMemSel_IN : in  STD_LOGIC;
            ExToMem_Wr_RegWr_IN : in  STD_LOGIC;
            ExToMem_MemRE_IN : in  STD_LOGIC;
-			  ExToMem_MemWE_IN : in  STD_LOGIC;
+           ExToMem_MemWE_IN : in  STD_LOGIC;
            ExToMem_MemVal_IN : in  STD_LOGIC_VECTOR(15 downto 0);
            ExToMem_MemAddr_IN : in  STD_LOGIC_VECTOR(15 downto 0);
            ExToMem_RegOverflow_IN : in  STD_LOGIC;
@@ -45,7 +45,7 @@ entity ExToMem is
            ExToMem_Wr_RegMemSel_OUT : out  STD_LOGIC;
            ExToMem_Wr_RegWr_OUT : out  STD_LOGIC;
            ExToMem_MemRE_OUT : out  STD_LOGIC;
-			  ExToMem_MemWE_OUT : out  STD_LOGIC;
+           ExToMem_MemWE_OUT : out  STD_LOGIC;
            ExToMem_MemVal_OUT : out  STD_LOGIC_VECTOR(15 downto 0);
            ExToMem_MemAddr_OUT : out  STD_LOGIC_VECTOR(15 downto 0);
            ExToMem_RegOverflow_OUT : out  STD_LOGIC;
@@ -54,7 +54,18 @@ entity ExToMem is
 end ExToMem;
 
 architecture Behavioral of ExToMem is
+    signal ExToMem_PC : STD_LOGIC_VECTOR(15 downto 0);
+    signal ExToMem_Wr_RegMemSel : STD_LOGIC;
+    signal ExToMem_Wr_RegWr : STD_LOGIC;
+    signal ExToMem_Mem_MemRE : STD_LOGIC;
+    signal ExToMem_Mem_MemWE : STD_LOGIC;
+    signal ExToMem_MemVal : STD_LOGIC_VECTOR(15 downto 0);
+    signal ExToMem_MemAddr : STD_LOGIC_VECTOR(15 downto 0);
+    signal ExToMem_RegOverflow : STD_LOGIC;
+    signal ExToMem_RegNum : STD_LOGIC_VECTOR(3 downto 0);
+begin
 
+process(CLK)
 begin
 	if (rising_edge(CLK)) then
         if (ExToMem_RESET = '1') then

@@ -47,7 +47,16 @@ entity MemToWr is
 end MemToWr;
 
 architecture Behavioral of MemToWr is
+    signal MemToWr_RegMemSel : STD_LOGIC;
+    signal MemToWr_RegWr : STD_LOGIC;
+    signal MemToWr_MemVal : STD_LOGIC_VECTOR(15 downto 0);
+    signal MemToWr_RegVal : STD_LOGIC_VECTOR(15 downto 0);
+    signal MemToWr_RegOverflow : STD_LOGIC;
+    signal MemToWr_RegNum : STD_LOGIC_VECTOR(3 downto 0);
 
+begin
+
+process(CLK)
 begin
     if (rising_edge(CLK)) then
         if (MemToWr_Reset = '1') then
@@ -90,6 +99,7 @@ begin
             MemToWr_RegNum_OUT <= "0000";
         end if;
     end if;
+end process;
 
 end Behavioral;
 

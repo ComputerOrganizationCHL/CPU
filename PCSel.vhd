@@ -39,6 +39,9 @@ end PCSel;
 architecture Behavioral of PCSel is
 
 begin
+
+process(CLK)
+begin
     if (rising_edge(CLK)) then
         if (PC_RESET = '1') then
             if (PC_En = '1') then
@@ -60,6 +63,7 @@ begin
             PC_NextPC_OUT <= "0000000000000000";
         end if;
     end if;
+end process;
 
 end Behavioral;
 
