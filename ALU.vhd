@@ -61,14 +61,15 @@ begin
                 ALU_OUT <= "0000000000000001";
             end if;
         when "011" =>
-            --取反, OUT = ~Rs
-            ALU_OUT <= NOT ALU_RsVal;
+            --取反, OUT = ~Rt
+            ALU_OUT <= NOT ALU_RtVal;
         when "100" =>
             --与或操作, OUT <= Rs | Rt
             if (ALU_ALUOr = '1') then
                 ALU_OUT <= ALU_RsVal OR ALU_RtVal;
             else
                 ALU_OUT <= ALU_RsVal AND ALU_RtVal;
+            end if;
         when "101" =>
             --左移操作, OUT <= Rs << Rt
             ALU_OUT <= to_stdlogicvector(to_bitvector(ALU_RsVal) SLL conv_integer(ALU_RtVal));

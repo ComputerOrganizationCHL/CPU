@@ -70,7 +70,6 @@ begin
         
             when others =>
                 ImmTrans_Imm_OUT <= ImmTrans_Imm_IN;
-        l
         end case;
     else
         if (ImmTrans_Width = "01") then
