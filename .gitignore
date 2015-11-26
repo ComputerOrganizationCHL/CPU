@@ -248,3 +248,5 @@ AddrMem_tb.vhd
 RegFile_tb.vhd
 *.xmsgs
 *.gise
+*.vhi
+DataMem_tb.vhd
