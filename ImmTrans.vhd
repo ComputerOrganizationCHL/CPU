@@ -45,7 +45,12 @@ begin
     if (ImmTrans_Imm_SignExt = '1') then
         case ImmTrans_Width is
             when "00" =>
-                ImmTrans_Imm_OUT <= ImmTrans_Imm_IN;
+                if (ImmTrans_Imm_IN(3) = '1') then
+                    ImmTrans_Imm_OUT(15 downto 3) <= "1111111111111";
+                else
+                    ImmTrans_Imm_OUT(15 downto 3) <= "0000000000000";
+                end if;
+                ImmTrans_Imm_OUT(2 downto 0) <= ImmTrans_Imm_IN(2 downto 0);
             when "01" =>
                 if (ImmTrans_Imm_IN(4) = '1') then
                     ImmTrans_Imm_OUT(15 downto 4) <= "111111111111";
