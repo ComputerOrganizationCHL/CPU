@@ -18,7 +18,7 @@
 --
 ----------------------------------------------------------------------------------
 library IEEE;
-USE IEEE.STD_LOGIC_signed.all;
+use IEEE.STD_LOGIC_signed.all;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 

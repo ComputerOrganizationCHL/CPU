@@ -29,31 +29,31 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity Mux is
-    Port ( Mux_DeaVal : in  STD_LOGIC_VECTOR (15 downto 0);
-           Mux_MemVal : in  STD_LOGIC_VECTOR (15 downto 0);
-           Mux_WrRegVal : in  STD_LOGIC_VECTOR (15 downto 0);
-           Mux_WrMemVal : in  STD_LOGIC_VECTOR (15 downto 0);
-           Mux_Sel : in  STD_LOGIC_VECTOR (1 downto 0);
-           Mux_Val_OUT : out  STD_LOGIC_VECTOR (15 downto 0));
-end Mux;
+entity Mux4 is
+    Port ( Mux4_00 : in  STD_LOGIC_VECTOR (15 downto 0);
+           Mux4_01 : in  STD_LOGIC_VECTOR (15 downto 0);
+           Mux4_10 : in  STD_LOGIC_VECTOR (15 downto 0);
+           Mux4_11 : in  STD_LOGIC_VECTOR (15 downto 0);
+           Mux4_Sel : in  STD_LOGIC_VECTOR (1 downto 0);
+           Mux4_OUT : out  STD_LOGIC_VECTOR (15 downto 0));
+end Mux4;
 
-architecture Behavioral of Mux is
+architecture Behavioral of Mux4 is
 
 begin
 
-process(Mux_DeaVal, Mux_MemVal, Mux_WrRegVal, Mux_WrMemVal, Mux_Sel)
+process(Mux4_00, Mux4_01, Mux4_10, Mux_11, Mux_Sel)
 begin
 
     case Mux_Sel is
         when "00" =>
-            Mux_Val_OUT <= Mux_DeaVal;
+            Mux4_OUT <= Mux4_00;
         when "01" =>
-            Mux_Val_OUT <= Mux_MemVal;
+            Mux4_OUT <= Mux4_01;
         when "10" =>
-            Mux_Val_OUT <= Mux_WrRegVal;
+            Mux4_OUT <= Mux4_10;
         when "11" =>
-            Mux_Val_OUT <= Mux_WrMemVal;
+            Mux4_OUT <= Mux4_11;
         when others =>
         
     end case;
