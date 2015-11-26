@@ -40,11 +40,19 @@ entity DataMem is
            DataMem_Val_IN : in  STD_LOGIC_VECTOR (15 downto 0);
            DataMem_Val_OUT : out  STD_LOGIC_VECTOR (15 downto 0);
            
-           DataMem_Ram1_Addr : out STD_LOGIC_VECTOR (15 downto 0);
+           DataMem_AddrMem_IfToId_EN : out STD_LOGIC;                                  --interface to control EN in AddrMem
+           
+           DataMem_Ram1_Addr : out STD_LOGIC_VECTOR (15 downto 0);              --interface for Ram1
            DataMem_Ram1_Data : inout STD_LOGIC_VECTOR (15 downto 0);
            DataMem_Ram1_OE : out STD_LOGIC;
            DataMem_Ram1_WE : out STD_LOGIC;
-           DataMem_Ram1_EN : out STD_LOGIC);
+           DataMem_Ram1_EN : out STD_LOGIC;
+           
+           DataMem_Ram2_Addr : out STD_LOGIC_VECTOR (15 downto 0);              --interface for Ram2
+           DataMem_Ram2_Data : inout STD_LOGIC_VECTOR (15 downto 0);
+           DataMem_Ram2_OE : out STD_LOGIC;
+           DataMem_Ram2_WE : out STD_LOGIC;
+           DataMem_Ram2_EN : out STD_LOGIC);
 end DataMem;
 
 architecture Behavioral of DataMem is
@@ -96,33 +104,88 @@ process(DataMem_CLK_high)
 begin
 	case next_status is
 		when readPre =>
-			DataMem_Ram1_Addr <= DataMem_Addr;
-			DataMem_Ram1_Data <= "ZZZZZZZZZZZZZZZZ";
-			DataMem_Ram1_EN <= '0';
-			DataMem_Ram1_OE <= '0';
-			DataMem_Ram1_WE <= '1';
+            if DataMem_Addr <= "1011111011111111" then                      -- Select Ram1
+                DataMem_Ram1_Addr <= DataMem_Addr;
+                DataMem_Ram1_Data <= "ZZZZZZZZZZZZZZZZ";
+                DataMem_Ram1_EN <= '0';
+                DataMem_Ram1_OE <= '0';
+                DataMem_Ram1_WE <= '1';
+            else                                                            -- Select Ram2
+                DataMem_Ram2_Addr <= DataMem_Addr;
+                DataMem_Ram2_Data <= "ZZZZZZZZZZZZZZZZ";
+                DataMem_Ram2_EN <= '0';
+                DataMem_Ram2_OE <= '0';
+                DataMem_Ram2_WE <= '1';
+            end if;
 		when readVal =>
-			DataMem_Val_OUT <= DataMem_Ram1_Data;
+            if DataMem_Addr <= "1011111011111111" then
+                DataMem_Val_OUT <= DataMem_Ram1_Data;
+            else
+                DataMem_Val_OUT <= DataMem_Ram2_Data;
+            end if;
 		when readWait =>
-			DataMem_Ram1_EN <= '1';
-			DataMem_Ram1_OE <= '1';
-			DataMem_Ram1_WE <= '1';
+            if DataMem_Addr <= "1011111011111111" then
+                DataMem_Ram1_EN <= '1';
+                DataMem_Ram1_OE <= '1';
+                DataMem_Ram1_WE <= '1';
+            else
+                DataMem_Ram2_EN <= '1';
+                DataMem_Ram2_OE <= '1';
+                DataMem_Ram2_WE <= '1';
+            end if;
 		when writePre =>
-			DataMem_Ram1_Addr <= DataMem_Addr;
-			DataMem_Ram1_Data <= DataMem_Val_IN;
-			DataMem_Ram1_EN <= '0';
-			DataMem_Ram1_OE <= '1';
-			DataMem_Ram1_WE <= '1';
+            if DataMem_Addr <= "1011111011111111" then
+                DataMem_Ram1_Addr <= DataMem_Addr;
+                DataMem_Ram1_Data <= DataMem_Val_IN;
+                DataMem_Ram1_EN <= '0';
+                DataMem_Ram1_OE <= '1';
+                DataMem_Ram1_WE <= '1';
+                
+                DataMem_AddrMem_EN <= '0';                                  -- Interrupt AddrMem
+            else
+                DataMem_Ram2_Addr <= DataMem_Addr;
+                DataMem_Ram2_Data <= DataMem_Val_IN;
+                DataMem_Ram2_EN <= '0';
+                DataMem_Ram2_OE <= '1';
+                DataMem_Ram2_WE <= '1';
+            end if;
 		when writeVal =>
-			DataMem_Ram1_EN <= '0';
-			DataMem_Ram1_OE <= '1';
-			DataMem_Ram1_WE <= '0';
+            if DataMem_Addr <= "1011111011111111" then
+                DataMem_Ram1_EN <= '0';
+                DataMem_Ram1_OE <= '1';
+                DataMem_Ram1_WE <= '0';
+            else
+                DataMem_Ram2_EN <= '0';
+                DataMem_Ram2_OE <= '1';
+                DataMem_Ram2_WE <= '0';
+            end if;
 		when writeWait =>
-			DataMem_Ram1_EN <= '1';
-			DataMem_Ram1_OE <= '1';
-			DataMem_Ram1_WE <= '1';
+            if DataMem_Addr <= "1011111011111111" then
+                DataMem_Ram1_EN <= '1';
+                DataMem_Ram1_OE <= '1';
+                DataMem_Ram1_WE <= '1';
+                
+                DataMem_AddrMem_EN <= '1';
+            else
+                DataMem_Ram2_EN <= '1';
+                DataMem_Ram2_OE <= '1';
+                DataMem_Ram2_WE <= '1';
+            end if;
 		when Asleep =>
 	end case;
+end process;
+
+process(DataMem_RE, DataMem_WE, DataMem_EN)
+begin
+    if DataMem_EN = '1' then
+        if DataMem_RE = '0' and DataMem_WE  = '1' then
+            DataMem_AddrMem_IfToId_EN <= '0';
+        else
+            DataMem_AddrMem_IfToId_EN <= '1';
+        end if;
+    else
+        DataMem_AddrMem_IfToId_EN <= '1';
+    end if;
 end process;
 
 end Behavioral;
