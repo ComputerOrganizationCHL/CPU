@@ -53,6 +53,8 @@ entity IdToEx is
            IdToEx_Rt_IN : in STD_LOGIC_VECTOR(3 downto 0);
            IdToEx_Rd_IN : in STD_LOGIC_VECTOR(3 downto 0);
            IdToEx_Imm_IN : in STD_LOGIC_VECTOR(15 downto 0);
+           IdToEx_RsVal_IN : in STD_LOGIC_VECTOR(15 downto 0);
+           IdToEx_RtVal_IN : in STD_LOGIC_VECTOR(15 downto 0);
            
            IdToEx_PC_OUT : out  STD_LOGIC_VECTOR (15 downto 0);
            IdToEx_RegMemSel_OUT : out STD_LOGIC;
@@ -72,7 +74,9 @@ entity IdToEx is
            IdToEx_Rs_OUT : out STD_LOGIC_VECTOR(3 downto 0);
            IdToEx_Rt_OUT : out STD_LOGIC_VECTOR(3 downto 0);
            IdToEx_Rd_OUT : out STD_LOGIC_VECTOR(3 downto 0);
-           IdToEx_Imm_OUT : out STD_LOGIC_VECTOR(15 downto 0));
+           IdToEx_Imm_OUT : out STD_LOGIC_VECTOR(15 downto 0);
+           IdToEx_RsVal_OUT : out STD_LOGIC_VECTOR(15 downto 0);
+           IdToEx_RtVal_OUT : out STD_LOGIC_VECTOR(15 downto 0));
 end IdToEx;
 
 architecture Behavioral of IdToEx is
@@ -95,6 +99,8 @@ architecture Behavioral of IdToEx is
     signal Rt : STD_LOGIC_VECTOR(3 downto 0);
     signal Rd : STD_LOGIC_VECTOR(3 downto 0);
     signal Imm : STD_LOGIC_VECTOR(15 downto 0);
+    signal RsVal : STD_LOGIC_VECTOR(15 downto 0);
+    signal RtVal : STD_LOGIC_VECTOR(15 downto 0);
 begin
 
 process(CLK)
@@ -122,6 +128,8 @@ begin
                 Rt <= IdToEx_Rt_IN;
                 Rd <= IdToEx_Rd_IN;
                 Imm <= IdToEx_Imm_IN;
+                RsVal <= IdToEx_RsVal_IN;
+                RtVal <= IdToEx_RtVal_IN;
             
                 IdToEx_PC_OUT <= IdToEx_PC_IN;
                 IdToEx_RegMemSel_OUT <= IdToEx_RegMemSel_IN;
@@ -142,6 +150,8 @@ begin
                 IdToEx_Rt_OUT <= IdToEx_Rt_IN;
                 IdToEx_Rd_OUT <= IdToEx_Rd_IN;
                 IdToEx_Imm_OUT <= IdToEx_Imm_IN;
+                IdToEx_RsVal_OUT <= IdToEx_RsVal_IN;
+                IdToEx_RtVal_OUT <= IdToEx_RtVal_IN;
             else
                 
                 IdToEx_PC_OUT <= PC;
@@ -163,6 +173,8 @@ begin
                 IdToEx_Rt_OUT <= Rt;
                 IdToEx_Rd_OUT <= Rd;
                 IdToEx_Imm_OUT <= Imm;
+                IdToEx_RsVal_OUT <= RsVal;
+                IdToEx_RtVal_OUT <= RtVal;
             end if;
         else
             PC <= "0000000000000000";
@@ -184,6 +196,8 @@ begin
             Rt <= "0000";
             Rd <= "0000";
             Imm <= "0000000000000000";
+            RsVal <= "0000000000000000";
+            RtVal <= "0000000000000000";
             
         end if;
     end if;
