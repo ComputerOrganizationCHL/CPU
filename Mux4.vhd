@@ -42,10 +42,10 @@ architecture Behavioral of Mux4 is
 
 begin
 
-process(Mux4_00, Mux4_01, Mux4_10, Mux_11, Mux_Sel)
+process(Mux4_00, Mux4_01, Mux4_10, Mux4_11, Mux4_Sel)
 begin
 
-    case Mux_Sel is
+    case Mux4_Sel is
         when "00" =>
             Mux4_OUT <= Mux4_00;
         when "01" =>

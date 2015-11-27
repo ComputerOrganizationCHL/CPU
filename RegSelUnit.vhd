@@ -91,7 +91,7 @@ begin
                     RegSelUnit_RtVal_OUT <= RegSelUnit_RAVal_IN;
                 when "11" =>
                     RegSelUnit_RtVal_OUT <= RegSelUnit_TVal_IN;
-                when otheRt =>
+                when others =>
                     RegSelUnit_RtVal_OUT <= RegSelUnit_RtVal_IN;
             end case;
         else 

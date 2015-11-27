@@ -32,7 +32,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity ImmTrans is
     Port ( ImmTrans_Imm_IN : in  STD_LOGIC_VECTOR (15 downto 0);
            ImmTrans_SignExt : in STD_LOGIC;
-           ImmTrans_Width : in STD_LOGIC_VECTOR(3 downto 0);
+           ImmTrans_Width : in STD_LOGIC_VECTOR(1 downto 0);
            ImmTrans_Imm_OUT : out  STD_LOGIC_VECTOR (15 downto 0));
 end ImmTrans;
 
@@ -40,9 +40,9 @@ architecture Behavioral of ImmTrans is
 
 begin
 
-process(ImmTrans_Ins)
+process(ImmTrans_Imm_IN, ImmTrans_SignExt, ImmTrans_Width)
 begin
-    if (ImmTrans_Imm_SignExt = '1') then
+    if (ImmTrans_SignExt = '1') then
         case ImmTrans_Width is
             when "00" =>
                 if (ImmTrans_Imm_IN(3) = '1') then

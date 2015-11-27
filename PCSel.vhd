@@ -50,7 +50,7 @@ begin
     if (rising_edge(CLK)) then
         if (PC_Reset = '1') then
             if (PC_En = '1') then
-                if (PC_Sel) then
+                if (PC_Sel = '1') then
                     PC <= PC_JmpPC_IN;
                     
                     PC_NextPC_OUT <= PC_JmpPC_IN;

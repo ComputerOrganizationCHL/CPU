@@ -32,7 +32,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity Mux2 is
     Port ( Mux2_0 : in  STD_LOGIC_VECTOR (15 downto 0);
            Mux2_1 : in  STD_LOGIC_VECTOR (15 downto 0);
-           Mux2_Sel : in  STD_LOGIC_VECTOR (1 downto 0);
+           Mux2_Sel : in  STD_LOGIC;
            Mux2_OUT : out  STD_LOGIC_VECTOR (15 downto 0));
 end Mux2;
 
@@ -40,13 +40,13 @@ architecture Behavioral of Mux2 is
 
 begin
 
-process(Mux2_0, Mux2_1, Mux_Sel)
+process(Mux2_0, Mux2_1, Mux2_Sel)
 begin
 
-    case Mux_Sel is
-        when "0" =>
+    case Mux2_Sel is
+        when '0' =>
             Mux2_OUT <= Mux2_0;
-        when "1" =>
+        when '1' =>
             Mux2_OUT <= Mux2_1;
         when others =>
 
