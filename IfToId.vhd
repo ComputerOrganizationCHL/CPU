@@ -30,7 +30,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity IfToId is
-    Port ( CLK : in STD_LOGIC;
+    Port ( IfToId_CLK : in STD_LOGIC;
            IfToId_En : in  STD_LOGIC;
            IfToId_Reset : in  STD_LOGIC;
            IfToId_PC_IN : in  STD_LOGIC_VECTOR(15 downto 0);
@@ -45,9 +45,9 @@ architecture Behavioral of IfToId is
     
 begin
 
-process(CLK)
+process(IfToId_CLK)
 begin
-    if (rising_edge(CLK)) then
+    if (rising_edge(IfToId_CLK)) then
         if (IfToId_Reset = '1') then
             if (IfToId_En = '1') then
                 PC <= IfToId_PC_IN;

@@ -640,6 +640,45 @@ architecture Behavioral of CPU is
    signal IH_OUT : std_logic_vector(15 downto 0);
    signal RA_OUT : std_logic_vector(15 downto 0);
    signal T_OUt : std_logic_vector(15 downto 0);
+   
+   
+    COMPONENT RegSelUnit
+    PORT(
+         RegSelUnit_RsZero : IN  std_logic;
+         RegSelUnit_RtZero : IN  std_logic;
+         RegSelUnit_RsDedEn : IN  std_logic;
+         RegSelUnit_RsDedSel : IN  std_logic_vector(1 downto 0);
+         RegSelUnit_RtDedEn : IN  std_logic;
+         RegSelUnit_RtDedSel : IN  std_logic_vector(1 downto 0);
+         RegSelUnit_RsVal_IN : IN  std_logic_vector(15 downto 0);
+         RegSelUnit_RtVal_IN : IN  std_logic_vector(15 downto 0);
+         RegSelUnit_SPVal_IN : IN  std_logic_vector(15 downto 0);
+         RegSelUnit_IHVal_IN : IN  std_logic_vector(15 downto 0);
+         RegSelUnit_RAVal_IN : IN  std_logic_vector(15 downto 0);
+         RegSelUnit_TVal_IN : IN  std_logic_vector(15 downto 0);
+         RegSelUnit_RsVal_OUT : OUT  std_logic_vector(15 downto 0);
+         RegSelUnit_RtVal_OUT : OUT  std_logic_vector(15 downto 0)
+        );
+    END COMPONENT;
+    
+
+   --Inputs
+   signal RegSelUnit_RsZero : std_logic := '0';
+   signal RegSelUnit_RtZero : std_logic := '0';
+   signal RegSelUnit_RsDedEn : std_logic := '0';
+   signal RegSelUnit_RsDedSel : std_logic_vector(1 downto 0) := (others => '0');
+   signal RegSelUnit_RtDedEn : std_logic := '0';
+   signal RegSelUnit_RtDedSel : std_logic_vector(1 downto 0) := (others => '0');
+   signal RegSelUnit_RsVal_IN : std_logic_vector(15 downto 0) := (others => '0');
+   signal RegSelUnit_RtVal_IN : std_logic_vector(15 downto 0) := (others => '0');
+   signal RegSelUnit_SPVal_IN : std_logic_vector(15 downto 0) := (others => '0');
+   signal RegSelUnit_IHVal_IN : std_logic_vector(15 downto 0) := (others => '0');
+   signal RegSelUnit_RAVal_IN : std_logic_vector(15 downto 0) := (others => '0');
+   signal RegSelUnit_TVal_IN : std_logic_vector(15 downto 0) := (others => '0');
+
+ 	--Outputs
+   signal RegSelUnit_RsVal_OUT : std_logic_vector(15 downto 0);
+   signal RegSelUnit_RtVal_OUT : std_logic_vector(15 downto 0);
 
 
 
@@ -667,7 +706,7 @@ begin
         );
 
    uut_AddrMem: AddrMem PORT MAP (
-          AddrMem_CLK => AddrMem_CLK,
+          CLK => CLK,
           AddrMem_PC => AddrMem_PC,
           AddrMem_EN => AddrMem_EN,
           AddrMem_Ins_OUT => AddrMem_Ins_OUT,
@@ -690,7 +729,7 @@ begin
         );
 
    uut_DataMem: DataMem PORT MAP (
-          DataMem_CLK => DataMem_CLK,
+          CLK => CLK,
           DataMem_Addr => DataMem_Addr,
           DataMem_RE => DataMem_RE,
           DataMem_WE => DataMem_WE,
@@ -888,7 +927,7 @@ begin
         );
 
    uut_RegFile: RegFile PORT MAP (
-          RegFile_CLK => RegFile_CLK,
+          CLK => CLK,
           RegFile_WE => RegFile_WE,
           RegFile_Rs => RegFile_Rs,
           RegFile_Rt => RegFile_Rt,
@@ -902,21 +941,24 @@ begin
           T_OUt => T_OUt
         );
         
-   uut_RegFile: RegFile PORT MAP (
-          RegFile_CLK => RegFile_CLK,
-          RegFile_WE => RegFile_WE,
-          RegFile_Rs => RegFile_Rs,
-          RegFile_Rt => RegFile_Rt,
-          RegFile_RegNum => RegFile_RegNum,
-          RegFile_RegVal => RegFile_RegVal,
-          RegFile_RsVal => RegFile_RsVal,
-          RegFile_RtVal => RegFile_RtVal,
-          SP_OUT => SP_OUT,
-          IH_OUT => IH_OUT,
-          RA_OUT => RA_OUT,
-          T_OUt => T_OUt
+   uut: RegSelUnit PORT MAP (
+          RegSelUnit_RsZero => RegSelUnit_RsZero,
+          RegSelUnit_RtZero => RegSelUnit_RtZero,
+          RegSelUnit_RsDedEn => RegSelUnit_RsDedEn,
+          RegSelUnit_RsDedSel => RegSelUnit_RsDedSel,
+          RegSelUnit_RtDedEn => RegSelUnit_RtDedEn,
+          RegSelUnit_RtDedSel => RegSelUnit_RtDedSel,
+          RegSelUnit_RsVal_IN => RegSelUnit_RsVal_IN,
+          RegSelUnit_RtVal_IN => RegSelUnit_RtVal_IN,
+          RegSelUnit_SPVal_IN => RegSelUnit_SPVal_IN,
+          RegSelUnit_IHVal_IN => RegSelUnit_IHVal_IN,
+          RegSelUnit_RAVal_IN => RegSelUnit_RAVal_IN,
+          RegSelUnit_TVal_IN => RegSelUnit_TVal_IN,
+          RegSelUnit_RsVal_OUT => RegSelUnit_RsVal_OUT,
+          RegSelUnit_RtVal_OUT => RegSelUnit_RtVal_OUT
         );
 
+    PCSel_
 
 
 

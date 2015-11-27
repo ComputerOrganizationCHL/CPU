@@ -30,7 +30,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity IdToEx is
-    Port ( CLK : in STD_LOGIC;
+    Port ( IdToEx_CLK : in STD_LOGIC;
            IdToEx_En : in  STD_LOGIC;
            IdToEx_Reset : in  STD_LOGIC;
            
@@ -103,9 +103,9 @@ architecture Behavioral of IdToEx is
     signal RtVal : STD_LOGIC_VECTOR(15 downto 0);
 begin
 
-process(CLK)
+process(IdToEx_CLK)
 begin
-    if (rising_edge(CLK)) then
+    if (rising_edge(IdToEx_CLK)) then
         if (IdToEx_Reset = '1') then
             if (IdToEx_En = '1') then
                 

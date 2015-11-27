@@ -30,7 +30,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity PCSel is
-    Port ( CLK : in STD_LOGIC;
+    Port ( PC_CLK : in STD_LOGIC;
            PC_En : in  STD_LOGIC;
            PC_Reset : in  STD_LOGIC;
            PC_Sel : in STD_LOGIC;
@@ -45,9 +45,9 @@ architecture Behavioral of PCSel is
 
 begin
 
-process(CLK)
+process(PC_CLK)
 begin
-    if (rising_edge(CLK)) then
+    if (rising_edge(PC_CLK)) then
         if (PC_Reset = '1') then
             if (PC_En = '1') then
                 if (PC_Sel = '1') then

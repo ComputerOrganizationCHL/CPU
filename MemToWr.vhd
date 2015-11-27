@@ -30,7 +30,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity MemToWr is
-    Port ( CLK : in STD_LOGIC;
+    Port ( MemToWr_CLK : in STD_LOGIC;
            MemToWr_En : in  STD_LOGIC;
            MemToWr_Reset : in  STD_LOGIC;
            
@@ -57,9 +57,9 @@ architecture Behavioral of MemToWr is
 
 begin
 
-process(CLK)
+process(MemToWr_CLK)
 begin
-    if (rising_edge(CLK)) then
+    if (rising_edge(MemToWr_CLK)) then
         if (MemToWr_Reset = '1') then
             if (MemToWr_En = '1') then
                 RegMemSel <= MemToWr_RegMemSel_IN;

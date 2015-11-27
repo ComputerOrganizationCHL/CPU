@@ -31,7 +31,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 
 entity ExToMem is
-    Port ( CLK : in STD_LOGIC;
+    Port ( ExToMem_CLK : in STD_LOGIC;
            ExToMem_En : in  STD_LOGIC;
            ExToMem_Reset : in  STD_LOGIC;
            
@@ -66,9 +66,9 @@ architecture Behavioral of ExToMem is
     signal RegNum : STD_LOGIC_VECTOR(3 downto 0);
 begin
 
-process(CLK)
+process(ExToMem_CLK)
 begin
-	if (rising_edge(CLK)) then
+	if (rising_edge(ExToMem_CLK)) then
         if (ExToMem_RESET = '1') then
             if (ExToMem_En = '1') then
                 PC <= ExToMem_PC_IN;
