@@ -46,13 +46,13 @@ entity DataMem is
            DataMem_tsre : in STD_LOGIC;
            DataMem_data_ready : in STD_LOGIC;
            
-           DataMem_Ram2_Addr : out STD_LOGIC_VECTOR (15 downto 0);              --interface for Ram2
+           DataMem_Ram2_Addr : out STD_LOGIC_VECTOR (17 downto 0);              --interface for Ram2
            DataMem_Ram2_Data : inout STD_LOGIC_VECTOR (15 downto 0);
            DataMem_Ram2_OE : out STD_LOGIC;
            DataMem_Ram2_WE : out STD_LOGIC;
            DataMem_Ram2_EN : out STD_LOGIC;
            
-           DataMem_Ram1_Addr : out STD_LOGIC_VECTOR (15 downto 0);              --interface for Ram1
+           DataMem_Ram1_Addr : out STD_LOGIC_VECTOR (17 downto 0);              --interface for Ram1
            DataMem_Ram1_Data : inout STD_LOGIC_VECTOR (15 downto 0);
            DataMem_Ram1_OE : out STD_LOGIC;
            DataMem_Ram1_WE : out STD_LOGIC;
@@ -61,9 +61,12 @@ end DataMem;
 
 architecture Behavioral of DataMem is
 
+DataMem_Ram1_Addr(17 downto 16) <= "00";
+DataMem_Ram2_Addr(17 downto 16) <= "00";
+
 begin
 
-process( DataMem_CLK, DataMem_EN)
+process( DataMem_CLK, DataMem_EN, DataMem_RE, DataMem_WE, DataMem_Addr, DataMem_Val_IN)
 begin
     if (DataMem_En = '0') then
         DataMem_Ram2_OE <= '1';
@@ -81,7 +84,7 @@ begin
     if DataMem_CLK = '1' then
         if DataMem_RE = '1' and DataMem_WE = '0' and DataMem_EN = '1' then
             if DataMem_Addr <= "1011111011111111" then                      -- Select Ram2
-                DataMem_Ram2_Addr <= DataMem_Addr;
+                DataMem_Ram2_Addr(15 downto 0) <= DataMem_Addr;
                 DataMem_Ram2_Data <= "ZZZZZZZZZZZZZZZZ";
                 DataMem_Ram2_EN <= '0';
                 DataMem_Ram2_OE <= '1';
@@ -93,7 +96,7 @@ begin
                 DataMem_rdn <= '1';
                 DataMem_Ram1_Data <= "ZZZZZZZZZZZZZZZZ";
             elsif DataMem_Addr >="1011111100010000" then                         -- Select Ram1
-                DataMem_Ram1_Addr <= DataMem_Addr;
+                DataMem_Ram1_Addr(15 downto 0) <= DataMem_Addr;
                 DataMem_Ram1_Data <= "ZZZZZZZZZZZZZZZZ";
                 DataMem_Ram1_EN <= '0';
                 DataMem_Ram1_OE <= '1';
@@ -102,7 +105,7 @@ begin
         else
             if DataMem_RE = '0' and DataMem_WE = '1' and DataMem_EN = '1' then
                 if DataMem_Addr <= "1011111011111111" then
-                    DataMem_Ram2_Addr <= DataMem_Addr;
+                    DataMem_Ram2_Addr(15 downto 0) <= DataMem_Addr;
                     DataMem_Ram2_Data <= DataMem_Val_IN;
                     DataMem_Ram2_EN <= '0';
                     DataMem_Ram2_OE <= '1';
@@ -114,7 +117,7 @@ begin
                     DataMem_wrn <= '1';
                     DataMem_Ram1_Data <= DataMem_Val_IN;
                 elsif DataMem_Addr >="1011111100010000" then                         -- Select Ram1
-                    DataMem_Ram1_Addr <= DataMem_Addr;
+                    DataMem_Ram1_Addr(15 downto 0) <= DataMem_Addr;
                     DataMem_Ram1_Data <= DataMem_Val_IN;
                     DataMem_Ram1_EN <= '0';
                     DataMem_Ram1_OE <= '1';
@@ -155,7 +158,8 @@ begin
     end if;
 end process;
 
-process(DataMem_Ram1_Data, DataMem_Ram2_Data, DataMem_CLK)
+process(DataMem_Ram1_Data, DataMem_Ram2_Data, DataMem_CLK, DataMem_WE, DataMem_EN, 
+DataMem_RE, DataMem_Addr, DataMem_tbre, DataMem_tsre, DataMem_data_ready)
 begin
     if NOT(DataMem_Ram1_Data  = "ZZZZZZZZZZZZZZZZ") and DataMem_WE = '0' and DataMem_RE = '1' and DataMem_EN = '1' then
         if (DataMem_Addr <= "1011111011111111") then
@@ -174,7 +178,7 @@ begin
     end if;
 end process;
 
-process(DataMem_RE, DataMem_WE, DataMem_EN)
+process(DataMem_RE, DataMem_WE, DataMem_EN, DataMem_Addr)
 begin
     if DataMem_EN = '1' and DataMem_Addr <= "1011111011111111" then
         DataMem_Stop_EN <= '0';

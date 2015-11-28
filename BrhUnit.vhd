@@ -45,7 +45,7 @@ architecture Behavioral of BrhUnit is
 
 begin
 
-process(BrhUnit_Brh, BrhUnit_RsVal, BrhUnit_RtVal, BrhUnit_Imm, BrhUnit_PC)
+process(BrhUnit_Brh, BrhUnit_Jmp, BrhUnit_RsVal, BrhUnit_RtVal, BrhUnit_Imm, BrhUnit_PC)
 begin
     case BrhUnit_Brh is
         when "00" =>

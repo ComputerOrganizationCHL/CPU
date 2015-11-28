@@ -35,7 +35,7 @@ entity AddrMem is
            AddrMem_EN : in STD_LOGIC;
            AddrMem_Ins_OUT : out  STD_LOGIC_VECTOR (15 downto 0);
            
-           AddrMem_Ram2_Addr : out STD_LOGIC_VECTOR (15 downto 0);
+           AddrMem_Ram2_Addr : out STD_LOGIC_VECTOR (17 downto 0);
            AddrMem_Ram2_Data : inout STD_LOGIC_VECTOR (15 downto 0);
            AddrMem_Ram2_OE : out STD_LOGIC;
            AddrMem_Ram2_WE : out STD_LOGIC;
@@ -43,13 +43,14 @@ entity AddrMem is
 end AddrMem;
 
 architecture Behavioral of AddrMem is
+AddrMem_Ram2_Addr(17 downto 16) <= "00";
 
 begin
 
-process( AddrMem_CLK, AddrMem_EN)
+process( AddrMem_CLK, AddrMem_EN, AddrMem_PC)
 begin
     if AddrMem_CLK = '1' and AddrMem_EN = '1' then
-        AddrMem_Ram2_Addr <= AddrMem_PC;
+        AddrMem_Ram2_Addr(15 downto 0) <= AddrMem_PC;
         AddrMem_Ram2_Data <= "ZZZZZZZZZZZZZZZZ";
         AddrMem_Ram2_EN <= '0';
         AddrMem_Ram2_OE <= '1';
@@ -61,7 +62,7 @@ begin
     end if;
 end process;
 
-process(AddrMem_Ram2_Data)
+process(AddrMem_Ram2_Data, AddrMem_EN)
 begin
     if NOT(AddrMem_Ram2_Data  = "ZZZZZZZZZZZZZZZZ") and AddrMem_EN = '1' then
         AddrMem_Ins_OUT <= AddrMem_Ram2_Data;

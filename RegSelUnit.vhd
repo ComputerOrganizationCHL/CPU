@@ -50,7 +50,7 @@ architecture Behavioral of RegSelUnit is
 
 begin
 
-process(RegSelUnit_RsDedEn, RegSelUnit_RsDedSel, RegSelUnit_RsVal_IN, 
+process(RegSelUnit_RsZero, RegSelUnit_RsDedEn, RegSelUnit_RsDedSel, RegSelUnit_RsVal_IN, 
         RegSelUnit_SPVal_IN, RegSelUnit_IHVal_IN, RegSelUnit_RAVal_IN, RegSelUnit_TVal_IN)
 begin
     if (RegSelUnit_RsZero = '1') then
@@ -75,7 +75,7 @@ begin
     end if;
 end process;
 
-process(RegSelUnit_RtDedEn, RegSelUnit_RtDedSel, RegSelUnit_RtVal_IN, 
+process(RegSelUnit_RtZero, RegSelUnit_RtDedEn, RegSelUnit_RtDedSel, RegSelUnit_RtVal_IN, 
         RegSelUnit_SPVal_IN, RegSelUnit_IHVal_IN, RegSelUnit_RAVal_IN, RegSelUnit_TVal_IN)
 begin
     if (RegSelUnit_RtZero = '1') then

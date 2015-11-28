@@ -44,7 +44,7 @@ architecture Behavioral of ALU is
 
 begin
 
-process(ALU_ALUOp, ALU_RsVal, ALU_RtVal)
+process(ALU_ALUOp, ALU_ALUOr, ALU_RsVal, ALU_RtVal)
 begin
     case ALU_ALUOp is
         when "000" =>
