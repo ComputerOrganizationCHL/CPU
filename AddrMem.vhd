@@ -43,9 +43,10 @@ entity AddrMem is
 end AddrMem;
 
 architecture Behavioral of AddrMem is
-AddrMem_Ram2_Addr(17 downto 16) <= "00";
 
 begin
+
+AddrMem_Ram2_Addr(17 downto 16) <= "00";
 
 process( AddrMem_CLK, AddrMem_EN, AddrMem_PC)
 begin

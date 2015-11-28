@@ -61,10 +61,10 @@ end DataMem;
 
 architecture Behavioral of DataMem is
 
+begin
+
 DataMem_Ram1_Addr(17 downto 16) <= "00";
 DataMem_Ram2_Addr(17 downto 16) <= "00";
-
-begin
 
 process( DataMem_CLK, DataMem_EN, DataMem_RE, DataMem_WE, DataMem_Addr, DataMem_Val_IN)
 begin
@@ -89,18 +89,23 @@ begin
                 DataMem_Ram2_EN <= '0';
                 DataMem_Ram2_OE <= '1';
                 DataMem_Ram2_WE <= '1';
+                DataMem_wrn <= '1';
+                DataMem_rdn <= '1';
             elsif DataMem_Addr <= "1011111100000001" then
+                DataMem_Ram1_Data <= "ZZZZZZZZZZZZZZZZ";
                 DataMem_Ram1_EN <= '1';
                 DataMem_Ram1_OE <= '1';
                 DataMem_Ram1_WE <= '1';
+                DataMem_wrn <= '1';
                 DataMem_rdn <= '1';
-                DataMem_Ram1_Data <= "ZZZZZZZZZZZZZZZZ";
             elsif DataMem_Addr >="1011111100010000" then                         -- Select Ram1
                 DataMem_Ram1_Addr(15 downto 0) <= DataMem_Addr;
                 DataMem_Ram1_Data <= "ZZZZZZZZZZZZZZZZ";
                 DataMem_Ram1_EN <= '0';
                 DataMem_Ram1_OE <= '1';
                 DataMem_Ram1_WE <= '1';
+                DataMem_wrn <= '1';
+                DataMem_rdn <= '1';
             end if;
         else
             if DataMem_RE = '0' and DataMem_WE = '1' and DataMem_EN = '1' then
@@ -110,18 +115,23 @@ begin
                     DataMem_Ram2_EN <= '0';
                     DataMem_Ram2_OE <= '1';
                     DataMem_Ram2_WE <= '1';
+                    DataMem_wrn <= '1';
+                    DataMem_rdn <= '1';
                 elsif DataMem_Addr <= "1011111100000001" then
+                    DataMem_Ram1_Data <= DataMem_Val_IN;
                     DataMem_Ram1_EN <= '1';
                     DataMem_Ram1_OE <= '1';
                     DataMem_Ram1_WE <= '1';
                     DataMem_wrn <= '1';
-                    DataMem_Ram1_Data <= DataMem_Val_IN;
+                    DataMem_rdn <= '1';
                 elsif DataMem_Addr >="1011111100010000" then                         -- Select Ram1
                     DataMem_Ram1_Addr(15 downto 0) <= DataMem_Addr;
                     DataMem_Ram1_Data <= DataMem_Val_IN;
                     DataMem_Ram1_EN <= '0';
                     DataMem_Ram1_OE <= '1';
                     DataMem_Ram1_WE <= '1';
+                    DataMem_wrn <= '1';
+                    DataMem_rdn <= '1';
                 end if;
             end if;
         end if;
