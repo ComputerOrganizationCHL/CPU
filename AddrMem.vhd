@@ -52,12 +52,22 @@ begin
         AddrMem_Ram2_Addr <= AddrMem_PC;
         AddrMem_Ram2_Data <= "ZZZZZZZZZZZZZZZZ";
         AddrMem_Ram2_EN <= '0';
-        AddrMem_Ram2_OE <= '0';
+        AddrMem_Ram2_OE <= '1';
         AddrMem_Ram2_WE <= '1';
     elsif AddrMem_CLK = '0' and AddrMem_EN = '1' then
+        AddrMem_Ram2_EN <= '0';
+        AddrMem_Ram2_OE <= '0';
+        AddrMem_Ram2_WE <= '1';
+    end if;
+end process;
+
+process(AddrMem_Ram2_Data)
+begin
+    if NOT(AddrMem_Ram2_Data  = "ZZZZZZZZZZZZZZZZ") and AddrMem_EN = '1' then
         AddrMem_Ins_OUT <= AddrMem_Ram2_Data;
     end if;
 end process;
+
 
 end Behavioral;
 
