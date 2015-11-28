@@ -65,13 +65,13 @@ begin
                 DataMem_Ram2_Addr <= DataMem_Addr;
                 DataMem_Ram2_Data <= "ZZZZZZZZZZZZZZZZ";
                 DataMem_Ram2_EN <= '0';
-                DataMem_Ram2_OE <= '0';
+                DataMem_Ram2_OE <= '1';
                 DataMem_Ram2_WE <= '1';
             else                                                            -- Select Ram1
                 DataMem_Ram1_Addr <= DataMem_Addr;
                 DataMem_Ram1_Data <= "ZZZZZZZZZZZZZZZZ";
                 DataMem_Ram1_EN <= '0';
-                DataMem_Ram1_OE <= '0';
+                DataMem_Ram1_OE <= '1';
                 DataMem_Ram1_WE <= '1';
             end if;
         else
@@ -95,9 +95,13 @@ begin
         if DataMem_CLK = '0' then
             if DataMem_RE = '1' and DataMem_WE = '0' and DataMem_EN = '1' then
                 if DataMem_Addr <= "1011111011111111" then                      -- Select Ram2
-                    DataMem_Val_OUT <= DataMem_Ram2_Data;
+                    DataMem_Ram2_EN <= '0';
+                    DataMem_Ram2_OE <= '0';
+                    DataMem_Ram2_WE <= '1';
                 else                                                            -- Select Ram1
-                    DataMem_Val_OUT <= DataMem_Ram1_Data;
+                    DataMem_Ram1_EN <= '0';
+                    DataMem_Ram1_OE <= '0';
+                    DataMem_Ram1_WE <= '1';
                 end if;
             else
                 if DataMem_RE = '0' and DataMem_WE = '1' and DataMem_EN = '1' then
@@ -116,9 +120,23 @@ begin
     end if;
 end process;
 
+process(DataMem_Ram1_Data)
+begin
+    if NOT(DataMem_Ram1_Data  = "ZZZZZZZZZZZZZZZZ") and DataMem_WE = '0' and DataMem_RE = '1' and DataMem_EN = '1' then
+        DataMem_Val_OUT <= DataMem_Ram1_Data;
+    end if;
+end process;
+
+process(DataMem_Ram2_Data)
+begin
+    if NOT(DataMem_Ram2_Data  = "ZZZZZZZZZZZZZZZZ") and DataMem_WE = '0' and DataMem_RE = '1' and DataMem_EN = '1' then
+        DataMem_Val_OUT <= DataMem_Ram2_Data;
+    end if;
+end process;
+
 process(DataMem_RE, DataMem_WE, DataMem_EN)
 begin
-    if DataMem_EN = '1' and DataMem_RE = '0' and DataMem_WE  = '1' then
+    if DataMem_EN = '1' and DataMem_Addr <= "1011111011111111" then
         DataMem_Stop_EN <= '0';
     else
         DataMem_Stop_EN <= '1';
