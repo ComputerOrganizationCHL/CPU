@@ -77,7 +77,6 @@ begin
         
         DataMem_rdn <= '1';
         DataMem_wrn <= '1';
-        
     end if;
         
         
@@ -110,6 +109,7 @@ begin
         else
             if DataMem_RE = '0' and DataMem_WE = '1' and DataMem_EN = '1' then
                 if DataMem_Addr <= "1011111011111111" then
+                    DataMem_Ram1_Data <= "ZZZZZZZZZZZZZZZZ";
                     DataMem_Ram2_Addr(15 downto 0) <= DataMem_Addr;
                     DataMem_Ram2_Data <= DataMem_Val_IN;
                     DataMem_Ram2_EN <= '0';

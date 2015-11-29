@@ -50,6 +50,10 @@ AddrMem_Ram2_Addr(17 downto 16) <= "00";
 
 process( AddrMem_CLK, AddrMem_EN, AddrMem_PC)
 begin
+    if AddrMem_EN = '0' then
+        AddrMem_Ram2_OE <= '1';
+        AddrMem_Ram2_WE <= '1';
+    end if;
     if AddrMem_CLK = '1' and AddrMem_EN = '1' then
         AddrMem_Ram2_Addr(15 downto 0) <= AddrMem_PC;
         AddrMem_Ram2_Data <= "ZZZZZZZZZZZZZZZZ";
