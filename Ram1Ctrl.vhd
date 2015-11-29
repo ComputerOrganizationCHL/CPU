@@ -35,9 +35,14 @@ entity Ram1Ctrl is
            Ram1Ctrl_RE : in STD_LOGIC;
            Ram1Ctrl_WE : in STD_LOGIC;
            Ram1Ctrl_EN : in STD_LOGIC;
+           Ram1Ctrl_data_ready : in STD_LOGIC;
+           Ram1Ctrl_tbre : in STD_LOGIC;
+           Ram1Ctrl_tsre : in STD_LOGIC;
            Ram1Ctrl_Data_IN : in STD_LOGIC_VECTOR ( 15 downto 0);
            Ram1Ctrl_Data_OUT : out  STD_LOGIC_VECTOR (15 downto 0);
            
+           Ram1Ctrl_wrn : out STD_LOGIC;
+           Ram1Ctrl_rdn : out STD_LOGIC;
            Ram1Ctrl_Ram1_Addr : out STD_LOGIC_VECTOR (17 downto 0);
            Ram1Ctrl_Ram1_Data : inout STD_LOGIC_VECTOR (15 downto 0);
            Ram1Ctrl_Ram1_OE : out STD_LOGIC;
@@ -51,7 +56,7 @@ begin
 
 Ram1Ctrl_Ram1_Addr(17 downto 16) <= "00";
 
-process(Ram1Ctrl_CLK, Ram1Ctrl_EN, Ram1Ctrl_Addr)
+process(Ram1Ctrl_CLK, Ram1Ctrl_EN, Ram1Ctrl_Addr, Ram1Ctrl_WE, Ram1Ctrl_RE, Ram1Ctrl_Data_IN)
 begin
     if Ram1Ctrl_EN = '0' then
         Ram1Ctrl_Ram1_OE <= '1';
@@ -59,36 +64,72 @@ begin
     end if;
     
     if Ram1Ctrl_CLK = '1' and Ram1Ctrl_EN = '1' then
-        if Ram1Ctrl_RE = '1' and Ram1Ctrl_WE = '0' then
-            Ram1Ctrl_Ram1_Addr(15 downto 0) <= Ram1Ctrl_Addr;
-            Ram1Ctrl_Ram1_Data <= "ZZZZZZZZZZZZZZZZ";
-            Ram1Ctrl_Ram1_EN <= '0';
-            Ram1Ctrl_Ram1_OE <= '1';
-            Ram1Ctrl_Ram1_WE <= '1';
-        elsif Ram1Ctrl_RE = '0' and Ram1Ctrl_WE = '1' then
-            Ram1Ctrl_Ram1_Addr(15 downto 0) <= Ram1Ctrl_Addr;
-            Ram1Ctrl_Ram1_Data <= Ram1Ctrl_Data_IN;
-            Ram1Ctrl_Ram1_EN <= '0';
-            Ram1Ctrl_Ram1_OE <= '1';
-            Ram1Ctrl_Ram1_WE <= '1';
+        if Ram1Ctrl_Addr <= "1011111100000001" then
+            if Ram1Ctrl_RE = '1' and Ram1Ctrl_WE = '0' then
+                Ram1Ctrl_Ram1_Data <= "ZZZZZZZZZZZZZZZZ";
+                Ram1Ctrl_Ram1_EN <= '1';
+                Ram1Ctrl_Ram1_OE <= '1';
+                Ram1Ctrl_Ram1_WE <= '1';
+                Ram1Ctrl_wrn <= '1';
+                Ram1Ctrl_rdn <= '1';
+            elsif Ram1Ctrl_RE = '0' and Ram1Ctrl_WE = '1' then  
+                Ram1Ctrl_Ram1_Data <= Ram1Ctrl_Data_IN;
+                Ram1Ctrl_Ram1_EN <= '1';
+                Ram1Ctrl_Ram1_OE <= '1';
+                Ram1Ctrl_Ram1_WE <= '1';
+                Ram1Ctrl_wrn <= '1';
+                Ram1Ctrl_rdn <= '1';
+            end if;
+        else
+            if Ram1Ctrl_RE = '1' and Ram1Ctrl_WE = '0' then
+                Ram1Ctrl_Ram1_Addr(15 downto 0) <= Ram1Ctrl_Addr;
+                Ram1Ctrl_Ram1_Data <= "ZZZZZZZZZZZZZZZZ";
+                Ram1Ctrl_Ram1_EN <= '0';
+                Ram1Ctrl_Ram1_OE <= '1';
+                Ram1Ctrl_Ram1_WE <= '1';
+                Ram1Ctrl_wrn <= '1';
+                Ram1Ctrl_rdn <= '1';
+            elsif Ram1Ctrl_RE = '0' and Ram1Ctrl_WE = '1' then
+                Ram1Ctrl_Ram1_Addr(15 downto 0) <= Ram1Ctrl_Addr;
+                Ram1Ctrl_Ram1_Data <= Ram1Ctrl_Data_IN;
+                Ram1Ctrl_Ram1_EN <= '0';
+                Ram1Ctrl_Ram1_OE <= '1';
+                Ram1Ctrl_Ram1_WE <= '1';
+                Ram1Ctrl_wrn <= '1';
+                Ram1Ctrl_rdn <= '1';
+            end if;
         end if;
     elsif Ram1Ctrl_CLK = '0' and Ram1Ctrl_EN = '1' then
-        if Ram1Ctrl_RE = '1' and Ram1Ctrl_WE = '0' then
-            Ram1Ctrl_Ram1_EN <= '0';
-            Ram1Ctrl_Ram1_OE <= '0';
-            Ram1Ctrl_Ram1_WE <= '1';
-        elsif Ram1Ctrl_RE = '0' and Ram1Ctrl_WE = '1' then
-            Ram1Ctrl_Ram1_EN <= '0';
-            Ram1Ctrl_Ram1_OE <= '1';
-            Ram1Ctrl_Ram1_WE <= '0';
+        if Ram1Ctrl_Addr <= "1011111100000001" then
+            if Ram1Ctrl_RE = '1' and Ram1Ctrl_WE = '0' then
+                Ram1Ctrl_rdn <= '0';
+            elsif Ram1Ctrl_RE = '0' and Ram1Ctrl_WE = '1' then
+                Ram1Ctrl_wrn <= '0';
+            end if;
+        else
+            if Ram1Ctrl_RE = '1' and Ram1Ctrl_WE = '0' then
+                Ram1Ctrl_Ram1_EN <= '0';
+                Ram1Ctrl_Ram1_OE <= '0';
+                Ram1Ctrl_Ram1_WE <= '1';
+            elsif Ram1Ctrl_RE = '0' and Ram1Ctrl_WE = '1' then
+                Ram1Ctrl_Ram1_EN <= '0';
+                Ram1Ctrl_Ram1_OE <= '1';
+                Ram1Ctrl_Ram1_WE <= '0';
+            end if;
         end if;
     end if;
 end process;
 
-process(Ram1Ctrl_Ram1_Data, Ram1Ctrl_EN)
+process(Ram1Ctrl_Ram1_Data, Ram1Ctrl_EN, Ram1Ctrl_RE, Ram1Ctrl_WE, Ram1Ctrl_tbre, Ram1Ctrl_tsre, Ram1Ctrl_data_ready)
 begin
     if NOT(Ram1Ctrl_Ram1_Data  = "ZZZZZZZZZZZZZZZZ") and Ram1Ctrl_RE = '1' and Ram1Ctrl_WE = '0' and Ram1Ctrl_EN = '1' then
-        Ram1Ctrl_Data_OUT <= Ram1Ctrl_Ram1_Data;
+        if (Ram1Ctrl_Addr = "1011111100000001") then
+            Ram1Ctrl_Data_OUT(0) <= Ram1Ctrl_tbre AND Ram1Ctrl_tsre;
+            Ram1Ctrl_Data_OUT(1) <= Ram1Ctrl_data_ready;
+            Ram1Ctrl_Data_OUT(15 downto 2) <= (others => '0');
+        else
+            Ram1Ctrl_Data_OUT <= Ram1Ctrl_Ram1_Data;
+        end if;
     end if;
 end process;
 
