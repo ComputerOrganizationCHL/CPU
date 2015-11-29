@@ -190,8 +190,12 @@ end process;
 
 process(DataMem_RE, DataMem_WE, DataMem_EN, DataMem_Addr)
 begin
-    if DataMem_EN = '1' and DataMem_Addr <= "1011111011111111" then
-        DataMem_Stop_EN <= '0';
+    if DataMem_WE = '1' OR DataMem_RE = '1' then
+        if DataMem_EN = '1' and DataMem_Addr <= "1011111011111111" then
+            DataMem_Stop_EN <= '0';
+        else
+            DataMem_Stop_EN <= '1';
+        end if;
     else
         DataMem_Stop_EN <= '1';
     end if;
