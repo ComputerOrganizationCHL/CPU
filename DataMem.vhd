@@ -80,7 +80,8 @@ DataMem_Ram2_Data_OUT <= DataMem_Val_IN
                                     when DataMem_Addr <  "1011111100000000" and
                                          DataMem_RE = '0' and DataMem_WE = '1'; 
 
-DataMem_Stop_EN <= '0'              when DataMem_Addr <  "1011111100000000";
+DataMem_Stop_EN <= '0'              when DataMem_Addr <  "1011111100000000" and DataMem_EN = '1' and (DataMem_RE = '1' or DataMem_WE = '1') else
+                   '1';
 
 end Behavioral;
 

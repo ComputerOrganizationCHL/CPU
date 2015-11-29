@@ -85,13 +85,7 @@ begin
     end if;
 end process;
 
-process(Ram2Ctrl_Ram2_Data, Ram2Ctrl_EN, Ram2Ctrl_RE, Ram2Ctrl_WE)
-begin
-    if NOT(Ram2Ctrl_Ram2_Data  = "ZZZZZZZZZZZZZZZZ") and Ram2Ctrl_RE = '1' and Ram2Ctrl_WE = '0' and Ram2Ctrl_EN = '1' then
-        Ram2Ctrl_Data_OUT <= Ram2Ctrl_Ram2_Data;
-    end if;
-end process;
-
+Ram2Ctrl_Data_OUT <= Ram2Ctrl_Ram2_Data;
 
 end Behavioral;
 

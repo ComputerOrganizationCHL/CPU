@@ -120,19 +120,9 @@ begin
     end if;
 end process;
 
-process(Ram1Ctrl_Ram1_Data, Ram1Ctrl_EN, Ram1Ctrl_RE, Ram1Ctrl_WE, Ram1Ctrl_tbre, Ram1Ctrl_tsre, Ram1Ctrl_data_ready)
-begin
-    if NOT(Ram1Ctrl_Ram1_Data  = "ZZZZZZZZZZZZZZZZ") and Ram1Ctrl_RE = '1' and Ram1Ctrl_WE = '0' and Ram1Ctrl_EN = '1' then
-        if (Ram1Ctrl_Addr = "1011111100000001") then
-            Ram1Ctrl_Data_OUT(0) <= Ram1Ctrl_tbre AND Ram1Ctrl_tsre;
-            Ram1Ctrl_Data_OUT(1) <= Ram1Ctrl_data_ready;
-            Ram1Ctrl_Data_OUT(15 downto 2) <= (others => '0');
-        else
-            Ram1Ctrl_Data_OUT <= Ram1Ctrl_Ram1_Data;
-        end if;
-    end if;
-end process;
-
+Ram1Ctrl_Data_OUT(0) <= Ram1Ctrl_tbre AND Ram1Ctrl_tsre     when Ram1Ctrl_Addr = "1011111100000001" else Ram1Ctrl_Ram1_Data(0);
+Ram1Ctrl_Data_OUT(1) <= Ram1Ctrl_data_ready                 when Ram1Ctrl_Addr = "1011111100000001" else Ram1Ctrl_Ram1_Data(1);
+Ram1Ctrl_Data_OUT(15 downto 2) <= (others => '0')           when Ram1Ctrl_Addr = "1011111100000001" else Ram1Ctrl_Ram1_Data(15 downto 2);
 
 end Behavioral;
 
