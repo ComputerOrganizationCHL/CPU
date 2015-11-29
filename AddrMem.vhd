@@ -30,14 +30,13 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity AddrMem is
-    Port ( AddrMem_CLK : in STD_LOGIC;
-           AddrMem_PC : in  STD_LOGIC_VECTOR (15 downto 0);
-           AddrMem_EN : in STD_LOGIC;
+    Port ( AddrMem_PC : in  STD_LOGIC_VECTOR (15 downto 0);
+           AddrMem_Data_IN : in STD_LOGIC_VECTOR ( 15 downto 0 );
+           
            AddrMem_Ins_OUT : out  STD_LOGIC_VECTOR (15 downto 0);
            
-           AddrMem_Ram2_Addr : out STD_LOGIC_VECTOR (17 downto 0);
-           AddrMem_Ram2_Data : inout STD_LOGIC_VECTOR (15 downto 0);
-           AddrMem_Ram2_OE : out STD_LOGIC;
+           AddrMem_Ram2_Addr : out STD_LOGIC_VECTOR (15 downto 0);
+           AddrMem_Ram2_RE : out STD_LOGIC;
            AddrMem_Ram2_WE : out STD_LOGIC;
            AddrMem_Ram2_EN : out STD_LOGIC );
 end AddrMem;
@@ -46,34 +45,11 @@ architecture Behavioral of AddrMem is
 
 begin
 
-AddrMem_Ram2_Addr(17 downto 16) <= "00";
-
-process( AddrMem_CLK, AddrMem_EN, AddrMem_PC)
-begin
-    if AddrMem_EN = '0' then
-        AddrMem_Ram2_OE <= '1';
-        AddrMem_Ram2_WE <= '1';
-    end if;
-    if AddrMem_CLK = '1' and AddrMem_EN = '1' then
-        AddrMem_Ram2_Addr(15 downto 0) <= AddrMem_PC;
-        AddrMem_Ram2_Data <= "ZZZZZZZZZZZZZZZZ";
-        AddrMem_Ram2_EN <= '0';
-        AddrMem_Ram2_OE <= '1';
-        AddrMem_Ram2_WE <= '1';
-    elsif AddrMem_CLK = '0' and AddrMem_EN = '1' then
-        AddrMem_Ram2_EN <= '0';
-        AddrMem_Ram2_OE <= '0';
-        AddrMem_Ram2_WE <= '1';
-    end if;
-end process;
-
-process(AddrMem_Ram2_Data, AddrMem_EN)
-begin
-    if NOT(AddrMem_Ram2_Data  = "ZZZZZZZZZZZZZZZZ") and AddrMem_EN = '1' then
-        AddrMem_Ins_OUT <= AddrMem_Ram2_Data;
-    end if;
-end process;
-
+AddrMem_Ram2_Addr <= AddrMem_PC;
+AddrMem_Ram2_EN <= '1';
+AddrMem_Ram2_RE <= '1';
+AddrMem_Ram2_WE <= '0';
+AddrMem_Ins_OUT <= AddrMem_Data_IN;
 
 end Behavioral;
 
