@@ -120,8 +120,12 @@ begin
     end if;
 end process;
 
-Ram1Ctrl_Data_OUT(0) <= Ram1Ctrl_tbre AND Ram1Ctrl_tsre     when Ram1Ctrl_Addr = "1011111100000001" else Ram1Ctrl_Ram1_Data(0);
-Ram1Ctrl_Data_OUT(1) <= Ram1Ctrl_data_ready                 when Ram1Ctrl_Addr = "1011111100000001" else Ram1Ctrl_Ram1_Data(1);
+--Ram1Ctrl_Data_OUT(0) <= Ram1Ctrl_tbre AND Ram1Ctrl_tsre     when Ram1Ctrl_Addr = "1011111100000001" else Ram1Ctrl_Ram1_Data(0);
+--Ram1Ctrl_Data_OUT(1) <= Ram1Ctrl_data_ready                 when Ram1Ctrl_Addr = "1011111100000001" else Ram1Ctrl_Ram1_Data(1);
+--Ram1Ctrl_Data_OUT(15 downto 2) <= (others => '0')           when Ram1Ctrl_Addr = "1011111100000001" else Ram1Ctrl_Ram1_Data(15 downto 2);
+
+Ram1Ctrl_Data_OUT(0) <= '1'                                 when Ram1Ctrl_Addr = "1011111100000001" else Ram1Ctrl_Ram1_Data(0);
+Ram1Ctrl_Data_OUT(1) <= '1'                                 when Ram1Ctrl_Addr = "1011111100000001" else Ram1Ctrl_Ram1_Data(1);
 Ram1Ctrl_Data_OUT(15 downto 2) <= (others => '0')           when Ram1Ctrl_Addr = "1011111100000001" else Ram1Ctrl_Ram1_Data(15 downto 2);
 
 end Behavioral;

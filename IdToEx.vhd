@@ -80,80 +80,30 @@ entity IdToEx is
 end IdToEx;
 
 architecture Behavioral of IdToEx is
-    signal PC : STD_LOGIC_VECTOR (15 downto 0);
-    signal RegMemSel : STD_LOGIC;
-    signal RegWr : STD_LOGIC;
-    signal SignExt : STD_LOGIC;
-    signal Width : STD_LOGIC_VECTOR(1 downto 0);
-    signal MemRE : STD_LOGIC;
-    signal MemWE : STD_LOGIC;
-    signal ALUOp : STD_LOGIC_VECTOR(2 downto 0);
-    signal ALUOr : STD_LOGIC;
-    signal RtRegImmSel : STD_LOGIC;
-    signal RsRegImmSel : STD_LOGIC;
-    signal RsRtRdSel : STD_LOGIC_VECTOR(1 downto 0);
-    signal DiRsRtSel : STD_LOGIC;
-    signal Brh : STD_LOGIC_VECTOR(1 downto 0);
-    signal Jmp : STD_LOGIC;
-    signal Rs : STD_LOGIC_VECTOR(3 downto 0);
-    signal Rt : STD_LOGIC_VECTOR(3 downto 0);
-    signal Rd : STD_LOGIC_VECTOR(3 downto 0);
-    signal Imm : STD_LOGIC_VECTOR(15 downto 0);
-    signal RsVal : STD_LOGIC_VECTOR(15 downto 0);
-    signal RtVal : STD_LOGIC_VECTOR(15 downto 0);
+    signal PC : STD_LOGIC_VECTOR (15 downto 0) := (others => '0');
+    signal RegMemSel : STD_LOGIC := '0';
+    signal RegWr : STD_LOGIC := '0';
+    signal SignExt : STD_LOGIC := '0';
+    signal Width : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
+    signal MemRE : STD_LOGIC := '0';
+    signal MemWE : STD_LOGIC := '0';
+    signal ALUOp : STD_LOGIC_VECTOR(2 downto 0) := (others => '0');
+    signal ALUOr : STD_LOGIC := '0';
+    signal RtRegImmSel : STD_LOGIC := '0';
+    signal RsRegImmSel : STD_LOGIC := '0';
+    signal RsRtRdSel : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
+    signal DiRsRtSel : STD_LOGIC := '0';
+    signal Brh : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
+    signal Jmp : STD_LOGIC := '0';
+    signal Rs : STD_LOGIC_VECTOR(3 downto 0) := (others => '0');
+    signal Rt : STD_LOGIC_VECTOR(3 downto 0) := (others => '0');
+    signal Rd : STD_LOGIC_VECTOR(3 downto 0) := (others => '0');
+    signal Imm : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+    signal RsVal : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+    signal RtVal : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
 begin
 
-process(IdToEx_CLK)
-begin
-    if (rising_edge(IdToEx_CLK)) then
-        if (IdToEx_Reset = '1') then
-            if (IdToEx_En = '1') then
-                
-                PC <= IdToEx_PC_IN;
-                RegMemSel <= IdToEx_RegMemSel_IN;
-                RegWr <= IdToEx_RegWr_IN;
-                SignExt <= IdToEx_SignExt_IN;
-                Width <= IdToEx_Width_IN;
-                MemRE <= IdToEx_MemRE_IN;
-                MemWE <= IdToEx_MemWE_IN;
-                ALUOp <= IdToEx_ALUOp_IN;
-                ALUOr <= IdToEx_ALUOr_IN;
-                RtRegImmSel <= IdToEx_RtRegImmSel_IN;
-                RsRegImmSel <= IdToEx_RsRegImmSel_IN;
-                RsRtRdSel <= IdToEx_RsRtRdSel_IN;
-                DiRsRtSel <= IdToEx_DiRsRtSel_IN;
-                Brh <= IdToEx_Brh_IN;
-                Jmp <= IdToEx_Jmp_IN;
-                Rs <= IdToEx_Rs_IN;
-                Rt <= IdToEx_Rt_IN;
-                Rd <= IdToEx_Rd_IN;
-                Imm <= IdToEx_Imm_IN;
-                RsVal <= IdToEx_RsVal_IN;
-                RtVal <= IdToEx_RtVal_IN;
-            
-                IdToEx_PC_OUT <= IdToEx_PC_IN;
-                IdToEx_RegMemSel_OUT <= IdToEx_RegMemSel_IN;
-                IdToEx_RegWr_OUT <= IdToEx_RegWr_IN;
-                IdToEx_SignExt_OUT <= IdToEx_SignExt_IN;
-                IdToEx_Width_OUT <= IdToEx_Width_IN;
-                IdToEx_MemRE_OUT <= IdToEx_MemRE_IN;
-                IdToEx_MemWE_OUT <= IdToEx_MemWE_IN;
-                IdToEx_ALUOp_OUT <= IdToEx_ALUOp_IN;
-                IdToEx_ALUOr_OUT <= IdToEx_ALUOr_IN;
-                IdToEx_RtRegImmSel_OUT <= IdToEx_RtRegImmSel_IN;
-                IdToEx_RsRegImmSel_OUT <= IdToEx_RsRegImmSel_IN;
-                IdToEx_RsRtRdSel_OUT <= IdToEx_RsRtRdSel_IN;
-                IdToEx_DiRsRtSel_OUT <= IdToEx_DiRsRtSel_IN;
-                IdToEx_Brh_OUT <= IdToEx_Brh_IN;
-                IdToEx_Jmp_OUT <= IdToEx_Jmp_IN;
-                IdToEx_Rs_OUT <= IdToEx_Rs_IN;
-                IdToEx_Rt_OUT <= IdToEx_Rt_IN;
-                IdToEx_Rd_OUT <= IdToEx_Rd_IN;
-                IdToEx_Imm_OUT <= IdToEx_Imm_IN;
-                IdToEx_RsVal_OUT <= IdToEx_RsVal_IN;
-                IdToEx_RtVal_OUT <= IdToEx_RtVal_IN;
-            else
-                
+
                 IdToEx_PC_OUT <= PC;
                 IdToEx_RegMemSel_OUT <= RegMemSel;
                 IdToEx_RegWr_OUT <= RegWr;
@@ -175,6 +125,35 @@ begin
                 IdToEx_Imm_OUT <= Imm;
                 IdToEx_RsVal_OUT <= RsVal;
                 IdToEx_RtVal_OUT <= RtVal;
+                
+
+process(IdToEx_CLK)
+begin
+    if (rising_edge(IdToEx_CLK)) then
+        if (IdToEx_Reset = '1') then
+            if (IdToEx_En = '1') then
+            
+                PC <= IdToEx_PC_IN;
+                RegMemSel <= IdToEx_RegMemSel_IN;
+                RegWr <= IdToEx_RegWr_IN;
+                SignExt <= IdToEx_SignExt_IN;
+                Width <= IdToEx_Width_IN;
+                MemRE <= IdToEx_MemRE_IN;
+                MemWE <= IdToEx_MemWE_IN;
+                ALUOp <= IdToEx_ALUOp_IN;
+                ALUOr <= IdToEx_ALUOr_IN;
+                RtRegImmSel <= IdToEx_RtRegImmSel_IN;
+                RsRegImmSel <= IdToEx_RsRegImmSel_IN;
+                RsRtRdSel <= IdToEx_RsRtRdSel_IN;
+                DiRsRtSel <= IdToEx_DiRsRtSel_IN;
+                Brh <= IdToEx_Brh_IN;
+                Jmp <= IdToEx_Jmp_IN;
+                Rs <= IdToEx_Rs_IN;
+                Rt <= IdToEx_Rt_IN;
+                Rd <= IdToEx_Rd_IN;
+                Imm <= IdToEx_Imm_IN;
+                RsVal <= IdToEx_RsVal_IN;
+                RtVal <= IdToEx_RtVal_IN;
             end if;
         else
             PC <= "0000000000000000";

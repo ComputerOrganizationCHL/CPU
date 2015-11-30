@@ -56,15 +56,24 @@ entity ExToMem is
 end ExToMem;
 
 architecture Behavioral of ExToMem is
-    signal PC : STD_LOGIC_VECTOR(15 downto 0);
-    signal RegMemSel : STD_LOGIC;
-    signal RegWr : STD_LOGIC;
-    signal MemRE : STD_LOGIC;
-    signal MemWE : STD_LOGIC;
-    signal MemVal : STD_LOGIC_VECTOR(15 downto 0);
-    signal MemAddr : STD_LOGIC_VECTOR(15 downto 0);
-    signal RegNum : STD_LOGIC_VECTOR(3 downto 0);
+    signal PC : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+    signal RegMemSel : STD_LOGIC    := '0';
+    signal RegWr : STD_LOGIC    := '0';
+    signal MemRE : STD_LOGIC    := '0';
+    signal MemWE : STD_LOGIC    := '0';
+    signal MemVal : STD_LOGIC_VECTOR(15 downto 0)   := (others => '0');
+    signal MemAddr : STD_LOGIC_VECTOR(15 downto 0)  := (others => '0');
+    signal RegNum : STD_LOGIC_VECTOR(3 downto 0)    := (others => '0');
 begin
+
+ExToMem_PC_OUT <= PC;
+ExToMem_RegMemSel_OUT <= RegMemSel;
+ExToMem_RegWr_OUT <= RegWr;
+ExToMem_MemRE_OUT <= MemRE;
+ExToMem_MemWE_OUT <= MemWE;
+ExToMem_MemVal_OUT <= MemVal;
+ExToMem_MemAddr_OUT <= MemAddr;
+ExToMem_RegNum_OUT <= RegNum;
 
 process(ExToMem_CLK)
 begin
@@ -79,24 +88,6 @@ begin
                 MemVal <= ExToMem_MemVal_IN;
                 MemAddr <= ExToMem_MemAddr_IN;
                 RegNum <= ExToMem_RegNum_IN;
-                
-                ExToMem_PC_OUT <= ExToMem_PC_IN;
-                ExToMem_RegMemSel_OUT <= ExToMem_RegMemSel_IN;
-                ExToMem_RegWr_OUT <= ExToMem_RegWr_IN;
-                ExToMem_MemRE_OUT <= ExToMem_MemRE_IN;
-                ExToMem_MemWE_OUT <= ExToMem_MemWE_IN;
-                ExToMem_MemVal_OUT <= ExToMem_MemVal_IN;
-                ExToMem_MemAddr_OUT <= ExToMem_MemAddr_IN;
-                ExToMem_RegNum_OUT <= ExToMem_RegNum_IN;
-            else
-                ExToMem_PC_OUT <= PC;
-                ExToMem_RegMemSel_OUT <= RegMemSel;
-                ExToMem_RegWr_OUT <= RegWr;
-                ExToMem_MemRE_OUT <= MemRE;
-                ExToMem_MemWE_OUT <= MemWE;
-                ExToMem_MemVal_OUT <= MemVal;
-                ExToMem_MemAddr_OUT <= MemAddr;
-                ExToMem_RegNum_OUT <= RegNum;
             end if;
         else 
         
@@ -108,15 +99,6 @@ begin
             MemVal <= "0000000000000000";
             MemAddr <= "0000000000000000";
             RegNum <= "0000";
-        
-            ExToMem_PC_OUT <= "0000000000000000";
-            ExToMem_RegMemSel_OUT <= '0';
-            ExToMem_RegWr_OUT <= '0';
-            ExToMem_MemRE_OUT <= '0';
-            ExToMem_MemWE_OUT <= '0';
-            ExToMem_MemVal_OUT <= "0000000000000000";
-            ExToMem_MemAddr_OUT <= "0000000000000000";
-            ExToMem_RegNum_OUT <= "0000";
         end if;
     end if;
 end process;

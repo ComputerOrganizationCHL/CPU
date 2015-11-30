@@ -41,9 +41,11 @@ end PCSel;
 
 architecture Behavioral of PCSel is
 
-    signal PC : STD_LOGIC_VECTOR(15 downto 0);
+    signal PC : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
 
 begin
+
+PC_NextPC_OUT <= PC;
 
 process(PC_CLK)
 begin
@@ -52,20 +54,14 @@ begin
             if (PC_En = '1') then
                 if (PC_Sel = '1') then
                     PC <= PC_JmpPC_IN;
-                    
-                    PC_NextPC_OUT <= PC_JmpPC_IN;
+                   
                 else
                     PC <= PC_NextPC_IN;
-                
-                    PC_NextPC_OUT <= PC_NextPC_IN;
+      
                 end if;
-            else
-                PC_NextPC_OUT <= PC;
             end if;
         else 
             PC <= "0000000000000000";
-            
-            PC_NextPC_OUT <= "0000000000000000";
         end if;
     end if;
 end process;
