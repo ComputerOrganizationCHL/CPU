@@ -79,7 +79,7 @@ begin
     else
         if (ImmTrans_Width = "01") then
             if (ImmTrans_Imm_IN = "0000000000000000") then
-                ImmTrans_Imm_OUT <= "0000000000000100";
+                ImmTrans_Imm_OUT <= "0000000000001000";
             else
                 ImmTrans_Imm_OUT <= ImmTrans_Imm_IN;    
             end if;

@@ -53,7 +53,7 @@ begin
             BrhUnit_PCSel <= BrhUnit_Jmp;
             
         when "01" =>
-            BrhUnit_JmpPC <= BrhUnit_PC + BrhUnit_RsVal;
+            BrhUnit_JmpPC <= BrhUnit_RsVal;
             BrhUnit_PCSel <= BrhUnit_Jmp;
             
         when "10" =>

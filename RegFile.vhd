@@ -118,7 +118,7 @@ end process;
 
 process(RegFile_CLK)         --write process
 begin
-    if RegFile_WE = '1' and rising_edge(RegFile_CLK) then
+    if RegFile_WE = '1' and falling_edge(RegFile_CLK) then
         case RegFile_RegNum is
             when "0000" =>
                 R0 <= RegFile_RegVal;

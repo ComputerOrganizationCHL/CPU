@@ -71,11 +71,11 @@ begin
                 ALU_OUT <= ALU_RsVal AND ALU_RtVal;
             end if;
         when "101" =>
-            --左移操作, OUT <= Rs << Rt
-            ALU_OUT <= to_stdlogicvector(to_bitvector(ALU_RsVal) SLL conv_integer(ALU_RtVal));
+            --左移操作, OUT <= Rt << Rs
+            ALU_OUT <= to_stdlogicvector(to_bitvector(ALU_RtVal) SLL conv_integer(ALU_RsVal));
         when "110" =>
-            --右移操作, OUT <= Rs >> Rt
-            ALU_OUT <= to_stdlogicvector(to_bitvector(ALU_RsVal) SRA conv_integer(ALU_RtVal));
+            --右移操作, OUT <= Rt >> Rs
+            ALU_OUT <= to_stdlogicvector(to_bitvector(ALU_RtVal) SRA conv_integer(ALU_RsVal));
         when "111" =>
             --小于等于操作, ALU_OUT <= (ALU_RsVal < ALU_RtVal)
             if (ALU_RsVal < ALU_RtVal) then

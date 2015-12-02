@@ -40,13 +40,10 @@ entity IfToId is
 end IfToId;
 
 architecture Behavioral of IfToId is
-    signal PC : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
-    signal Ins : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+    signal PC : STD_LOGIC_VECTOR(15 downto 0);
+    signal Ins : STD_LOGIC_VECTOR(15 downto 0);
     
 begin
-
-IfToId_PC_OUT <= PC;
-IfToId_Ins_OUT <= Ins;
 
 process(IfToId_CLK)
 begin
@@ -55,10 +52,19 @@ begin
             if (IfToId_En = '1') then
                 PC <= IfToId_PC_IN;
                 Ins <= IfToId_Ins_IN;
+                
+                IfToId_PC_OUT <= IfToId_PC_IN;
+                IfToId_Ins_OUT <= IfToId_Ins_IN;
+            else
+                IfToId_PC_OUT <= PC;
+                IfToId_Ins_OUT <= Ins;
             end if;
         else 
             PC <= "0000000000000000";
             Ins <= "0000000000000000";
+            
+            IfToId_PC_OUT <= "0000000000000000";
+            IfToId_Ins_OUT <= "0000000000000000";
         end if;
     
     end if;
