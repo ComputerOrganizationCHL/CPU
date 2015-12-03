@@ -135,13 +135,8 @@
         <signal name="XLXN_10089(1:0)" />
         <signal name="XLXN_10090" />
         <signal name="DYP0A" />
-        <signal name="XLXN_10093" />
         <signal name="CLK" />
         <signal name="XLXN_10102(15:0)" />
-        <signal name="XLXN_10104" />
-        <signal name="XLXN_10105" />
-        <signal name="XLXN_10108" />
-        <signal name="XLXN_10109(15:0)" />
         <signal name="L(15:0)" />
         <port polarity="Input" name="Start" />
         <port polarity="Output" name="Ram2_OE" />
@@ -416,8 +411,7 @@
             <line x2="736" y1="-32" y2="-32" x1="672" />
         </blockdef>
         <blockdef name="PCSel">
-            <timestamp>2015-11-30T8:38:24</timestamp>
-            <rect width="464" x="64" y="-384" height="384" />
+            <timestamp>2015-12-3T17:25:48</timestamp>
             <line x2="0" y1="-352" y2="-352" x1="64" />
             <line x2="0" y1="-288" y2="-288" x1="64" />
             <line x2="0" y1="-224" y2="-224" x1="64" />
@@ -428,10 +422,10 @@
             <line x2="0" y1="-32" y2="-32" x1="64" />
             <rect width="64" x="528" y="-364" height="24" />
             <line x2="592" y1="-352" y2="-352" x1="528" />
+            <rect width="464" x="64" y="-384" height="448" />
         </blockdef>
         <blockdef name="RegFile">
-            <timestamp>2015-11-30T8:38:30</timestamp>
-            <rect width="448" x="64" y="-384" height="384" />
+            <timestamp>2015-12-3T17:26:6</timestamp>
             <line x2="0" y1="-352" y2="-352" x1="64" />
             <line x2="0" y1="-288" y2="-288" x1="64" />
             <rect width="64" x="0" y="-236" height="24" />
@@ -454,6 +448,7 @@
             <line x2="576" y1="-96" y2="-96" x1="512" />
             <rect width="64" x="512" y="-44" height="24" />
             <line x2="576" y1="-32" y2="-32" x1="512" />
+            <rect width="448" x="64" y="-384" height="512" />
         </blockdef>
         <blockdef name="RegSelUnit">
             <timestamp>2015-11-30T8:38:38</timestamp>

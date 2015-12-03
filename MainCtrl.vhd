@@ -379,7 +379,7 @@ begin
         MainCtrl_RsRegImmSel<= '0';
         MainCtrl_RsRtRdSel  <= "00";
         MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "11";
+        MainCtrl_Brh        <= "10";
         MainCtrl_Jmp        <= '1';
         
         MainCtrl_Rs(3)          <= '1';
