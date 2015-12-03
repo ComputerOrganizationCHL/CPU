@@ -52,7 +52,7 @@ begin
             if (IfToId_En = '1') then
                 PC <= IfToId_PC_IN;
                 Ins <= IfToId_Ins_IN;
-                
+                  
                 IfToId_PC_OUT <= IfToId_PC_IN;
                 IfToId_Ins_OUT <= IfToId_Ins_IN;
             else

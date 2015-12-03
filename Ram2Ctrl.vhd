@@ -57,14 +57,20 @@ begin
     Ram2Ctrl_Ram2_OE <= '1';
     Ram2Ctrl_Ram2_WE <= '1';
     
+    if (falling_edge(Ram2Ctrl_CLK) and Ram2Ctrl_EN = '1') then
+        if Ram2Ctrl_RE = '1' and Ram2Ctrl_WE = '0' then
+            Ram2Ctrl_Ram2_Data <= "ZZZZZZZZZZZZZZZZ";
+        elsif Ram2Ctrl_RE = '0' and Ram2Ctrl_WE = '1' then
+            Ram2Ctrl_Ram2_Data <= Ram2Ctrl_Data_IN;
+        end if;
+    end if;
+    
     if Ram2Ctrl_CLK = '1' and Ram2Ctrl_EN = '1' then
         if Ram2Ctrl_RE = '1' and Ram2Ctrl_WE = '0' then
             Ram2Ctrl_Ram2_Addr(15 downto 0) <= Ram2Ctrl_Addr;
-            Ram2Ctrl_Ram2_Data <= "ZZZZZZZZZZZZZZZZ";
             Ram2Ctrl_Ram2_EN <= '0';
         elsif Ram2Ctrl_RE = '0' and Ram2Ctrl_WE = '1' then
             Ram2Ctrl_Ram2_Addr(15 downto 0) <= Ram2Ctrl_Addr;
-            Ram2Ctrl_Ram2_Data <= Ram2Ctrl_Data_IN;
             Ram2Ctrl_Ram2_EN <= '0';
         end if;
     elsif Ram2Ctrl_CLK = '0' and Ram2Ctrl_EN = '1' then

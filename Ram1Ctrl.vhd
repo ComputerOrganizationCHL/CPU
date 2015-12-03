@@ -64,7 +64,7 @@ begin
     Ram1Ctrl_wrn <= '1';
     Ram1Ctrl_rdn <= '1';
     
-    if Ram1Ctrl_CLK = '1' and Ram1Ctrl_EN = '1' then
+    if (falling_edge(Ram1Ctrl_CLK) and Ram1Ctrl_EN = '1') then
         if Ram1Ctrl_Addr <= "1011111100000001" then
             if Ram1Ctrl_RE = '1' and Ram1Ctrl_WE = '0' then
                 Ram1Ctrl_Ram1_Data <= "ZZZZZZZZZZZZZZZZ";
@@ -73,12 +73,24 @@ begin
             end if;
         else
             if Ram1Ctrl_RE = '1' and Ram1Ctrl_WE = '0' then
-                Ram1Ctrl_Ram1_Addr(15 downto 0) <= Ram1Ctrl_Addr;
                 Ram1Ctrl_Ram1_Data <= "ZZZZZZZZZZZZZZZZ";
+            elsif Ram1Ctrl_RE = '0' and Ram1Ctrl_WE = '1' then
+                Ram1Ctrl_Ram1_Data <= Ram1Ctrl_Data_IN;
+            end if;
+        end if;
+    end if;
+    
+    if Ram1Ctrl_CLK = '1' and Ram1Ctrl_EN = '1' then
+        if Ram1Ctrl_Addr <= "1011111100000001" then
+            if Ram1Ctrl_RE = '1' and Ram1Ctrl_WE = '0' then
+            elsif Ram1Ctrl_RE = '0' and Ram1Ctrl_WE = '1' then  
+            end if;
+        else
+            if Ram1Ctrl_RE = '1' and Ram1Ctrl_WE = '0' then
+                Ram1Ctrl_Ram1_Addr(15 downto 0) <= Ram1Ctrl_Addr;
                 Ram1Ctrl_Ram1_EN <= '0';
             elsif Ram1Ctrl_RE = '0' and Ram1Ctrl_WE = '1' then
                 Ram1Ctrl_Ram1_Addr(15 downto 0) <= Ram1Ctrl_Addr;
-                Ram1Ctrl_Ram1_Data <= Ram1Ctrl_Data_IN;
                 Ram1Ctrl_Ram1_EN <= '0';
             end if;
         end if;
