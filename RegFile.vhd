@@ -34,6 +34,8 @@ entity RegFile is
            RegFile_WE : in  STD_LOGIC;
            RegFile_Rs : in  STD_LOGIC_VECTOR (2 downto 0);
            RegFile_Rt : in  STD_LOGIC_VECTOR (2 downto 0);
+           RegFile_Int : in  STD_LOGIC;
+           RegFile_PC : in  STD_LOGIC_VECTOR (15 downto 0);
            RegFile_RegNum : in  STD_LOGIC_VECTOR (3 downto 0);--For write --000~111 gr, 1000~1011 SP IH RA T
            RegFile_RegVal : in  STD_LOGIC_VECTOR (15 downto 0);--For write
            RegFile_RsVal : out  STD_LOGIC_VECTOR (15 downto 0);
@@ -59,7 +61,7 @@ architecture Behavioral of RegFile is
     signal IH : STD_LOGIC_VECTOR (15 downto 0) := (others => '0');
     signal RA : STD_LOGIC_VECTOR (15 downto 0) := (others => '0');
     signal T  : STD_LOGIC_VECTOR (15 downto 0) := (others => '0');
-
+    signal PC : STD_LOGIC_VECTOR (15 downto 0) := (others => '0');
 
 begin
 
@@ -119,36 +121,48 @@ end process;
 process(RegFile_CLK)         --write process
 begin
     if RegFile_WE = '1' and falling_edge(RegFile_CLK) then
-        case RegFile_RegNum is
-            when "0000" =>
-                R0 <= RegFile_RegVal;
-            when "0001" =>
-                R1 <= RegFile_RegVal;
-            when "0010" =>
-                R2 <= RegFile_RegVal;
-            when "0011" =>
-                R3 <= RegFile_RegVal;
-            when "0100" =>
-                R4 <= RegFile_RegVal;
-            when "0101" =>
-                R5 <= RegFile_RegVal;
-            when "0110" =>
-                R6 <= RegFile_RegVal;
-            when "0111" =>
-                R7 <= RegFile_RegVal;
-                
-            when "1000" =>
-                SP <= RegFile_RegVal;
-            when "1001" =>
-                IH <= RegFile_RegVal;
-            when "1010" =>
-                RA <= RegFile_RegVal;
-            when "1011" =>
-                T  <= RegFile_RegVal;
-            when others =>
-        end case;
+        if (RegFile_Int = '0') then
+            R1 <= "0000000000000000";
+            R2 <= PC;
+        else
+            case RegFile_RegNum is
+                when "0000" =>
+                    R0 <= RegFile_RegVal;
+                when "0001" =>
+                    R1 <= RegFile_RegVal;
+                when "0010" =>
+                    R2 <= RegFile_RegVal;
+                when "0011" =>
+                    R3 <= RegFile_RegVal;
+                when "0100" =>
+                    R4 <= RegFile_RegVal;
+                when "0101" =>
+                    R5 <= RegFile_RegVal;
+                when "0110" =>
+                    R6 <= RegFile_RegVal;
+                when "0111" =>
+                    R7 <= RegFile_RegVal;
+                    
+                when "1000" =>
+                    SP <= RegFile_RegVal;
+                when "1001" =>
+                    IH <= RegFile_RegVal;
+                when "1010" =>
+                    RA <= RegFile_RegVal;
+                when "1011" =>
+                    T  <= RegFile_RegVal;
+                when others =>
+            end case;
+        end if;
     end if;
 
+end process;
+
+process(RegFile_Int)
+begin
+    if (falling_edge(RegFile_Int)) then
+        PC <= RegFile_PC;
+    end if;
 end process;
 
 end Behavioral;

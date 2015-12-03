@@ -34,9 +34,11 @@ entity PCSel is
            PC_En : in  STD_LOGIC;
            PC_Reset : in  STD_LOGIC;
            PC_Sel : in STD_LOGIC;
+           PC_Int : in STD_LOGIC;
            PC_JmpPC_IN : in STD_LOGIC_VECTOR(15 downto 0);
            PC_NextPC_IN : in  STD_LOGIC_VECTOR (15 downto 0);
-           PC_NextPC_OUT : out  STD_LOGIC_VECTOR (15 downto 0));
+           PC_NextPC_OUT : out  STD_LOGIC_VECTOR (15 downto 0);
+           PC_PC : out STD_LOGIC_VECTOR(15 downto 0));
 end PCSel;
 
 architecture Behavioral of PCSel is
@@ -44,6 +46,8 @@ architecture Behavioral of PCSel is
     signal PC : STD_LOGIC_VECTOR(15 downto 0);
 
 begin
+
+PC_PC <= PC;
 
 process(PC_CLK)
 begin
@@ -60,7 +64,13 @@ begin
                     PC_NextPC_OUT <= PC_NextPC_IN;
                 end if;
             else
-                PC_NextPC_OUT <= PC;
+                if (PC_Int = '1') then
+                    PC_NextPC_OUT <= PC;
+                else
+                    PC <= "0000000000000100";
+                    
+                    PC_NextPC_OUT <= "0000000000000100";
+                end if;
             end if;
         else 
             PC <= "0000000000000000";
