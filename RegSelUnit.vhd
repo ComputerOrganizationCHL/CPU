@@ -50,55 +50,21 @@ architecture Behavioral of RegSelUnit is
 
 begin
 
-process(RegSelUnit_RsZero, RegSelUnit_RsDedEn, RegSelUnit_RsDedSel, RegSelUnit_RsVal_IN, 
-        RegSelUnit_SPVal_IN, RegSelUnit_IHVal_IN, RegSelUnit_RAVal_IN, RegSelUnit_TVal_IN)
-begin
-    if (RegSelUnit_RsZero = '1') then
-        RegSelUnit_RsVal_OUT <= "0000000000000000";
-    else
-        if (RegSelUnit_RsDedEn = '1') then
-            case RegSelUnit_RsDedSel is
-                when "00" =>
-                    RegSelUnit_RsVal_OUT <= RegSelUnit_SPVal_IN;
-                when "01" =>
-                    RegSelUnit_RsVal_OUT <= RegSelUnit_IHVal_IN;
-                when "10" =>
-                    RegSelUnit_RsVal_OUT <= RegSelUnit_RAVal_IN;
-                when "11" =>
-                    RegSelUnit_RsVal_OUT <= RegSelUnit_TVal_IN;
-                when others =>
-                    RegSelUnit_RsVal_OUT <= RegSelUnit_RsVal_IN;
-            end case;
-        else 
-            RegSelUnit_RsVal_OUT <= RegSelUnit_RsVal_IN;
-        end if;
-    end if;
-end process;
 
-process(RegSelUnit_RtZero, RegSelUnit_RtDedEn, RegSelUnit_RtDedSel, RegSelUnit_RtVal_IN, 
-        RegSelUnit_SPVal_IN, RegSelUnit_IHVal_IN, RegSelUnit_RAVal_IN, RegSelUnit_TVal_IN)
-begin
-    if (RegSelUnit_RtZero = '1') then
-        RegSelUnit_RtVal_OUT <= "0000000000000000";
-    else
-        if (RegSelUnit_RtDedEn = '1') then
-            case RegSelUnit_RtDedSel is
-                when "00" =>
-                    RegSelUnit_RtVal_OUT <= RegSelUnit_SPVal_IN;
-                when "01" =>
-                    RegSelUnit_RtVal_OUT <= RegSelUnit_IHVal_IN;
-                when "10" =>
-                    RegSelUnit_RtVal_OUT <= RegSelUnit_RAVal_IN;
-                when "11" =>
-                    RegSelUnit_RtVal_OUT <= RegSelUnit_TVal_IN;
-                when others =>
-                    RegSelUnit_RtVal_OUT <= RegSelUnit_RtVal_IN;
-            end case;
-        else 
-            RegSelUnit_RtVal_OUT <= RegSelUnit_RtVal_IN;
-        end if;
-    end if;
-end process;
+RegSelUnit_RsVal_OUT <= "0000000000000000"  when RegSelUnit_RsZero = '1'    else
+                        RegSelUnit_RsVal_IN when RegSelUnit_RsDedEn = '0'   else
+                        RegSelUnit_SPVal_IN when RegSelUnit_RsDedSel = "00" else
+                        RegSelUnit_IHVal_IN when RegSelUnit_RsDedSel = "01" else
+                        RegSelUnit_RAVal_IN when RegSelUnit_RsDedSel = "10" else
+                        RegSelUnit_TVal_IN  when RegSelUnit_RsDedSel = "11";
+                        
+
+RegSelUnit_RtVal_OUT <= "0000000000000000"  when RegSelUnit_RtZero = '1'    else
+                        RegSelUnit_RtVal_IN when RegSelUnit_RtDedEn = '0'   else
+                        RegSelUnit_SPVal_IN when RegSelUnit_RtDedSel = "00" else
+                        RegSelUnit_IHVal_IN when RegSelUnit_RtDedSel = "01" else
+                        RegSelUnit_RAVal_IN when RegSelUnit_RtDedSel = "10" else
+                        RegSelUnit_TVal_IN  when RegSelUnit_RtDedSel = "11";
 
 end Behavioral;
 

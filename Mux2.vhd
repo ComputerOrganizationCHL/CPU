@@ -40,19 +40,7 @@ architecture Behavioral of Mux2 is
 
 begin
 
-process(Mux2_0, Mux2_1, Mux2_Sel)
-begin
-
-    case Mux2_Sel is
-        when '0' =>
-            Mux2_OUT <= Mux2_0;
-        when '1' =>
-            Mux2_OUT <= Mux2_1;
-        when others =>
-
-    end case;
-
-end process;
-
+Mux2_OUT <= Mux2_0 when Mux2_Sel = '0' else
+            Mux2_1 when Mux2_Sel = '1';
 
 end Behavioral;

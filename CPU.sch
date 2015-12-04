@@ -32,7 +32,6 @@
         <signal name="XLXN_72(15:0)" />
         <signal name="XLXN_71(15:0)" />
         <signal name="XLXN_64(15:0)" />
-        <signal name="XLXN_61(15:0)" />
         <signal name="XLXN_60(15:0)" />
         <signal name="XLXN_58(15:0)" />
         <signal name="XLXN_57(15:0)" />
@@ -140,8 +139,6 @@
         <signal name="XLXN_10104" />
         <signal name="INT" />
         <signal name="XLXN_10106(15:0)" />
-        <signal name="XLXN_10107(2:0)" />
-        <signal name="XLXN_10108(2:0)" />
         <signal name="XLXN_10109(15:0)" />
         <signal name="XLXN_10110(2:0)" />
         <signal name="XLXN_10111(2:0)" />
