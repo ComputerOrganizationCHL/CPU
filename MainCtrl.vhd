@@ -64,983 +64,1122 @@ begin
 
 process(MainCtrl_Ins)
 begin
-    if (MainCtrl_Ins(15 downto 11) = "01001") then
-    --ADDIU
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '0';
-        MainCtrl_RsDedEn    <= '0';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '1';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "10";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "000";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '1';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "00";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '0';
-        
-        MainCtrl_Rs(3)          <= '0';
-        MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
-        MainCtrl_Rt(3)          <= '1';
-        MainCtrl_Rt(2 downto 0) <= "111";
-        MainCtrl_Rd(3)          <= '1';
-        MainCtrl_Rd(2 downto 0) <= "111";
-        
-        MainCtrl_Imm(15 downto 8)   <= (others => '0');
-        MainCtrl_Imm(7 downto 0)    <= MainCtrl_Ins(7 downto 0);
+    if (MainCtrl_Ins(15) = '0') then
+        if (MainCtrl_Ins(14) = '0') then
+            if (MainCtrl_Ins(13) = '0') then
+                if (MainCtrl_Ins(12) = '0') then
+                    if (MainCtrl_Ins(11) = '0') then
+                    --00000
+                        if (MainCtrl_Ins(15 downto 11) = "00000") then
+                        --ADDSP3
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '0';
+                            MainCtrl_RsDedEn    <= '1';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '1';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "10";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "000";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '1';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "10";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '0';
+                            
+                            MainCtrl_Rs(3)          <= '1';
+                            MainCtrl_Rs(2 downto 0) <= "000";
+                            MainCtrl_Rt(3)          <= '1';
+                            MainCtrl_Rt(2 downto 0) <= "111";
+                            MainCtrl_Rd(3)          <= '0';
+                            MainCtrl_Rd(2 downto 0) <= MainCtrl_Ins(10 downto 8);
+                            
+                            MainCtrl_Imm(15 downto 8)   <= (others => '0');
+                            MainCtrl_Imm(7 downto 0)    <= MainCtrl_Ins(7 downto 0);        
+                        end if;
+                    else
+                    --00001
+                        if (MainCtrl_Ins(15 downto 0) = "0000100000000000") then
+                        --NOP
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '0';
+                            MainCtrl_RsDedEn    <= '0';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '0';
+                            MainCtrl_SignExt    <= '0';
+                            MainCtrl_Width      <= "00";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "000";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '0';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "00";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '0';
+                            
+                            MainCtrl_Rs(3)          <= '1';
+                            MainCtrl_Rs(2 downto 0) <= "111";
+                            MainCtrl_Rt(3)          <= '1';
+                            MainCtrl_Rt(2 downto 0) <= "111";
+                            MainCtrl_Rd(3)          <= '1';
+                            MainCtrl_Rd(2 downto 0) <= "111";
+                            
+                            MainCtrl_Imm(15 downto 0)   <= (others => '0');
+                        end if;
+                    end if;        
+                else
+                    if (MainCtrl_Ins(11) = '0') then
+                    --00010
+                        if (MainCtrl_Ins(15 downto 11) = "00010") then
+                        --B
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '0';
+                            MainCtrl_RsDedEn    <= '0';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '0';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "11";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "000";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '0';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "00";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '1';
+                            
+                            MainCtrl_Rs(3)          <= '1';
+                            MainCtrl_Rs(2 downto 0) <= "111";
+                            MainCtrl_Rt(3)          <= '1';
+                            MainCtrl_Rt(2 downto 0) <= "111";
+                            MainCtrl_Rd(3)          <= '1';
+                            MainCtrl_Rd(2 downto 0) <= "111";
+                            
+                            MainCtrl_Imm(15 downto 11)   <= (others => '0');
+                            MainCtrl_Imm(10 downto 0)    <= MainCtrl_Ins(10 downto 0);
+                        end if;
+                    else
+                    --00011
+                    end if;                   
+                end if;
+            else
+                if (MainCtrl_Ins(12) = '0') then
+                    if (MainCtrl_Ins(11) = '0') then
+                    --00100
+                        if (MainCtrl_Ins(15 downto 11) = "00100") then
+                        --BEQZ
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '1';
+                            MainCtrl_RsDedEn    <= '0';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '0';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "10";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "000";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '0';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "00";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "10";
+                            MainCtrl_Jmp        <= '1';
+                            
+                            MainCtrl_Rs(3)          <= '0';
+                            MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
+                            MainCtrl_Rt(3)          <= '1';
+                            MainCtrl_Rt(2 downto 0) <= "111";
+                            MainCtrl_Rd(3)          <= '1';
+                            MainCtrl_Rd(2 downto 0) <= "111";
+                            
+                            MainCtrl_Imm(15 downto 8)   <= (others => '0');
+                            MainCtrl_Imm(7 downto 0)    <= MainCtrl_Ins(7 downto 0);
+                        end if;
+                    else
+                    --00101
+                        if (MainCtrl_Ins(15 downto 11) = "00101") then
+                        --BNEZ
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '1';
+                            MainCtrl_RsDedEn    <= '0';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '0';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "10";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "000";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '0';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "00";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "11";
+                            MainCtrl_Jmp        <= '1';
+                            
+                            MainCtrl_Rs(3)          <= '0';
+                            MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
+                            MainCtrl_Rt(3)          <= '1';
+                            MainCtrl_Rt(2 downto 0) <= "111";
+                            MainCtrl_Rd(3)          <= '1';
+                            MainCtrl_Rd(2 downto 0) <= "111";
+                            
+                            MainCtrl_Imm(15 downto 8)   <= (others => '0');
+                            MainCtrl_Imm(7 downto 0)    <= MainCtrl_Ins(7 downto 0);
+                        end if;
+                    end if;                
+                else
+                    if (MainCtrl_Ins(11) = '0') then
+                    --00110
+                        if (MainCtrl_Ins(15 downto 11) = "00110" AND MainCtrl_Ins(1 downto 0) = "11") then
+                        --SRA
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '0';
+                            MainCtrl_RsDedEn    <= '0';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '1';
+                            MainCtrl_SignExt    <= '0';
+                            MainCtrl_Width      <= "01";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "110";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '0';
+                            MainCtrl_RsRegImmSel<= '1';
+                            MainCtrl_RsRtRdSel  <= "10";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '0';
+                            
+                            MainCtrl_Rs(3)          <= '1';
+                            MainCtrl_Rs(2 downto 0) <= "111";
+                            MainCtrl_Rt(3)          <= '0';
+                            MainCtrl_Rt(2 downto 0) <= MainCtrl_Ins(7 downto 5);
+                            MainCtrl_Rd(3)          <= '0';
+                            MainCtrl_Rd(2 downto 0) <= MainCtrl_Ins(10 downto 8);
+                            
+                            MainCtrl_Imm(15 downto 3)   <= (others => '0');
+                            MainCtrl_Imm(2 downto 0)    <= MainCtrl_Ins(4 downto 2);
+                        end if;
+                        
+                        if (MainCtrl_Ins(15 downto 11) = "00110" AND MainCtrl_Ins(1 downto 0) = "00") then
+                        --SLL
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '0';
+                            MainCtrl_RsDedEn    <= '0';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '1';
+                            MainCtrl_SignExt    <= '0';
+                            MainCtrl_Width      <= "01";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "101";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '0';
+                            MainCtrl_RsRegImmSel<= '1';
+                            MainCtrl_RsRtRdSel  <= "10";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '0';
+                            
+                            MainCtrl_Rs(3)          <= '1';
+                            MainCtrl_Rs(2 downto 0) <= "111";
+                            MainCtrl_Rt(3)          <= '0';
+                            MainCtrl_Rt(2 downto 0) <= MainCtrl_Ins(7 downto 5);
+                            MainCtrl_Rd(3)          <= '0';
+                            MainCtrl_Rd(2 downto 0) <= MainCtrl_Ins(10 downto 8);
+                            
+                            MainCtrl_Imm(15 downto 3)   <= (others => '0');
+                            MainCtrl_Imm(2 downto 0)    <= MainCtrl_Ins(4 downto 2);
+                        end if;
+                    else
+                    --00111
+                    end if;                   
+                end if;       
+            end if;
+        else
+            if (MainCtrl_Ins(13) = '0') then
+                if (MainCtrl_Ins(12) = '0') then
+                    if (MainCtrl_Ins(11) = '0') then
+                    --01000
+                        if (MainCtrl_Ins(15 downto 11) = "01000" AND MainCtrl_Ins(4) = '0') then
+                        --ADDIU3
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '0';
+                            MainCtrl_RsDedEn    <= '0';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '1';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "00";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "000";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '1';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "10";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '0';
+                            
+                            MainCtrl_Rs(3)          <= '0';
+                            MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
+                            MainCtrl_Rt(3)          <= '1';
+                            MainCtrl_Rt(2 downto 0) <= "111";
+                            MainCtrl_Rd(3)          <= '0';
+                            MainCtrl_Rd(2 downto 0) <= MainCtrl_Ins(7 downto 5);
+                            
+                            MainCtrl_Imm(15 downto 4)   <= (others => '0');
+                            MainCtrl_Imm(3 downto 0)    <= MainCtrl_Ins(3 downto 0);
+                        end if;
+                    else
+                    --01001
+                        if (MainCtrl_Ins(15 downto 11) = "01001") then
+                        --ADDIU
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '0';
+                            MainCtrl_RsDedEn    <= '0';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '1';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "10";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "000";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '1';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "00";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '0';
+                            
+                            MainCtrl_Rs(3)          <= '0';
+                            MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
+                            MainCtrl_Rt(3)          <= '1';
+                            MainCtrl_Rt(2 downto 0) <= "111";
+                            MainCtrl_Rd(3)          <= '1';
+                            MainCtrl_Rd(2 downto 0) <= "111";
+                            
+                            MainCtrl_Imm(15 downto 8)   <= (others => '0');
+                            MainCtrl_Imm(7 downto 0)    <= MainCtrl_Ins(7 downto 0);
+                        end if;
+                    end if;                
+                else
+                    if (MainCtrl_Ins(11) = '0') then
+                    --01010
+                    else
+                    --01011
+                    end if;                   
+                end if;    
+            else
+                if (MainCtrl_Ins(12) = '0') then
+                    if (MainCtrl_Ins(11) = '0') then
+                    --01100
+                        if (MainCtrl_Ins(15 downto 8) = "01100100" AND MainCtrl_Ins(4 downto 0) = "00000") then
+                        --MTSP
+                            MainCtrl_RsZero     <= '1';
+                            MainCtrl_RtZero     <= '0';
+                            MainCtrl_RsDedEn    <= '0';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '1';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "00";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "000";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '0';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "10";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '0';
+                            
+                            MainCtrl_Rs(3)          <= '1';
+                            MainCtrl_Rs(2 downto 0) <= "111";
+                            MainCtrl_Rt(3)          <= '0';
+                            MainCtrl_Rt(2 downto 0) <= MainCtrl_Ins(7 downto 5);
+                            MainCtrl_Rd(3)          <= '1';
+                            MainCtrl_Rd(2 downto 0) <= "000";
+                            
+                            MainCtrl_Imm(15 downto 0)   <= (others => '0');
+                        end if;
+                        
+                        if (MainCtrl_Ins(15 downto 8) = "01100000") then
+                        --BTEQZ
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '1';
+                            MainCtrl_RsDedEn    <= '1';
+                            MainCtrl_RsDedSel   <= "11";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '0';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "10";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "000";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '0';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "00";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "10";
+                            MainCtrl_Jmp        <= '1';
+                            
+                            MainCtrl_Rs(3)          <= '1';
+                            MainCtrl_Rs(2 downto 0) <= "011";
+                            MainCtrl_Rt(3)          <= '1';
+                            MainCtrl_Rt(2 downto 0) <= "111";
+                            MainCtrl_Rd(3)          <= '1';
+                            MainCtrl_Rd(2 downto 0) <= "111";
+                            
+                            MainCtrl_Imm(15 downto 8)   <= (others => '0');
+                            MainCtrl_Imm(7 downto 0)    <= MainCtrl_Ins(7 downto 0);
+                        end if;
+                        
+                        if (MainCtrl_Ins(15 downto 8) = "01100011") then
+                        --ADDSP
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '0';
+                            MainCtrl_RsDedEn    <= '1';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '1';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "10";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "000";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '1';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "00";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '0';
+                            
+                            MainCtrl_Rs(3)          <= '1';
+                            MainCtrl_Rs(2 downto 0) <= "000";
+                            MainCtrl_Rt(3)          <= '1';
+                            MainCtrl_Rt(2 downto 0) <= "111";
+                            MainCtrl_Rd(3)          <= '1';
+                            MainCtrl_Rd(2 downto 0) <= "111";
+                            
+                            MainCtrl_Imm(15 downto 8)   <= (others => '0');
+                            MainCtrl_Imm(7 downto 0)    <= MainCtrl_Ins(7 downto 0);
+                        end if;
+                    else
+                    --01101
+                        if (MainCtrl_Ins(15 downto 11) = "01101") then
+                        --LI
+                            MainCtrl_RsZero     <= '1';
+                            MainCtrl_RtZero     <= '0';
+                            MainCtrl_RsDedEn    <= '0';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '1';
+                            MainCtrl_SignExt    <= '0';
+                            MainCtrl_Width      <= "10";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "000";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '1';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "10";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '0';
+                            
+                            MainCtrl_Rs(3)          <= '1';
+                            MainCtrl_Rs(2 downto 0) <= "111";
+                            MainCtrl_Rt(3)          <= '1';
+                            MainCtrl_Rt(2 downto 0) <= "111";
+                            MainCtrl_Rd(3)          <= '0';
+                            MainCtrl_Rd(2 downto 0) <= MainCtrl_Ins(10 downto 8);
+                            
+                            MainCtrl_Imm(15 downto 8)   <= (others => '0');
+                            MainCtrl_Imm(7 downto 0)    <= MainCtrl_Ins(7 downto 0);
+                        end if;
+                    end if;                
+                else
+                    if (MainCtrl_Ins(11) = '0') then
+                    --01110
+                        if (MainCtrl_Ins(15 downto 11) = "01110") then
+                        --CMPI
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '0';
+                            MainCtrl_RsDedEn    <= '0';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '1';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "10";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "010";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '1';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "10";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '0';
+                            
+                            MainCtrl_Rs(3)          <= '0';
+                            MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
+                            MainCtrl_Rt(3)          <= '1';
+                            MainCtrl_Rt(2 downto 0) <= "111";
+                            MainCtrl_Rd(3)          <= '1';
+                            MainCtrl_Rd(2 downto 0) <= "011";
+                            
+                            MainCtrl_Imm(15 downto 8)   <= (others => '0');
+                            MainCtrl_Imm(7 downto 0)    <= MainCtrl_Ins(7 downto 0);
+                        end if;
+                    else
+                    --01111
+                    end if;                   
+                end if;       
+            end if;
+        end if;
+    else
+        if (MainCtrl_Ins(14) = '0') then
+            if (MainCtrl_Ins(13) = '0') then
+                if (MainCtrl_Ins(12) = '0') then
+                    if (MainCtrl_Ins(11) = '0') then
+                    --10000
+                    else
+                    --10001               
+                    end if;                
+                else
+                    if (MainCtrl_Ins(11) = '0') then
+                    --10010
+                        if (MainCtrl_Ins(15 downto 11) = "10010") then
+                        --LW_SP
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '0';
+                            MainCtrl_RsDedEn    <= '1';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '1';
+                            MainCtrl_RegWr      <= '1';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "10";
+                            MainCtrl_MemRE      <= '1';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "000";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '1';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "10";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '0';
+                            
+                            MainCtrl_Rs(3)          <= '1';
+                            MainCtrl_Rs(2 downto 0) <= "011";
+                            MainCtrl_Rt(3)          <= '1';
+                            MainCtrl_Rt(2 downto 0) <= "111";
+                            MainCtrl_Rd(3)          <= '0';
+                            MainCtrl_Rd(2 downto 0) <= MainCtrl_Ins(10 downto 8);
+                            
+                            MainCtrl_Imm(15 downto 5)   <= (others => '0');
+                            MainCtrl_Imm(4 downto 0)    <= MainCtrl_Ins(4 downto 0);
+                        end if;
+                    else
+                    --10011
+                        if (MainCtrl_Ins(15 downto 11) = "10011") then
+                        --LW
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '0';
+                            MainCtrl_RsDedEn    <= '0';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '1';
+                            MainCtrl_RegWr      <= '1';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "01";
+                            MainCtrl_MemRE      <= '1';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "000";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '1';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "10";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '0';
+                            
+                            MainCtrl_Rs(3)          <= '0';
+                            MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
+                            MainCtrl_Rt(3)          <= '1';
+                            MainCtrl_Rt(2 downto 0) <= "111";
+                            MainCtrl_Rd(3)          <= '0';
+                            MainCtrl_Rd(2 downto 0) <= MainCtrl_Ins(7 downto 5);
+                            
+                            MainCtrl_Imm(15 downto 5)   <= (others => '0');
+                            MainCtrl_Imm(4 downto 0)    <= MainCtrl_Ins(4 downto 0);
+                        end if;
+                    end if;                   
+                end if;    
+            else
+                if (MainCtrl_Ins(12) = '0') then
+                    if (MainCtrl_Ins(11) = '0') then
+                    --10100
+                    else
+                    --10101
+                    end if;                
+                else
+                    if (MainCtrl_Ins(11) = '0') then
+                    --10110
+                    else
+                    --10111
+                    end if;                   
+                end if;       
+            end if;
+        else
+            if (MainCtrl_Ins(13) = '0') then
+                if (MainCtrl_Ins(12) = '0') then
+                    if (MainCtrl_Ins(11) = '0') then
+                    --11000
+                    else
+                    --11001               
+                    end if;                
+                else
+                    if (MainCtrl_Ins(11) = '0') then
+                    --11010
+                        if (MainCtrl_Ins(15 downto 11) = "11010") then
+                        --SW_SP
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '0';
+                            MainCtrl_RsDedEn    <= '0';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '0';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "10";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '1';
+                            MainCtrl_ALUOp      <= "000";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '0';
+                            MainCtrl_RsRegImmSel<= '1';
+                            MainCtrl_RsRtRdSel  <= "00";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '0';
+                            
+                            MainCtrl_Rs(3)          <= '0';
+                            MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
+                            MainCtrl_Rt(3)          <= '1';
+                            MainCtrl_Rt(2 downto 0) <= "000";
+                            MainCtrl_Rd(3)          <= '1';
+                            MainCtrl_Rd(2 downto 0) <= "111";
+                            
+                            MainCtrl_Imm(15 downto 8)   <= (others => '0');
+                            MainCtrl_Imm(7 downto 0)    <= MainCtrl_Ins(7 downto 0);
+                            
+                        end if;
+                    else
+                    --11011 
+                        if (MainCtrl_Ins(15 downto 11) = "11011") then
+                        --SW
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '0';
+                            MainCtrl_RsDedEn    <= '0';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '0';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "01";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '1';
+                            MainCtrl_ALUOp      <= "000";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '1';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "00";
+                            MainCtrl_DiRsRtSel  <= '1';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '0';
+                            
+                            MainCtrl_Rs(3)          <= '0';
+                            MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
+                            MainCtrl_Rt(3)          <= '0';
+                            MainCtrl_Rt(2 downto 0) <= MainCtrl_Ins(7 downto 5);
+                            MainCtrl_Rd(3)          <= '1';
+                            MainCtrl_Rd(2 downto 0) <= "111";
+                            
+                            MainCtrl_Imm(15 downto 5)   <= (others => '0');
+                            MainCtrl_Imm(4 downto 0)    <= MainCtrl_Ins(4 downto 0);
 
-    elsif (MainCtrl_Ins(15 downto 11) = "01000" AND MainCtrl_Ins(4) = '0') then
-    --ADDIU3
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '0';
-        MainCtrl_RsDedEn    <= '0';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '1';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "00";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "000";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '1';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "10";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '0';
-        
-        MainCtrl_Rs(3)          <= '0';
-        MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
-        MainCtrl_Rt(3)          <= '1';
-        MainCtrl_Rt(2 downto 0) <= "111";
-        MainCtrl_Rd(3)          <= '0';
-        MainCtrl_Rd(2 downto 0) <= MainCtrl_Ins(7 downto 5);
-        
-        MainCtrl_Imm(15 downto 4)   <= (others => '0');
-        MainCtrl_Imm(3 downto 0)    <= MainCtrl_Ins(3 downto 0);
-        
-    elsif (MainCtrl_Ins(15 downto 11) = "00000") then
-    --ADDSP3
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '0';
-        MainCtrl_RsDedEn    <= '1';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '1';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "10";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "000";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '1';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "10";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '0';
-        
-        MainCtrl_Rs(3)          <= '1';
-        MainCtrl_Rs(2 downto 0) <= "000";
-        MainCtrl_Rt(3)          <= '1';
-        MainCtrl_Rt(2 downto 0) <= "111";
-        MainCtrl_Rd(3)          <= '0';
-        MainCtrl_Rd(2 downto 0) <= MainCtrl_Ins(10 downto 8);
-        
-        MainCtrl_Imm(15 downto 8)   <= (others => '0');
-        MainCtrl_Imm(7 downto 0)    <= MainCtrl_Ins(7 downto 0);        
+                        end if;                   
+                    end if;
+                end if;    
+            else
+                if (MainCtrl_Ins(12) = '0') then
+                    if (MainCtrl_Ins(11) = '0') then
+                    --11100
+                        if (MainCtrl_Ins(15 downto 11) = "11100" AND MainCtrl_Ins(1 downto 0) = "11") then
+                        --SUBU
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '0';
+                            MainCtrl_RsDedEn    <= '0';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '1';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "00";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "001";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '0';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "10";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '0';
+                            
+                            MainCtrl_Rs(3)          <= '0';
+                            MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
+                            MainCtrl_Rt(3)          <= '0';
+                            MainCtrl_Rt(2 downto 0) <= MainCtrl_Ins(7 downto 5);
+                            MainCtrl_Rd(3)          <= '0';
+                            MainCtrl_Rd(2 downto 0) <= MainCtrl_Ins(4 downto 2);
+                            
+                            MainCtrl_Imm(15 downto 0)   <= (others => '0');
+                        end if;
+                        
+                        if (MainCtrl_Ins(15 downto 11) = "11100" AND MainCtrl_Ins(1 downto 0) = "01") then
+                        --ADDU
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '0';
+                            MainCtrl_RsDedEn    <= '0';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '1';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "00";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "000";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '0';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "10";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '0';
+                            
+                            MainCtrl_Rs(3)          <= '0';
+                            MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
+                            MainCtrl_Rt(3)          <= '0';
+                            MainCtrl_Rt(2 downto 0) <= MainCtrl_Ins(7 downto 5);
+                            MainCtrl_Rd(3)          <= '0';
+                            MainCtrl_Rd(2 downto 0) <= MainCtrl_Ins(4 downto 2);
+                            
+                            MainCtrl_Imm(15 downto 0)   <= (others => '0');
+                        end if;
+                    else
+                    --11101
+                        if (MainCtrl_Ins(15 downto 11) = "11101" AND MainCtrl_Ins(4 downto 0) = "00010") then
+                        --SLT
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '0';
+                            MainCtrl_RsDedEn    <= '0';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '1';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "00";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "111";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '0';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "10";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '0';
+                            
+                            MainCtrl_Rs(3)          <= '0';
+                            MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
+                            MainCtrl_Rt(3)          <= '0';
+                            MainCtrl_Rt(2 downto 0) <= MainCtrl_Ins(7 downto 5);
+                            MainCtrl_Rd(3)          <= '1';
+                            MainCtrl_Rd(2 downto 0) <= "011";
+                            
+                            MainCtrl_Imm(15 downto 0)   <= (others => '0');
+                        end if;
+                        
+                        if (MainCtrl_Ins(15 downto 11) = "11101" AND MainCtrl_Ins(4 downto 0) = "00100") then
+                        --SLLV
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '0';
+                            MainCtrl_RsDedEn    <= '0';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '1';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "00";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "101";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '0';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "01";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '0';
+                            
+                            MainCtrl_Rs(3)          <= '0';
+                            MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
+                            MainCtrl_Rt(3)          <= '0';
+                            MainCtrl_Rt(2 downto 0) <= MainCtrl_Ins(7 downto 5);
+                            MainCtrl_Rd(3)          <= '1';
+                            MainCtrl_Rd(2 downto 0) <= "111";
+                            
+                            MainCtrl_Imm(15 downto 0)   <= (others => '0');
+                        end if;
+                            
+                        if (MainCtrl_Ins(15 downto 11) = "11101" AND MainCtrl_Ins(4 downto 0) = "01101") then
+                        --OR
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '0';
+                            MainCtrl_RsDedEn    <= '0';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '1';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "00";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "100";
+                            MainCtrl_ALUOr      <= '1';
+                            MainCtrl_RtRegImmSel<= '0';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "00";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '0';
+                            
+                            MainCtrl_Rs(3)          <= '0';
+                            MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
+                            MainCtrl_Rt(3)          <= '0';
+                            MainCtrl_Rt(2 downto 0) <= MainCtrl_Ins(7 downto 5);
+                            MainCtrl_Rd(3)          <= '1';
+                            MainCtrl_Rd(2 downto 0) <= "111";
+                            
+                            MainCtrl_Imm(15 downto 0)   <= (others => '0');
+                        end if;
+                        
+                        if (MainCtrl_Ins(15 downto 11) = "11101" AND MainCtrl_Ins(4 downto 0) = "01111") then
+                        --NOT
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '0';
+                            MainCtrl_RsDedEn    <= '0';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '1';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "00";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "011";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '0';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "10";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '0';
+                            
+                            MainCtrl_Rs(3)          <= '1';
+                            MainCtrl_Rs(2 downto 0) <= "111";
+                            MainCtrl_Rt(3)          <= '0';
+                            MainCtrl_Rt(2 downto 0) <= MainCtrl_Ins(7 downto 5);
+                            MainCtrl_Rd(3)          <= '0';
+                            MainCtrl_Rd(2 downto 0) <= MainCtrl_Ins(10 downto 8);
+                            
+                            MainCtrl_Imm(15 downto 0)   <= (others => '0');
+                        end if;
+                        
+                        if (MainCtrl_Ins(15 downto 11) = "11101" AND MainCtrl_Ins(7 downto 0) = "01000000") then
+                        --MFPC
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '1';
+                            MainCtrl_RsDedEn    <= '1';
+                            MainCtrl_RsDedSel   <= "10";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '1';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "00";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "000";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '0';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "10";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '0';
+                            
+                            MainCtrl_Rs(3)          <= '1';
+                            MainCtrl_Rs(2 downto 0) <= "111";
+                            MainCtrl_Rt(3)          <= '1';
+                            MainCtrl_Rt(2 downto 0) <= "111";
+                            MainCtrl_Rd(3)          <= '0';
+                            MainCtrl_Rd(2 downto 0) <= MainCtrl_Ins(10 downto 8);
+                            
+                            MainCtrl_Imm(15 downto 0)   <= (others => '0');
+                        end if;
+                        
+                        if (MainCtrl_Ins(15 downto 11) = "11101" AND MainCtrl_Ins(7 downto 0) = "00000000") then
+                        --JR
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '0';
+                            MainCtrl_RsDedEn    <= '0';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '0';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "00";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "000";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '0';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "00";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "01";
+                            MainCtrl_Jmp        <= '1';
+                            
+                            MainCtrl_Rs(3)          <= '0';
+                            MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
+                            MainCtrl_Rt(3)          <= '1';
+                            MainCtrl_Rt(2 downto 0) <= "111";
+                            MainCtrl_Rd(3)          <= '1';
+                            MainCtrl_Rd(2 downto 0) <= "111";
+                            
+                            MainCtrl_Imm(15 downto 0)   <= (others => '0');
+                        end if;
+                        
+                        if (MainCtrl_Ins(15 downto 11) = "11101" AND MainCtrl_Ins(4 downto 0) = "01010") then
+                        --CMP
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '0';
+                            MainCtrl_RsDedEn    <= '0';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '1';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "00";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "010";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '0';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "10";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '0';
+                            
+                            MainCtrl_Rs(3)          <= '0';
+                            MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
+                            MainCtrl_Rt(3)          <= '0';
+                            MainCtrl_Rt(2 downto 0) <= MainCtrl_Ins(7 downto 5);
+                            MainCtrl_Rd(3)          <= '1';
+                            MainCtrl_Rd(2 downto 0) <= "011";
+                            
+                            MainCtrl_Imm(15 downto 0)   <= (others => '0');
+                        end if;
 
-    elsif (MainCtrl_Ins(15 downto 8) = "01100011") then
-    --ADDSP
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '0';
-        MainCtrl_RsDedEn    <= '1';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '1';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "10";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "000";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '1';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "00";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '0';
-        
-        MainCtrl_Rs(3)          <= '1';
-        MainCtrl_Rs(2 downto 0) <= "000";
-        MainCtrl_Rt(3)          <= '1';
-        MainCtrl_Rt(2 downto 0) <= "111";
-        MainCtrl_Rd(3)          <= '1';
-        MainCtrl_Rd(2 downto 0) <= "111";
-        
-        MainCtrl_Imm(15 downto 8)   <= (others => '0');
-        MainCtrl_Imm(7 downto 0)    <= MainCtrl_Ins(7 downto 0);
+                        if (MainCtrl_Ins(15 downto 11) = "11101" AND MainCtrl_Ins(4 downto 0) = "01100") then
+                        --AND
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '0';
+                            MainCtrl_RsDedEn    <= '0';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '1';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "00";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "100";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '0';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "00";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '0';
+                            
+                            MainCtrl_Rs(3)          <= '0';
+                            MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
+                            MainCtrl_Rt(3)          <= '0';
+                            MainCtrl_Rt(2 downto 0) <= MainCtrl_Ins(7 downto 5);
+                            MainCtrl_Rd(3)          <= '1';
+                            MainCtrl_Rd(2 downto 0) <= "111";
+                            
+                            MainCtrl_Imm(15 downto 0)   <= (others => '0');
+                        end if;
+                    end if;                
+                else
+                    if (MainCtrl_Ins(11) = '0') then
+                    --11110
+                        if (MainCtrl_Ins(15 downto 11) = "11110" AND MainCtrl_Ins(7 downto 0) = "00000001") then
+                        --MTIH
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '1';
+                            MainCtrl_RsDedEn    <= '0';
+                            MainCtrl_RsDedSel   <= "00";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '1';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "00";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "000";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '0';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "10";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '0';
+                            
+                            MainCtrl_Rs(3)          <= '0';
+                            MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
+                            MainCtrl_Rt(3)          <= '1';
+                            MainCtrl_Rt(2 downto 0) <= "111";
+                            MainCtrl_Rd(3)          <= '1';
+                            MainCtrl_Rd(2 downto 0) <= "001";
+                            
+                            MainCtrl_Imm(15 downto 0)   <= (others => '0');
+                        end if;
 
-    elsif (MainCtrl_Ins(15 downto 11) = "11100" AND MainCtrl_Ins(1 downto 0) = "01") then
-    --ADDU
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '0';
-        MainCtrl_RsDedEn    <= '0';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '1';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "00";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "000";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '0';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "10";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '0';
-        
-        MainCtrl_Rs(3)          <= '0';
-        MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
-        MainCtrl_Rt(3)          <= '0';
-        MainCtrl_Rt(2 downto 0) <= MainCtrl_Ins(7 downto 5);
-        MainCtrl_Rd(3)          <= '0';
-        MainCtrl_Rd(2 downto 0) <= MainCtrl_Ins(4 downto 2);
-        
-        MainCtrl_Imm(15 downto 0)   <= (others => '0');
-
-    elsif (MainCtrl_Ins(15 downto 11) = "11101" AND MainCtrl_Ins(4 downto 0) = "01100") then
-    --AND
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '0';
-        MainCtrl_RsDedEn    <= '0';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '1';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "00";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "100";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '0';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "00";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '0';
-        
-        MainCtrl_Rs(3)          <= '0';
-        MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
-        MainCtrl_Rt(3)          <= '0';
-        MainCtrl_Rt(2 downto 0) <= MainCtrl_Ins(7 downto 5);
-        MainCtrl_Rd(3)          <= '1';
-        MainCtrl_Rd(2 downto 0) <= "111";
-        
-        MainCtrl_Imm(15 downto 0)   <= (others => '0');
-
-    elsif (MainCtrl_Ins(15 downto 11) = "00010") then
-    --B
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '0';
-        MainCtrl_RsDedEn    <= '0';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '0';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "11";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "000";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '0';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "00";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '1';
-        
-        MainCtrl_Rs(3)          <= '1';
-        MainCtrl_Rs(2 downto 0) <= "111";
-        MainCtrl_Rt(3)          <= '1';
-        MainCtrl_Rt(2 downto 0) <= "111";
-        MainCtrl_Rd(3)          <= '1';
-        MainCtrl_Rd(2 downto 0) <= "111";
-        
-        MainCtrl_Imm(15 downto 11)   <= (others => '0');
-        MainCtrl_Imm(10 downto 0)    <= MainCtrl_Ins(10 downto 0);
-        
-    elsif (MainCtrl_Ins(15 downto 11) = "00100") then
-    --BEQZ
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '1';
-        MainCtrl_RsDedEn    <= '0';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '0';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "10";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "000";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '0';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "00";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "10";
-        MainCtrl_Jmp        <= '1';
-        
-        MainCtrl_Rs(3)          <= '0';
-        MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
-        MainCtrl_Rt(3)          <= '1';
-        MainCtrl_Rt(2 downto 0) <= "111";
-        MainCtrl_Rd(3)          <= '1';
-        MainCtrl_Rd(2 downto 0) <= "111";
-        
-        MainCtrl_Imm(15 downto 8)   <= (others => '0');
-        MainCtrl_Imm(7 downto 0)    <= MainCtrl_Ins(7 downto 0);
-        
-    elsif (MainCtrl_Ins(15 downto 11) = "00101") then
-    --BNEZ
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '1';
-        MainCtrl_RsDedEn    <= '0';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '0';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "10";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "000";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '0';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "00";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "11";
-        MainCtrl_Jmp        <= '1';
-        
-        MainCtrl_Rs(3)          <= '0';
-        MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
-        MainCtrl_Rt(3)          <= '1';
-        MainCtrl_Rt(2 downto 0) <= "111";
-        MainCtrl_Rd(3)          <= '1';
-        MainCtrl_Rd(2 downto 0) <= "111";
-        
-        MainCtrl_Imm(15 downto 8)   <= (others => '0');
-        MainCtrl_Imm(7 downto 0)    <= MainCtrl_Ins(7 downto 0);
-
-    elsif (MainCtrl_Ins(15 downto 8) = "01100000") then
-    --BTEQZ
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '1';
-        MainCtrl_RsDedEn    <= '1';
-        MainCtrl_RsDedSel   <= "11";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '0';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "10";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "000";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '0';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "00";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "10";
-        MainCtrl_Jmp        <= '1';
-        
-        MainCtrl_Rs(3)          <= '1';
-        MainCtrl_Rs(2 downto 0) <= "011";
-        MainCtrl_Rt(3)          <= '1';
-        MainCtrl_Rt(2 downto 0) <= "111";
-        MainCtrl_Rd(3)          <= '1';
-        MainCtrl_Rd(2 downto 0) <= "111";
-        
-        MainCtrl_Imm(15 downto 8)   <= (others => '0');
-        MainCtrl_Imm(7 downto 0)    <= MainCtrl_Ins(7 downto 0);
-        
-    elsif (MainCtrl_Ins(15 downto 11) = "11101" AND MainCtrl_Ins(4 downto 0) = "01010") then
-    --CMP
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '0';
-        MainCtrl_RsDedEn    <= '0';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '1';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "00";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "010";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '0';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "10";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '0';
-        
-        MainCtrl_Rs(3)          <= '0';
-        MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
-        MainCtrl_Rt(3)          <= '0';
-        MainCtrl_Rt(2 downto 0) <= MainCtrl_Ins(7 downto 5);
-        MainCtrl_Rd(3)          <= '1';
-        MainCtrl_Rd(2 downto 0) <= "011";
-        
-        MainCtrl_Imm(15 downto 0)   <= (others => '0');
-
-    elsif (MainCtrl_Ins(15 downto 11) = "01110") then
-    --CMPI
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '0';
-        MainCtrl_RsDedEn    <= '0';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '1';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "10";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "010";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '1';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "10";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '0';
-        
-        MainCtrl_Rs(3)          <= '0';
-        MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
-        MainCtrl_Rt(3)          <= '1';
-        MainCtrl_Rt(2 downto 0) <= "111";
-        MainCtrl_Rd(3)          <= '1';
-        MainCtrl_Rd(2 downto 0) <= "011";
-        
-        MainCtrl_Imm(15 downto 8)   <= (others => '0');
-        MainCtrl_Imm(7 downto 0)    <= MainCtrl_Ins(7 downto 0);
-
-    elsif (MainCtrl_Ins(15 downto 11) = "11101" AND MainCtrl_Ins(7 downto 0) = "00000000") then
-    --JR
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '0';
-        MainCtrl_RsDedEn    <= '0';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '0';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "00";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "000";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '0';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "00";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "01";
-        MainCtrl_Jmp        <= '1';
-        
-        MainCtrl_Rs(3)          <= '0';
-        MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
-        MainCtrl_Rt(3)          <= '1';
-        MainCtrl_Rt(2 downto 0) <= "111";
-        MainCtrl_Rd(3)          <= '1';
-        MainCtrl_Rd(2 downto 0) <= "111";
-        
-        MainCtrl_Imm(15 downto 0)   <= (others => '0');
-
-    elsif (MainCtrl_Ins(15 downto 11) = "01101") then
-    --LI
-        MainCtrl_RsZero     <= '1';
-        MainCtrl_RtZero     <= '0';
-        MainCtrl_RsDedEn    <= '0';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '1';
-        MainCtrl_SignExt    <= '0';
-        MainCtrl_Width      <= "10";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "000";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '1';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "10";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '0';
-        
-        MainCtrl_Rs(3)          <= '1';
-        MainCtrl_Rs(2 downto 0) <= "111";
-        MainCtrl_Rt(3)          <= '1';
-        MainCtrl_Rt(2 downto 0) <= "111";
-        MainCtrl_Rd(3)          <= '0';
-        MainCtrl_Rd(2 downto 0) <= MainCtrl_Ins(10 downto 8);
-        
-        MainCtrl_Imm(15 downto 8)   <= (others => '0');
-        MainCtrl_Imm(7 downto 0)    <= MainCtrl_Ins(7 downto 0);
-        
-    elsif (MainCtrl_Ins(15 downto 11) = "10011") then
-    --LW
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '0';
-        MainCtrl_RsDedEn    <= '0';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '1';
-        MainCtrl_RegWr      <= '1';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "01";
-        MainCtrl_MemRE      <= '1';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "000";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '1';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "10";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '0';
-        
-        MainCtrl_Rs(3)          <= '0';
-        MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
-        MainCtrl_Rt(3)          <= '1';
-        MainCtrl_Rt(2 downto 0) <= "111";
-        MainCtrl_Rd(3)          <= '0';
-        MainCtrl_Rd(2 downto 0) <= MainCtrl_Ins(7 downto 5);
-        
-        MainCtrl_Imm(15 downto 5)   <= (others => '0');
-        MainCtrl_Imm(4 downto 0)    <= MainCtrl_Ins(4 downto 0);
-        
-    elsif (MainCtrl_Ins(15 downto 11) = "10010") then
-    --LW_SP
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '0';
-        MainCtrl_RsDedEn    <= '1';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '1';
-        MainCtrl_RegWr      <= '1';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "10";
-        MainCtrl_MemRE      <= '1';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "000";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '1';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "10";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '0';
-        
-        MainCtrl_Rs(3)          <= '1';
-        MainCtrl_Rs(2 downto 0) <= "011";
-        MainCtrl_Rt(3)          <= '1';
-        MainCtrl_Rt(2 downto 0) <= "111";
-        MainCtrl_Rd(3)          <= '0';
-        MainCtrl_Rd(2 downto 0) <= MainCtrl_Ins(10 downto 8);
-        
-        MainCtrl_Imm(15 downto 5)   <= (others => '0');
-        MainCtrl_Imm(4 downto 0)    <= MainCtrl_Ins(4 downto 0);
-
-    elsif (MainCtrl_Ins(15 downto 11) = "11110" AND MainCtrl_Ins(7 downto 0) = "00000000") then
-    --MFIH
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '1';
-        MainCtrl_RsDedEn    <= '1';
-        MainCtrl_RsDedSel   <= "01";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '1';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "00";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "000";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '0';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "10";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '0';
-        
-        MainCtrl_Rs(3)          <= '1';
-        MainCtrl_Rs(2 downto 0) <= "001";
-        MainCtrl_Rt(3)          <= '1';
-        MainCtrl_Rt(2 downto 0) <= "111";
-        MainCtrl_Rd(3)          <= '0';
-        MainCtrl_Rd(2 downto 0) <= MainCtrl_Ins(10 downto 8);
-        
-        MainCtrl_Imm(15 downto 0)   <= (others => '0');
-
-    elsif (MainCtrl_Ins(15 downto 11) = "11101" AND MainCtrl_Ins(7 downto 0) = "01000000") then
-    --MFPC
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '1';
-        MainCtrl_RsDedEn    <= '1';
-        MainCtrl_RsDedSel   <= "10";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '1';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "00";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "000";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '0';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "10";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '0';
-        
-        MainCtrl_Rs(3)          <= '1';
-        MainCtrl_Rs(2 downto 0) <= "111";
-        MainCtrl_Rt(3)          <= '1';
-        MainCtrl_Rt(2 downto 0) <= "111";
-        MainCtrl_Rd(3)          <= '0';
-        MainCtrl_Rd(2 downto 0) <= MainCtrl_Ins(10 downto 8);
-        
-        MainCtrl_Imm(15 downto 0)   <= (others => '0');
-
-    elsif (MainCtrl_Ins(15 downto 11) = "11110" AND MainCtrl_Ins(7 downto 0) = "00000001") then
-    --MTIH
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '1';
-        MainCtrl_RsDedEn    <= '0';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '1';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "00";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "000";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '0';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "10";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '0';
-        
-        MainCtrl_Rs(3)          <= '0';
-        MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
-        MainCtrl_Rt(3)          <= '1';
-        MainCtrl_Rt(2 downto 0) <= "111";
-        MainCtrl_Rd(3)          <= '1';
-        MainCtrl_Rd(2 downto 0) <= "001";
-        
-        MainCtrl_Imm(15 downto 0)   <= (others => '0');
-
-    elsif (MainCtrl_Ins(15 downto 8) = "01100100" AND MainCtrl_Ins(4 downto 0) = "00000") then
-    --MTSP
-        MainCtrl_RsZero     <= '1';
-        MainCtrl_RtZero     <= '0';
-        MainCtrl_RsDedEn    <= '0';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '1';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "00";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "000";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '0';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "10";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '0';
-        
-        MainCtrl_Rs(3)          <= '1';
-        MainCtrl_Rs(2 downto 0) <= "111";
-        MainCtrl_Rt(3)          <= '0';
-        MainCtrl_Rt(2 downto 0) <= MainCtrl_Ins(7 downto 5);
-        MainCtrl_Rd(3)          <= '1';
-        MainCtrl_Rd(2 downto 0) <= "000";
-        
-        MainCtrl_Imm(15 downto 0)   <= (others => '0');
-
-    elsif (MainCtrl_Ins(15 downto 11) = "11101" AND MainCtrl_Ins(4 downto 0) = "01111") then
-    --NOT
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '0';
-        MainCtrl_RsDedEn    <= '0';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '1';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "00";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "011";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '0';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "10";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '0';
-        
-        MainCtrl_Rs(3)          <= '1';
-        MainCtrl_Rs(2 downto 0) <= "111";
-        MainCtrl_Rt(3)          <= '0';
-        MainCtrl_Rt(2 downto 0) <= MainCtrl_Ins(7 downto 5);
-        MainCtrl_Rd(3)          <= '0';
-        MainCtrl_Rd(2 downto 0) <= MainCtrl_Ins(10 downto 8);
-        
-        MainCtrl_Imm(15 downto 0)   <= (others => '0');
-
-    elsif (MainCtrl_Ins(15 downto 0) = "0000100000000000") then
-    --NOP
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '0';
-        MainCtrl_RsDedEn    <= '0';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '0';
-        MainCtrl_SignExt    <= '0';
-        MainCtrl_Width      <= "00";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "000";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '0';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "00";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '0';
-        
-        MainCtrl_Rs(3)          <= '1';
-        MainCtrl_Rs(2 downto 0) <= "111";
-        MainCtrl_Rt(3)          <= '1';
-        MainCtrl_Rt(2 downto 0) <= "111";
-        MainCtrl_Rd(3)          <= '1';
-        MainCtrl_Rd(2 downto 0) <= "111";
-        
-        MainCtrl_Imm(15 downto 0)   <= (others => '0');
-        
-    elsif (MainCtrl_Ins(15 downto 11) = "11101" AND MainCtrl_Ins(4 downto 0) = "01101") then
-    --OR
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '0';
-        MainCtrl_RsDedEn    <= '0';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '1';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "00";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "100";
-        MainCtrl_ALUOr      <= '1';
-        MainCtrl_RtRegImmSel<= '0';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "00";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '0';
-        
-        MainCtrl_Rs(3)          <= '0';
-        MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
-        MainCtrl_Rt(3)          <= '0';
-        MainCtrl_Rt(2 downto 0) <= MainCtrl_Ins(7 downto 5);
-        MainCtrl_Rd(3)          <= '1';
-        MainCtrl_Rd(2 downto 0) <= "111";
-        
-        MainCtrl_Imm(15 downto 0)   <= (others => '0');
-
-    elsif (MainCtrl_Ins(15 downto 11) = "00110" AND MainCtrl_Ins(1 downto 0) = "00") then
-    --SLL
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '0';
-        MainCtrl_RsDedEn    <= '0';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '1';
-        MainCtrl_SignExt    <= '0';
-        MainCtrl_Width      <= "01";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "101";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '0';
-        MainCtrl_RsRegImmSel<= '1';
-        MainCtrl_RsRtRdSel  <= "10";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '0';
-        
-        MainCtrl_Rs(3)          <= '1';
-        MainCtrl_Rs(2 downto 0) <= "111";
-        MainCtrl_Rt(3)          <= '0';
-        MainCtrl_Rt(2 downto 0) <= MainCtrl_Ins(7 downto 5);
-        MainCtrl_Rd(3)          <= '0';
-        MainCtrl_Rd(2 downto 0) <= MainCtrl_Ins(10 downto 8);
-        
-        MainCtrl_Imm(15 downto 3)   <= (others => '0');
-        MainCtrl_Imm(2 downto 0)    <= MainCtrl_Ins(4 downto 2);
-
-    elsif (MainCtrl_Ins(15 downto 11) = "11101" AND MainCtrl_Ins(4 downto 0) = "00100") then
-    --SLLV
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '0';
-        MainCtrl_RsDedEn    <= '0';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '1';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "00";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "101";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '0';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "01";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '0';
-        
-        MainCtrl_Rs(3)          <= '0';
-        MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
-        MainCtrl_Rt(3)          <= '0';
-        MainCtrl_Rt(2 downto 0) <= MainCtrl_Ins(7 downto 5);
-        MainCtrl_Rd(3)          <= '1';
-        MainCtrl_Rd(2 downto 0) <= "111";
-        
-        MainCtrl_Imm(15 downto 0)   <= (others => '0');
-
-    elsif (MainCtrl_Ins(15 downto 11) = "11101" AND MainCtrl_Ins(4 downto 0) = "00010") then
-    --SLT
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '0';
-        MainCtrl_RsDedEn    <= '0';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '1';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "00";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "111";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '0';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "10";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '0';
-        
-        MainCtrl_Rs(3)          <= '0';
-        MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
-        MainCtrl_Rt(3)          <= '0';
-        MainCtrl_Rt(2 downto 0) <= MainCtrl_Ins(7 downto 5);
-        MainCtrl_Rd(3)          <= '1';
-        MainCtrl_Rd(2 downto 0) <= "011";
-        
-        MainCtrl_Imm(15 downto 0)   <= (others => '0');
-
-    elsif (MainCtrl_Ins(15 downto 11) = "00110" AND MainCtrl_Ins(1 downto 0) = "11") then
-    --SRA
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '0';
-        MainCtrl_RsDedEn    <= '0';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '1';
-        MainCtrl_SignExt    <= '0';
-        MainCtrl_Width      <= "01";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "110";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '0';
-        MainCtrl_RsRegImmSel<= '1';
-        MainCtrl_RsRtRdSel  <= "10";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '0';
-        
-        MainCtrl_Rs(3)          <= '1';
-        MainCtrl_Rs(2 downto 0) <= "111";
-        MainCtrl_Rt(3)          <= '0';
-        MainCtrl_Rt(2 downto 0) <= MainCtrl_Ins(7 downto 5);
-        MainCtrl_Rd(3)          <= '0';
-        MainCtrl_Rd(2 downto 0) <= MainCtrl_Ins(10 downto 8);
-        
-        MainCtrl_Imm(15 downto 3)   <= (others => '0');
-        MainCtrl_Imm(2 downto 0)    <= MainCtrl_Ins(4 downto 2);
-
-    elsif (MainCtrl_Ins(15 downto 11) = "11100" AND MainCtrl_Ins(1 downto 0) = "11") then
-    --SUBU
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '0';
-        MainCtrl_RsDedEn    <= '0';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '1';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "00";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '0';
-        MainCtrl_ALUOp      <= "001";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '0';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "10";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '0';
-        
-        MainCtrl_Rs(3)          <= '0';
-        MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
-        MainCtrl_Rt(3)          <= '0';
-        MainCtrl_Rt(2 downto 0) <= MainCtrl_Ins(7 downto 5);
-        MainCtrl_Rd(3)          <= '0';
-        MainCtrl_Rd(2 downto 0) <= MainCtrl_Ins(4 downto 2);
-        
-        MainCtrl_Imm(15 downto 0)   <= (others => '0');
-    
-    elsif (MainCtrl_Ins(15 downto 11) = "11011") then
-    --SW
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '0';
-        MainCtrl_RsDedEn    <= '0';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '0';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "01";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '1';
-        MainCtrl_ALUOp      <= "000";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '1';
-        MainCtrl_RsRegImmSel<= '0';
-        MainCtrl_RsRtRdSel  <= "00";
-        MainCtrl_DiRsRtSel  <= '1';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '0';
-        
-        MainCtrl_Rs(3)          <= '0';
-        MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
-        MainCtrl_Rt(3)          <= '0';
-        MainCtrl_Rt(2 downto 0) <= MainCtrl_Ins(7 downto 5);
-        MainCtrl_Rd(3)          <= '1';
-        MainCtrl_Rd(2 downto 0) <= "111";
-        
-        MainCtrl_Imm(15 downto 5)   <= (others => '0');
-        MainCtrl_Imm(4 downto 0)    <= MainCtrl_Ins(4 downto 0);
-
-    elsif (MainCtrl_Ins(15 downto 11) = "11010") then
-    --SW_SP
-        MainCtrl_RsZero     <= '0';
-        MainCtrl_RtZero     <= '0';
-        MainCtrl_RsDedEn    <= '0';
-        MainCtrl_RsDedSel   <= "00";
-        MainCtrl_RtDedEn    <= '0';
-        MainCtrl_RtDedSel   <= "00";
-        MainCtrl_RegMemSel  <= '0';
-        MainCtrl_RegWr      <= '0';
-        MainCtrl_SignExt    <= '1';
-        MainCtrl_Width      <= "10";
-        MainCtrl_MemRE      <= '0';
-        MainCtrl_MemWE      <= '1';
-        MainCtrl_ALUOp      <= "000";
-        MainCtrl_ALUOr      <= '0';
-        MainCtrl_RtRegImmSel<= '0';
-        MainCtrl_RsRegImmSel<= '1';
-        MainCtrl_RsRtRdSel  <= "00";
-        MainCtrl_DiRsRtSel  <= '0';
-        MainCtrl_Brh        <= "00";
-        MainCtrl_Jmp        <= '0';
-        
-        MainCtrl_Rs(3)          <= '0';
-        MainCtrl_Rs(2 downto 0) <= MainCtrl_Ins(10 downto 8);
-        MainCtrl_Rt(3)          <= '1';
-        MainCtrl_Rt(2 downto 0) <= "000";
-        MainCtrl_Rd(3)          <= '1';
-        MainCtrl_Rd(2 downto 0) <= "111";
-        
-        MainCtrl_Imm(15 downto 8)   <= (others => '0');
-        MainCtrl_Imm(7 downto 0)    <= MainCtrl_Ins(7 downto 0);
-        
+                        if (MainCtrl_Ins(15 downto 11) = "11110" AND MainCtrl_Ins(7 downto 0) = "00000000") then
+                        --MFIH
+                            MainCtrl_RsZero     <= '0';
+                            MainCtrl_RtZero     <= '1';
+                            MainCtrl_RsDedEn    <= '1';
+                            MainCtrl_RsDedSel   <= "01";
+                            MainCtrl_RtDedEn    <= '0';
+                            MainCtrl_RtDedSel   <= "00";
+                            MainCtrl_RegMemSel  <= '0';
+                            MainCtrl_RegWr      <= '1';
+                            MainCtrl_SignExt    <= '1';
+                            MainCtrl_Width      <= "00";
+                            MainCtrl_MemRE      <= '0';
+                            MainCtrl_MemWE      <= '0';
+                            MainCtrl_ALUOp      <= "000";
+                            MainCtrl_ALUOr      <= '0';
+                            MainCtrl_RtRegImmSel<= '0';
+                            MainCtrl_RsRegImmSel<= '0';
+                            MainCtrl_RsRtRdSel  <= "10";
+                            MainCtrl_DiRsRtSel  <= '0';
+                            MainCtrl_Brh        <= "00";
+                            MainCtrl_Jmp        <= '0';
+                            
+                            MainCtrl_Rs(3)          <= '1';
+                            MainCtrl_Rs(2 downto 0) <= "001";
+                            MainCtrl_Rt(3)          <= '1';
+                            MainCtrl_Rt(2 downto 0) <= "111";
+                            MainCtrl_Rd(3)          <= '0';
+                            MainCtrl_Rd(2 downto 0) <= MainCtrl_Ins(10 downto 8);
+                            
+                            MainCtrl_Imm(15 downto 0)   <= (others => '0');
+                        end if;
+                    else
+                    --11111
+                    end if;                   
+                end if;       
+            end if;
+        end if;
     end if;
+    
 end process;
 
 
