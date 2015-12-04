@@ -45,35 +45,16 @@ architecture Behavioral of BrhUnit is
 
 begin
 
-process(BrhUnit_Brh, BrhUnit_Jmp, BrhUnit_RsVal, BrhUnit_RtVal, BrhUnit_Imm, BrhUnit_PC)
-begin
-    case BrhUnit_Brh is
-        when "00" =>
-            BrhUnit_JmpPC <= BrhUnit_PC + BrhUnit_Imm;
-            BrhUnit_PCSel <= BrhUnit_Jmp;
-            
-        when "01" =>
-            BrhUnit_JmpPC <= BrhUnit_RsVal;
-            BrhUnit_PCSel <= BrhUnit_Jmp;
-            
-        when "10" =>
-            BrhUnit_JmpPC <= BrhUnit_PC + BrhUnit_Imm;
-            if (BrhUnit_RsVal = BrhUnit_RtVal) then
-                BrhUnit_PCSel <= BrhUnit_Jmp;
-            else
-                BrhUnit_PCSel <= '0';
-            end if;
-        when "11" =>
-            BrhUnit_JmpPC <= BrhUnit_PC + BrhUnit_Imm;
-            if (BrhUnit_RsVal /= BrhUnit_RtVal) then
-                BrhUnit_PCSel <= BrhUnit_Jmp;
-            else
-                BrhUnit_PCSel <= '0';
-            end if;
-        when others =>
-            BrhUnit_JmpPC <= BrhUnit_PC;
-    end case;
-end process;
+BrhUnit_JmpPC <= BrhUnit_PC + BrhUnit_Imm when BrhUnit_Brh = "00" else
+                 BrhUnit_RsVal            when BrhUnit_Brh = "01" else
+                 BrhUnit_PC + BrhUnit_Imm when BrhUnit_Brh = "10" else
+                 BrhUnit_PC + BrhUnit_Imm when BrhUnit_Brh = "11";
+                 
+BrhUnit_PCSel <= BrhUnit_Jmp when BrhUnit_Brh = "00" else
+                 BrhUnit_Jmp when BrhUnit_Brh = "01" else
+                 BrhUnit_Jmp when BrhUnit_Brh = "10" and BrhUnit_RsVal = BrhUnit_RtVal else
+                 BrhUnit_Jmp when BrhUnit_Brh = "11" and BrhUnit_RsVal /= BrhUnit_RtVal else
+                 '0';
 
 end Behavioral;
 

@@ -44,49 +44,16 @@ architecture Behavioral of ALU is
 
 begin
 
-process(ALU_ALUOp, ALU_ALUOr, ALU_RsVal, ALU_RtVal)
-begin
-    case ALU_ALUOp is
-        when "000" =>
-            --加法,OUT = Rs + Rt
-            ALU_OUT <= ALU_RsVal + ALU_RtVal;
-        when "001" =>
-            --减法，OUT = Rs - Rt
-            ALU_OUT <= ALU_RsVal - ALU_RtVal;
-        when "010" =>
-            --比较, OUT = !(Rs == Rt)
-            if (ALU_RsVal = ALU_RtVal) then
-                ALU_OUT <= "0000000000000000";
-            else
-                ALU_OUT <= "0000000000000001";
-            end if;
-        when "011" =>
-            --取反, OUT = ~Rt
-            ALU_OUT <= NOT ALU_RtVal;
-        when "100" =>
-            --与或操作, OUT <= Rs | Rt
-            if (ALU_ALUOr = '1') then
-                ALU_OUT <= ALU_RsVal OR ALU_RtVal;
-            else
-                ALU_OUT <= ALU_RsVal AND ALU_RtVal;
-            end if;
-        when "101" =>
-            --左移操作, OUT <= Rt << Rs
-            ALU_OUT <= to_stdlogicvector(to_bitvector(ALU_RtVal) SLL conv_integer(ALU_RsVal));
-        when "110" =>
-            --右移操作, OUT <= Rt >> Rs
-            ALU_OUT <= to_stdlogicvector(to_bitvector(ALU_RtVal) SRA conv_integer(ALU_RsVal));
-        when "111" =>
-            --小于等于操作, ALU_OUT <= (ALU_RsVal < ALU_RtVal)
-            if (ALU_RsVal < ALU_RtVal) then
-                ALU_OUT <= "0000000000000001";
-            else
-                ALU_OUT <= "0000000000000000";
-            end if;
-        when others =>
-            ALU_OUT <= ALU_RsVal;
-    end case;
-end process;
+ALU_OUT <= ALU_RsVal + ALU_RtVal when ALU_ALUOp = "000" else
+           ALU_RsVal - ALU_RtVal when ALU_ALUOp = "001" else
+           "0000000000000001"    when ALU_ALUOp = "010" and ALU_RsVal /= ALU_RtVal else
+           NOT ALU_RtVal         when ALU_ALUOp = "011" else
+           ALU_RsVal OR ALU_RtVal when ALU_ALUOp = "100" and ALU_ALUOr = '1' else
+           ALU_RsVal AND ALU_RtVal when ALU_ALUOp = "100" and ALU_ALUOr = '0' else
+           to_stdlogicvector(to_bitvector(ALU_RtVal) SLL conv_integer(ALU_RsVal)) when ALU_ALUOp = "101" else
+           to_stdlogicvector(to_bitvector(ALU_RtVal) SRA conv_integer(ALU_RsVal)) when ALU_ALUOp = "110" else
+           "0000000000000001" when ALU_RsVal < ALU_RtVal else
+           "0000000000000000";
 
 end Behavioral;
 

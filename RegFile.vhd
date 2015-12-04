@@ -70,53 +70,23 @@ IH_OUT <= IH;
 RA_OUT <= RA;
 T_OUT  <= T;
 
-process(RegFile_Rs,R0,R1,R2,R3,R4,R5,R6,R7)                     --read Rs process
-begin
-        case RegFile_Rs is
-            when "000" =>
-                RegFile_RsVal <= R0;
-            when "001" =>
-                RegFile_RsVal <= R1;
-            when "010" =>
-                RegFile_RsVal <= R2;
-            when "011" =>
-                RegFile_RsVal <= R3;
-            when "100" =>
-                RegFile_RsVal <= R4;
-            when "101" =>
-                RegFile_RsVal <= R5;
-            when "110" =>
-                RegFile_RsVal <= R6;
-            when "111" =>
-                RegFile_RsVal <= R7;
-            when others =>
-        end case;
-end process;
-
-
-process(RegFile_Rt,R0,R1,R2,R3,R4,R5,R6,R7)                         --read Rt process
-begin
-        case RegFile_Rt is
-            when "000" =>
-                RegFile_RtVal <= R0;
-            when "001" =>
-                RegFile_RtVal <= R1;
-            when "010" =>
-                RegFile_RtVal <= R2;
-            when "011" =>
-                RegFile_RtVal <= R3;
-            when "100" =>
-                RegFile_RtVal <= R4;
-            when "101" =>
-                RegFile_RtVal <= R5;
-            when "110" =>
-                RegFile_RtVal <= R6;
-            when "111" =>
-                RegFile_RtVal <= R7;
-            when others =>
-        end case;
-   
-end process;
+RegFile_RsVal <= R0 when RegFile_Rs = "000" else
+                 R1 when RegFile_Rs = "001" else
+                 R2 when RegFile_Rs = "010" else
+                 R3 when RegFile_Rs = "011" else
+                 R4 when RegFile_Rs = "100" else
+                 R5 when RegFile_Rs = "101" else
+                 R6 when RegFile_Rs = "110" else
+                 R7 when RegFile_Rs = "111";
+                 
+RegFile_RtVal <= R0 when RegFile_Rt = "000" else
+                 R1 when RegFile_Rt = "001" else
+                 R2 when RegFile_Rt = "010" else
+                 R3 when RegFile_Rt = "011" else
+                 R4 when RegFile_Rt = "100" else
+                 R5 when RegFile_Rt = "101" else
+                 R6 when RegFile_Rt = "110" else
+                 R7 when RegFile_Rt = "111";
 
 process(RegFile_CLK)         --write process
 begin
